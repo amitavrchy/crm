@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { FaEnvelope, FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
 import logo from "../../../public/dr white logo.png"
+import Image from "next/image";
 
 const Navbar = () => {
 
@@ -36,7 +37,13 @@ const Navbar = () => {
       <nav className="bg-black text-white py-4 px-6 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center">
-          <h1 className="text-2xl font-extrabold">Demand Recruitment</h1>
+          <Image
+                  src={logo}
+                  alt="LOGO"
+                  width={80}
+                  height={60}
+                  className="opacity-70"
+                />
         </div>
 
         {/* Desktop Navigation */}
