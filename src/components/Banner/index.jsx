@@ -10,7 +10,7 @@ function Banner() {
         alt="Banner Background"
         layout="fill"
         objectFit="cover"
-        className="opacity-70"
+        className="opacity-30"
       />
 
       {/* Overlay Content */}
