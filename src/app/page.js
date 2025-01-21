@@ -1,5 +1,6 @@
 import AboutUs from "@/components/About_Us";
 import Banner from "@/components/Banner";
+import Services from "@/components/Services";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <div className="container mx-auto max-w-full">
         <Banner />
         <AboutUs />
+        <Services />
       </div>
     </div>
   );
