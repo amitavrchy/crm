@@ -1,7 +1,12 @@
-import React from "react";
-import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
+"use client";
+import { useState } from "react";
+import { FaEnvelope, FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
+import logo from "../../../public/dr white logo.png"
 
 const Navbar = () => {
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div>
       {/* Top Navbar */}
@@ -29,16 +34,19 @@ const Navbar = () => {
 
       {/* Main Navbar */}
       <nav className="bg-black text-white py-4 px-6 flex items-center justify-between">
-        <div className="flex space-x-8">
+        {/* Logo Section */}
+        <div className="flex items-center">
+          <h1 className="text-2xl font-extrabold">Demand Recruitment</h1>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex space-x-8">
           <a href="#" className="hover:text-gray-400 transition">
             Services
           </a>
           <a href="#" className="hover:text-gray-400 transition">
             Post a job
           </a>
-        </div>
-
-        <div>
           <a
             href="#"
             className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition"
@@ -46,6 +54,59 @@ const Navbar = () => {
             About us
           </a>
         </div>
+
+        {/* Mobile Menu Toggle */}
+        <div className="lg:hidden">
+          <button
+            type="button"
+            onClick={() => setIsSidebarOpen(true)}
+            className="text-2xl focus:outline-none"
+          >
+            <FaBars />
+          </button>
+        </div>
+
+        {/* Mobile Sidebar */}
+        <div
+          className={`fixed top-0 left-0 h-full w-64 bg-black text-white transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+        >
+          {/* Close Button */}
+          <div className="flex items-center justify-between px-4 py-4 border-b border-gray-700">
+            <h2 className="text-xl font-bold">Menu</h2>
+            <button
+              type="button"
+              onClick={() => setIsSidebarOpen(false)}
+              className="text-2xl focus:outline-none"
+            >
+              <FaTimes />
+            </button>
+          </div>
+
+          {/* Sidebar Links */}
+          <div className="flex flex-col space-y-6 mt-6 px-4">
+            <a href="#" className="text-lg hover:text-gray-400 transition">
+              Services
+            </a>
+            <a href="#" className="text-lg hover:text-gray-400 transition">
+              Post a job
+            </a>
+            <a
+              href="#"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition text-center"
+            >
+              About us
+            </a>
+          </div>
+        </div>
+
+        {/* Overlay */}
+        {isSidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-10"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
       </nav>
     </div>
   );
