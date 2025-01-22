@@ -32,9 +32,11 @@ function AboutUs() {
           searching for a fresh start, career advancement, or a new challenge,
           we're here to guide you every step of the way.
         </p>
-        <button className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition duration-300">
-          Know more...
-        </button>
+        <a href="/aboutUs">
+          <button className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition duration-300">
+            Know more...
+          </button>
+        </a>
       </div>
     </div>
   );

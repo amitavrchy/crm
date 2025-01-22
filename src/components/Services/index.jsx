@@ -93,9 +93,11 @@ export default function Services() {
               <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center px-6">
                 <h3 className="text-2xl font-bold text-white">{item.title}</h3>
                 <p className="mt-4 text-gray-200">{item.description}</p>
-                <button className="mt-6 px-4 py-2 border border-orange-500 text-orange-500 rounded-lg hover:bg-orange-500 hover:text-white transition duration-300">
-                  {item.buttonText}
-                </button>
+                <a href="/services">
+                  <button className="mt-6 px-4 py-2 border border-orange-500 text-orange-500 rounded-lg hover:bg-orange-500 hover:text-white transition duration-300">
+                    {item.buttonText}
+                  </button>
+                </a>
               </div>
             </div>
           ))}
