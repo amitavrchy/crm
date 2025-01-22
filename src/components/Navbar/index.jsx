@@ -27,8 +27,11 @@ const Navbar = () => {
           <a href="#" className="hover:text-yellow-400 transition">
             Become a vendor
           </a>
-          <a href="#" className="hover:text-yellow-400 transition">
-            Login / Register
+          <a href="/signIn" className="hover:text-yellow-400 transition">
+            Login
+          </a>
+          <a href="/signUp" className="hover:text-yellow-400 transition">
+            Register
           </a>
         </div>
       </div>
