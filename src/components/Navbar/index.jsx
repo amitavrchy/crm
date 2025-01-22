@@ -37,13 +37,15 @@ const Navbar = () => {
       <nav className="bg-black text-white py-4 px-6 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center">
-          <Image
-                  src={logo}
-                  alt="LOGO"
-                  width={80}
-                  height={60}
-                  className="opacity-70"
-                />
+          <a href="/homePage">
+            <Image
+              src={logo}
+              alt="LOGO"
+              width={80}
+              height={60}
+              className="opacity-70"
+            />
+          </a>
         </div>
 
         {/* Desktop Navigation */}
