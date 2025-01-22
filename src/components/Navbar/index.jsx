@@ -96,15 +96,15 @@ const Navbar = () => {
           </div>
 
           {/* Sidebar Links */}
-          <div className="flex flex-col space-y-6 mt-6 px-4">
-            <a href="#" className="text-lg hover:text-gray-400 transition">
+          <div className="flex flex-col space-y-6 my-6 px-4">
+            <a href="/services" className="text-lg hover:text-gray-400 transition">
               Services
             </a>
             <a href="#" className="text-lg hover:text-gray-400 transition">
               Post a job
             </a>
             <a
-              href="#"
+              href="/aboutUs"
               className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition text-center"
             >
               About us
