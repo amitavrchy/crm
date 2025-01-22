@@ -24,11 +24,14 @@ const Navbar = () => {
         </div>
 
         <div className="flex space-x-6">
-          <a href="#" className="hover:text-yellow-400 transition">
+          <a href="/signUp" className="hover:text-yellow-400 transition">
             Become a vendor
           </a>
-          <a href="#" className="hover:text-yellow-400 transition">
-            Login / Register
+          <a href="/signIn" className="hover:text-yellow-400 transition">
+            Login
+          </a>
+          <a href="/signUp" className="hover:text-yellow-400 transition">
+            Register
           </a>
         </div>
       </div>
@@ -37,13 +40,15 @@ const Navbar = () => {
       <nav className="bg-black text-white py-4 px-6 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center">
-          <Image
-                  src={logo}
-                  alt="LOGO"
-                  width={80}
-                  height={60}
-                  className="opacity-70"
-                />
+          <a href="/homePage">
+            <Image
+              src={logo}
+              alt="LOGO"
+              width={80}
+              height={60}
+              className="opacity-70"
+            />
+          </a>
         </div>
 
         {/* Desktop Navigation */}

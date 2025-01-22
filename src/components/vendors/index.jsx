@@ -15,13 +15,13 @@ export default function Vendors() {
         </p>
         <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
           <a
-            href="#"
+            href="/signUp"
             className="inline-block px-8 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-lg shadow-md hover:from-red-500 hover:to-orange-500 transition-all duration-300 transform hover:-translate-y-1"
           >
             Learn More
           </a>
           <a
-            href="#"
+            href="/signUp"
             className="inline-block px-8 py-3 font-medium text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-1"
           >
             Apply as Vendor
