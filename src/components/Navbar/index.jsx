@@ -24,7 +24,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex space-x-6">
-          <a href="#" className="hover:text-yellow-400 transition">
+          <a href="/signUp" className="hover:text-yellow-400 transition">
             Become a vendor
           </a>
           <a href="/signIn" className="hover:text-yellow-400 transition">
