@@ -48,14 +48,14 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex space-x-8">
-          <a href="#" className="hover:text-gray-400 transition">
+          <a href="/services" className="hover:text-gray-400 transition">
             Services
           </a>
           <a href="#" className="hover:text-gray-400 transition">
             Post a job
           </a>
           <a
-            href="#"
+            href="/aboutUs"
             className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition"
           >
             About us
