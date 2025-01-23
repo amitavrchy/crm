@@ -1,11 +1,10 @@
 "use client";
 import { useState } from "react";
 import { FaEnvelope, FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
-import logo from "../../../public/dr white logo.png"
+import logo from "../../../public/dr white logo.png";
 import Image from "next/image";
 
 const Navbar = () => {
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -37,51 +36,62 @@ const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <nav className="bg-black text-white py-4 px-6 flex items-center justify-between">
-        {/* Logo Section */}
-        <div className="flex items-center">
-          <a href="/homePage">
-            <Image
-              src={logo}
-              alt="LOGO"
-              width={80}
-              height={60}
-              className="opacity-70"
-            />
-          </a>
+      <nav className="bg-black text-white py-4">
+        <div className="container mx-auto px-6 flex items-center justify-between">
+          {/* Logo Section */}
+          <div className="flex items-center">
+            <a href="/homePage">
+              <Image
+                src={logo}
+                alt="LOGO"
+                width={80}
+                height={60}
+                className="opacity-70"
+              />
+            </a>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
+            <a href="/services" className="hover:text-gray-400 transition">
+              Services
+            </a>
+            <a href="#" className="hover:text-gray-400 transition">
+              Post a job
+            </a>
+            <a
+              href="/aboutUs"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition"
+            >
+              About us
+            </a>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="lg:hidden">
+            <button
+              type="button"
+              onClick={() => setIsSidebarOpen(true)}
+              className="text-2xl focus:outline-none"
+            >
+              <FaBars />
+            </button>
+          </div>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex space-x-8">
-          <a href="/services" className="hover:text-gray-400 transition">
-            Services
-          </a>
-          <a href="#" className="hover:text-gray-400 transition">
-            Post a job
-          </a>
-          <a
-            href="/aboutUs"
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition"
-          >
-            About us
-          </a>
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <div className="lg:hidden">
-          <button
-            type="button"
-            onClick={() => setIsSidebarOpen(true)}
-            className="text-2xl focus:outline-none"
-          >
-            <FaBars />
-          </button>
-        </div>
+        {/* Overlay */}
+        {isSidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-30"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
 
         {/* Mobile Sidebar */}
         <div
-          className={`fixed top-0 left-0 h-full w-64 bg-black text-white transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
+          className={`fixed top-0 left-0 h-full w-64 bg-black text-white transform transition-transform duration-300 z-40 ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
         >
           {/* Close Button */}
           <div className="flex items-center justify-between px-4 py-4 border-b border-gray-700">
@@ -97,28 +107,29 @@ const Navbar = () => {
 
           {/* Sidebar Links */}
           <div className="flex flex-col space-y-6 my-6 px-4">
-            <a href="/services" className="text-lg hover:text-gray-400 transition">
+            <a
+              href="/services"
+              className="text-lg hover:text-gray-400 transition"
+              onClick={() => setIsSidebarOpen(false)} // Close sidebar on link click
+            >
               Services
             </a>
-            <a href="#" className="text-lg hover:text-gray-400 transition">
+            <a
+              href="#"
+              className="text-lg hover:text-gray-400 transition"
+              onClick={() => setIsSidebarOpen(false)} // Close sidebar on link click
+            >
               Post a job
             </a>
             <a
               href="/aboutUs"
               className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition text-center"
+              onClick={() => setIsSidebarOpen(false)} // Close sidebar on link click
             >
               About us
             </a>
           </div>
         </div>
-
-        {/* Overlay */}
-        {isSidebarOpen && (
-          <div
-            className="fixed inset-0 bg-black/50 z-10"
-            onClick={() => setIsSidebarOpen(false)}
-          />
-        )}
       </nav>
     </div>
   );
