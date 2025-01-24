@@ -1,18 +1,22 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
+import axios from "axios";
 
 function SignUp() {
     const [userType, setUserType] = useState("Client");
+    const router = useRouter(); // Initialize useRouter for navigation
 
     const {
         register,
         handleSubmit,
         reset,
+        watch,
         formState: { errors },
     } = useForm({
         defaultValues: {
@@ -23,15 +27,35 @@ function SignUp() {
         },
     });
 
-    const onSubmit = (data) => {
-        Swal.fire({
-            title: "Success!",
-            text: `You have signed up successfully as a ${userType}!`,
-            icon: "success",
-            confirmButtonColor: "#4F46E5",
-        });
-        console.log({ ...data, userType });
-        reset(); // Clear the input fields
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post("/api/auth/register", {
+                username: data.username,
+                email: data.email,
+                password: data.password,
+                userType, // Include the userType
+            });
+
+            if (response.status === 201) {
+                Swal.fire({
+                    title: "Success!",
+                    text: "You have signed up successfully!",
+                    icon: "success",
+                    confirmButtonColor: "#4F46E5",
+                }).then(() => {
+                    router.push("/signIn"); // Redirect to Sign In page
+                });
+                reset(); // Clear the input fields
+            }
+        } catch (error) {
+            console.error("Error registering user:", error);
+            Swal.fire({
+                title: "Error!",
+                text: error.response?.data?.message || "Something went wrong",
+                icon: "error",
+                confirmButtonColor: "#E53E3E",
+            });
+        }
     };
 
     const handleUserTypeChange = (type) => {
@@ -116,6 +140,8 @@ function SignUp() {
                             type="password"
                             {...register("confirmPassword", {
                                 required: "Please confirm your password",
+                                validate: (value) =>
+                                    value === watch("password") || "Passwords do not match",
                             })}
                             className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
                             placeholder="Confirm your password"
