@@ -1,23 +1,52 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function SignIn() {
+    const router = useRouter();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
-        Swal.fire({
-            title: "Welcome Back!",
-            text: "You have successfully signed in!",
-            icon: "success",
-            confirmButtonColor: "#4F46E5",
-        });
-        console.log(data);
-        reset();
+    const onSubmit = async (data) => {
+        try {
+            // Send POST request to the backend
+            const response = await fetch("/api/auth/signin", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                Swal.fire({
+                    title: "Welcome Back!",
+                    text: "You have successfully signed in!",
+                    icon: "success",
+                    confirmButtonColor: "#4F46E5",
+                });
+                reset();
+                router.push("/homePage"); // Redirect to home page
+            } else {
+                Swal.fire({
+                    title: "Sign In Failed",
+                    text: result.message || "Something went wrong",
+                    icon: "error",
+                    confirmButtonColor: "#EF4444",
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                title: "Error",
+                text: "Something went wrong. Please try again later.",
+                icon: "error",
+                confirmButtonColor: "#EF4444",
+            });
+        }
     };
 
     return (
