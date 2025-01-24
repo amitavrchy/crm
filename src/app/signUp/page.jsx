@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
+import axios from "axios";
+// import bcrypt from "bcryptjs";
 
 function SignUp() {
     const [userType, setUserType] = useState("Client");
@@ -23,16 +25,33 @@ function SignUp() {
         },
     });
 
-    const onSubmit = (data) => {
-        Swal.fire({
-            title: "Success!",
-            text: `You have signed up successfully as a ${userType}!`,
-            icon: "success",
-            confirmButtonColor: "#4F46E5",
-        });
-        console.log({ ...data, userType });
-        reset(); // Clear the input fields
-    };
+    const onSubmit = async (data) => {
+        try {
+          const response = await axios.post("/api/auth/register", {
+            username: data.username,
+            email: data.email,
+            password: data.password,
+          });
+      
+          if (response.status === 201) {
+            Swal.fire({
+              title: "Success!",
+              text: "You have signed up successfully!",
+              icon: "success",
+              confirmButtonColor: "#4F46E5",
+            });
+            reset(); // Clear the input fields
+          }
+        } catch (error) {
+          console.error("Error registering user:", error);
+          Swal.fire({
+            title: "Error!",
+            text: error.response?.data?.message || "Something went wrong",
+            icon: "error",
+            confirmButtonColor: "#E53E3E",
+          });
+        }
+      };
 
     const handleUserTypeChange = (type) => {
         setUserType(type);
