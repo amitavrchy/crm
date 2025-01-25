@@ -13,7 +13,6 @@ function SignIn() {
 
     const onSubmit = async (data) => {
         try {
-            // Send POST request to the backend
             const response = await fetch("/api/auth/signin", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -22,6 +21,8 @@ function SignIn() {
 
             const result = await response.json();
 
+            console.log("API Response:", result);
+
             if (response.ok) {
                 Swal.fire({
                     title: "Welcome Back!",
@@ -29,8 +30,19 @@ function SignIn() {
                     icon: "success",
                     confirmButtonColor: "#4F46E5",
                 });
+
+                const { userType } = result.user;
+                console.log("User Type:", userType);
+
+                if (userType === "Admin") {
+                    router.push("/dashboard/admin");
+                } else if (userType === "Client") {
+                    router.push("/dashboard/client");
+                } else if (userType === "Vendor") {
+                    router.push("/dashboard/vendor");
+                }
+
                 reset();
-                router.push("/homePage"); // Redirect to home page
             } else {
                 Swal.fire({
                     title: "Sign In Failed",
@@ -46,12 +58,12 @@ function SignIn() {
                 icon: "error",
                 confirmButtonColor: "#EF4444",
             });
+            console.error("Error:", error);
         }
     };
 
     return (
         <section className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
-            {/* Background Effects */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute w-64 h-64 bg-blue-500 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
                 <div className="absolute w-80 h-80 bg-purple-500 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
@@ -104,7 +116,6 @@ function SignIn() {
                     </button>
                 </form>
 
-                {/* Link to Sign Up */}
                 <p className="mt-4 text-sm text-center text-gray-300">
                     Don’t have an account?{" "}
                     <Link href="/signUp">

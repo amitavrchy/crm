@@ -13,25 +13,23 @@ const options = {
       },
       async authorize(credentials) {
         try {
-          // Connect to MongoDB
           const client = await connectMongoDB();
           const db = client.db();
           const usersCollection = db.collection("users");
 
-          // Find the user by email
           const user = await usersCollection.findOne({ email: credentials.email });
-          if (!user) {
-            throw new Error("No user found with the given email");
-          }
+          if (!user) throw new Error("No user found with the given email");
 
-          // Validate the password
           const isValidPassword = await bcrypt.compare(credentials.password, user.password);
-          if (!isValidPassword) {
-            throw new Error("Invalid email or password");
-          }
+          if (!isValidPassword) throw new Error("Invalid email or password");
 
-          // Return user object (fields used in the session and token)
-          return { id: user._id.toString(), name: user.username, email: user.email };
+          return {
+            id: user._id.toString(),
+            name: user.username,
+            email: user.email,
+            userType: user.userType, // Include userType
+            user,
+          };
         } catch (error) {
           console.error("Authorize error:", error.message);
           throw new Error("Unable to authenticate. Please try again.");
@@ -44,29 +42,31 @@ const options = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/signIn", // Custom sign-in page route
+    signIn: "/signIn",
   },
   callbacks: {
     async jwt({ token, user }) {
-      // Include user information in the JWT token
       if (user) {
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
+        token.userType = user.userType; // Add userType to token
       }
+      token.user = user;
       return token;
     },
     async session({ session, token }) {
-      // Include user ID in the session
       if (token) {
         session.user.id = token.id;
         session.user.email = token.email;
         session.user.name = token.name;
+        session.user.userType = token.userType; // Add userType to session
       }
+      session.user = token.user;
       return session;
     },
   },
-  debug: process.env.NODE_ENV === "development", // Enable debug logs in development
+  debug: process.env.NODE_ENV === "development",
 };
 
 export default NextAuth(options);

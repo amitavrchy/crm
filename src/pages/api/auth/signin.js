@@ -33,6 +33,7 @@ export default async function handler(req, res) {
                     id: user._id,
                     username: user.username,
                     email: user.email,
+                    userType: user.userType,
                 },
             });
         } catch (error) {

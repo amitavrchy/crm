@@ -1,7 +1,3 @@
-import AboutUs from "@/components/About_Us";
-import Banner from "@/components/Banner";
-import Services from "@/components/Services";
-import Vendors from "@/components/vendors";
 import HomePage from "./homePage/page";
 
 export default function Home() {

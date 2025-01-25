@@ -4,11 +4,11 @@ import Header from "../Header/index";
 
 export default function DashboardLayout({ children }) {
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen overflow-hidden">
             <Sidebar />
-            <div className="flex-1 flex flex-col bg-gray-100">
+            <div className="flex-1 flex flex-col">
                 <Header />
-                <main className="p-6">{children}</main>
+                <main className="flex-1 overflow-auto bg-gray-100 pl-20 pt-6">{children}</main>
             </div>
         </div>
     );

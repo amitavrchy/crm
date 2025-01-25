@@ -1,33 +1,46 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { Home, Briefcase, Settings, LogOut } from "lucide-react";
 
-export default function Sidebar() {
+const Sidebar = () => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+
     return (
-        <div className="w-64 bg-gray-900 text-white p-4">
-            <h2 className="text-xl font-bold mb-4">Dashboard</h2>
-            <ul>
-                <li className="mb-2">
-                    <Link href="/dashboard/client" className="hover:text-purple-400">
-                        Client Dashboard
-                    </Link>
-                </li>
-                <li className="mb-2">
-                    <Link href="/dashboard/vendor" className="hover:text-purple-400">
-                        Vendor Dashboard
-                    </Link>
-                </li>
-                <li className="mb-2">
-                    <Link href="/dashboard/admin" className="hover:text-purple-400">
-                        Admin Dashboard
-                    </Link>
-                </li>
-                <li className="mt-4">
-                    <button onClick={() => signOut()} className="text-red-400">
-                        Sign Out
-                    </button>
-                </li>
-            </ul>
+        <div
+            className={`fixed top-0 left-0 h-full bg-gray-900 text-white shadow-lg transition-width duration-300 ${
+                isCollapsed ? "w-16" : "w-64"
+            }`}
+        >
+            <div className="flex items-center justify-between px-4 py-4 bg-gray-800">
+                <h2 className={`text-lg font-semibold ${isCollapsed ? "hidden" : ""}`}>Dashboard</h2>
+                <button
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    className="p-2 rounded-md text-gray-300 hover:text-white"
+                >
+                    {isCollapsed ? "➡️" : "⬅️"}
+                </button>
+            </div>
+            <nav className="mt-4 space-y-2">
+                <SidebarLink icon={Home} label="Home" href="/homePage" isCollapsed={isCollapsed} />
+                <SidebarLink icon={Briefcase} label="Jobs" href="/jobs" isCollapsed={isCollapsed} />
+                <SidebarLink icon={Settings} label="Settings" href="/settings" isCollapsed={isCollapsed} />
+            </nav>
+            <div className="mt-auto px-4 py-4">
+                <button className="flex items-center gap-2 text-gray-300 hover:text-red-400">
+                    <LogOut className="h-6 w-6" />
+                    {!isCollapsed && <span>Sign Out</span>}
+                </button>
+            </div>
         </div>
     );
-}
+};
+
+const SidebarLink = ({ icon: Icon, label, href, isCollapsed }) => (
+    <Link href={href} className="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-gray-700">
+            <Icon className="h-6 w-6" />
+            {!isCollapsed && <span>{label}</span>}
+    </Link>
+);
+
+export default Sidebar;
