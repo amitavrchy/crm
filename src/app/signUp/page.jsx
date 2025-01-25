@@ -10,7 +10,12 @@ import axios from "axios";
 
 function SignUp() {
     const [userType, setUserType] = useState("Client");
-    const router = useRouter(); // Initialize useRouter for navigation
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
+    const axiosInstance = axios.create({
+        baseURL: process.env.NEXT_PUBLIC_API_URL,
+        timeout: 30000,
+    });
 
     const {
         register,
@@ -28,12 +33,13 @@ function SignUp() {
     });
 
     const onSubmit = async (data) => {
+        setIsLoading(true);
         try {
-            const response = await axios.post("/api/auth/register", {
+            const response = await axiosInstance.post("api/auth/register", {
                 username: data.username,
                 email: data.email,
                 password: data.password,
-                userType, // Include the userType
+                userType,
             });
 
             if (response.status === 201) {
@@ -43,9 +49,9 @@ function SignUp() {
                     icon: "success",
                     confirmButtonColor: "#4F46E5",
                 }).then(() => {
-                    router.push("/signIn"); // Redirect to Sign In page
+                    router.push("/signIn");
                 });
-                reset(); // Clear the input fields
+                reset();
             }
         } catch (error) {
             console.error("Error registering user:", error);
@@ -55,6 +61,8 @@ function SignUp() {
                 icon: "error",
                 confirmButtonColor: "#E53E3E",
             });
+        } finally {
+            setIsLoading(false);
         }
     };
 

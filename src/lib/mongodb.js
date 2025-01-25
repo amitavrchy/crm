@@ -1,24 +1,38 @@
 import { MongoClient } from "mongodb";
-require('dotenv').config();
 
+if (!process.env.MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI environment variable in .env");
+}
+
+const uri = process.env.MONGODB_URI;
 let client;
 let clientPromise;
 
-export const connectMongoDB = async () => {
-  try {
-    if (!client) {
-      console.log("Initializing MongoDB connection...");
-      client = new MongoClient(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-
-      clientPromise = client.connect();
-      console.log("MongoDB connected successfully"); // This message should appear
-    }
-    return await clientPromise;
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error.message);
-    throw new Error("Could not connect to MongoDB");
+if (process.env.NODE_ENV === "development") {
+  // In development, use a global variable to preserve the MongoDB connection across hot reloads
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    global._mongoClientPromise = client.connect();
   }
-};
+  clientPromise = global._mongoClientPromise;
+} else {
+  // In production, create a new connection
+  client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  clientPromise = client.connect();
+}
+
+export async function connectMongoDB() {
+  try {
+    const client = await clientPromise;
+    return client;
+  } catch (error) {
+    console.error("Failed to connect to MongoDB:", error.message);
+    throw new Error("Failed to connect to MongoDB");
+  }
+}
