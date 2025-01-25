@@ -1,24 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaPhoneAlt, FaBars, FaTimes, FaTachometerAlt } from "react-icons/fa";
-import { getSession, signOut } from "next-auth/react"; // Import NextAuth helpers
+import { useSession, signOut } from "next-auth/react"; // UseSession for better reactivity
 import logo from "../../../public/dr white logo.png";
 import Image from "next/image";
 
 const Navbar = () => {
+  const { data: session, status } = useSession(); // Use useSession for auto-updates
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [user, setUser] = useState(null); // Track the user session
+  console.log("Session in Navbar:", session);
 
-  // Fetch the session dynamically
-  useEffect(() => {
-    const fetchSession = async () => {
-      const session = await getSession();
-      console.log("Session data:", session); // Debugging output
-      setUser(session?.user || null);
-    };
-    fetchSession();
-  }, []);
-  
 
   return (
     <div>
@@ -36,7 +27,9 @@ const Navbar = () => {
         </div>
 
         <div className="flex space-x-6">
-          {!user ? (
+          {status === "loading" ? (
+            <span>Loading...</span>
+          ) : !session ? (
             <>
               <a href="/signUp" className="hover:text-yellow-400 transition">
                 Become a vendor
@@ -98,7 +91,7 @@ const Navbar = () => {
             >
               About us
             </a>
-            {user && (
+            {session && (
               <a
                 href="/dashboard"
                 className="hover:text-gray-400 flex items-center space-x-2 transition"
@@ -152,29 +145,29 @@ const Navbar = () => {
             <a
               href="/services"
               className="text-lg hover:text-gray-400 transition"
-              onClick={() => setIsSidebarOpen(false)} // Close sidebar on link click
+              onClick={() => setIsSidebarOpen(false)}
             >
               Services
             </a>
             <a
               href="#"
               className="text-lg hover:text-gray-400 transition"
-              onClick={() => setIsSidebarOpen(false)} // Close sidebar on link click
+              onClick={() => setIsSidebarOpen(false)}
             >
               Post a job
             </a>
             <a
               href="/aboutUs"
               className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition text-center"
-              onClick={() => setIsSidebarOpen(false)} // Close sidebar on link click
+              onClick={() => setIsSidebarOpen(false)}
             >
               About us
             </a>
-            {user && (
+            {session && (
               <a
                 href="/dashboard"
                 className="flex items-center space-x-2 text-lg hover:text-gray-400 transition"
-                onClick={() => setIsSidebarOpen(false)} // Close sidebar on link click
+                onClick={() => setIsSidebarOpen(false)}
               >
                 <FaTachometerAlt />
                 <span>Dashboard</span>

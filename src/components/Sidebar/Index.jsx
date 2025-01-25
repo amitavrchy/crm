@@ -8,7 +8,7 @@ const Sidebar = () => {
 
     return (
         <div
-            className={`fixed top-0 left-0 h-full bg-gray-900 text-white shadow-lg transition-width duration-300 ${
+            className={`fixed opacity-90 top-0 left-0 h-full bg-gray-900 text-white shadow-lg transition-width duration-300 ${
                 isCollapsed ? "w-16" : "w-64"
             }`}
         >
