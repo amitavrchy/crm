@@ -1,15 +1,54 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaPhoneAlt, FaBars, FaTimes, FaTachometerAlt } from "react-icons/fa";
-import { useSession, signOut } from "next-auth/react"; // UseSession for better reactivity
+import { useSession, signOut } from "next-auth/react";
 import logo from "../../../public/dr white logo.png";
 import Image from "next/image";
 
 const Navbar = () => {
-  const { data: session, status } = useSession(); // Use useSession for auto-updates
+  const { data: session, status } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   console.log("Session in Navbar:", session);
 
+  if (status === "loading") {
+    return (
+      <div className="bg-gray-800 text-white text-center py-4">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  const authLinks = session ? (
+    <>
+      <a
+        href="/dashboard"
+        className="flex items-center space-x-2 hover:text-yellow-400 transition"
+      >
+        <FaTachometerAlt />
+        <span>Dashboard</span>
+      </a>
+      <button
+        onClick={() => signOut()}
+        className="hover:text-yellow-400 transition"
+      >
+        Logout
+      </button>
+    </>
+  ) : (
+    <>
+      <a href="/signUp" className="hover:text-yellow-400 transition">
+        Become a vendor
+      </a>
+      <a href="/signIn" className="hover:text-yellow-400 transition">
+        Login
+      </a>
+      <a href="/signUp" className="hover:text-yellow-400 transition">
+        Register
+      </a>
+    </>
+  );
 
   return (
     <div>
@@ -25,40 +64,7 @@ const Navbar = () => {
             <span>+8801716059625</span>
           </div>
         </div>
-
-        <div className="flex space-x-6">
-          {status === "loading" ? (
-            <span>Loading...</span>
-          ) : !session ? (
-            <>
-              <a href="/signUp" className="hover:text-yellow-400 transition">
-                Become a vendor
-              </a>
-              <a href="/signIn" className="hover:text-yellow-400 transition">
-                Login
-              </a>
-              <a href="/signUp" className="hover:text-yellow-400 transition">
-                Register
-              </a>
-            </>
-          ) : (
-            <>
-              <a
-                href="/dashboard"
-                className="flex items-center space-x-2 hover:text-yellow-400 transition"
-              >
-                <FaTachometerAlt />
-                <span>Dashboard</span>
-              </a>
-              <button
-                onClick={() => signOut()}
-                className="hover:text-yellow-400 transition"
-              >
-                Logout
-              </button>
-            </>
-          )}
-        </div>
+        <div className="flex space-x-6">{authLinks}</div>
       </div>
 
       {/* Main Navbar */}
