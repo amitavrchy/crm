@@ -88,7 +88,7 @@ const Navbar = () => {
             <a href="/services" className="hover:text-gray-400 transition">
               Services
             </a>
-            <a href="#" className="hover:text-gray-400 transition">
+            <a href="/postJob" className="hover:text-gray-400 transition">
               Post a job
             </a>
             <a
@@ -156,7 +156,7 @@ const Navbar = () => {
               Services
             </a>
             <a
-              href="#"
+              href="/postAJob"
               className="text-lg hover:text-gray-400 transition"
               onClick={() => setIsSidebarOpen(false)}
             >
