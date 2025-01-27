@@ -158,7 +158,7 @@ const Navbar = () => {
               Services
             </a>
             <a
-              href="/postAJob"
+              href="/postJob"
               className="text-lg hover:text-gray-400 transition"
               onClick={() => setIsSidebarOpen(false)}
             >
