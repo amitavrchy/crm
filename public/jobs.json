@@ -1,0 +1,83 @@
+[
+    {
+      "_id": "1",
+      "title": "Frontend Developer",
+      "company": "Tech Solutions Inc.",
+      "location": "New York, USA",
+      "category": "IT",
+      "description": "Develop and maintain web applications using React.js. Collaborate with the design team to create user-friendly interfaces.",
+      "salary": "80000",
+      "postedAt": "2025-01-20T10:00:00Z"
+    },
+    {
+      "_id": "2",
+      "title": "Accountant",
+      "company": "Finance Corp.",
+      "location": "London, UK",
+      "category": "Accountancy & Finance",
+      "description": "Manage financial records, prepare reports, and ensure compliance with tax regulations.",
+      "salary": "60000",
+      "postedAt": "2025-01-18T08:00:00Z"
+    },
+    {
+      "_id": "3",
+      "title": "Customer Service Representative",
+      "company": "SupportNow",
+      "location": "Los Angeles, USA",
+      "category": "Customer Service",
+      "description": "Provide assistance to customers, resolve queries, and ensure customer satisfaction.",
+      "salary": "45000",
+      "postedAt": "2025-01-22T12:00:00Z"
+    },
+    {
+      "_id": "4",
+      "title": "HR Manager",
+      "company": "People Partners",
+      "location": "Sydney, Australia",
+      "category": "HR",
+      "description": "Oversee recruitment, employee relations, and company policies.",
+      "salary": "90000",
+      "postedAt": "2025-01-15T09:00:00Z"
+    },
+    {
+      "_id": "5",
+      "title": "Marketing Specialist",
+      "company": "Market Leaders",
+      "location": "Toronto, Canada",
+      "category": "Marketing",
+      "description": "Plan and execute marketing campaigns to promote products and services.",
+      "salary": "70000",
+      "postedAt": "2025-01-19T11:00:00Z"
+    },
+    {
+      "_id": "6",
+      "title": "Full Stack Developer",
+      "company": "CodeWorks",
+      "location": "Berlin, Germany",
+      "category": "IT",
+      "description": "Build end-to-end web solutions using MERN stack technologies.",
+      "salary": "85000",
+      "postedAt": "2025-01-20T13:00:00Z"
+    },
+    {
+      "_id": "7",
+      "title": "Data Analyst",
+      "company": "Data Insights Co.",
+      "location": "Mumbai, India",
+      "category": "Accountancy & Finance",
+      "description": "Analyze data sets to provide actionable insights for business decision-making.",
+      "salary": "55000",
+      "postedAt": "2025-01-21T14:00:00Z"
+    },
+    {
+      "_id": "8",
+      "title": "Remote Support Specialist",
+      "company": "Remote Assist",
+      "location": "Remote",
+      "category": "Customer Service",
+      "description": "Assist customers remotely with troubleshooting and product inquiries.",
+      "salary": "40000",
+      "postedAt": "2025-01-23T15:00:00Z"
+    }
+  ]
+  

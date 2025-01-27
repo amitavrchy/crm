@@ -52,6 +52,17 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                 <span>Back to Home</span>
               </Link>
             </li>
+            <li>
+              <Link
+                href="/dashboard/allJobs"
+                className={`menu-item text-sm flex items-center cursor-pointer rounded-md px-3 py-3 transition-all duration-300 ${isActive(
+                  "/"
+                )}`}
+              >
+                <BiHomeAlt className="text-2xl mr-2" />
+                <span>All Jobs</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

@@ -9,6 +9,7 @@ import Dashboard1 from "./layouts/Dashboard1";
 import Client from "./Client";
 import Vendor from "./Vendor";
 import Admin from "./Admin";
+import AllJobs from "./AllJobs";
 
 
 const MainLayout = () => {
@@ -47,6 +48,7 @@ const MainLayout = () => {
             {pathname === "/dashboard/client" && <Client/>}
             {pathname === "/dashboard/vendor" && <Vendor/>}
             {pathname === "/dashboard/admin" && <Admin/>}
+            {pathname === "/dashboard/allJobs" && <AllJobs/>}
           </div>
         </section>
       </div>
