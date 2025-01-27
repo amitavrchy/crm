@@ -133,9 +133,8 @@ const Navbar = () => {
 
         {/* Mobile Sidebar */}
         <div
-          className={`fixed top-0 left-0 h-full w-64 bg-black text-white transform transition-transform duration-300 z-40 ${
-            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className={`fixed top-0 left-0 h-full w-64 bg-black text-white transform transition-transform duration-300 z-40 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
         >
           {/* Close Button */}
           <div className="flex items-center justify-between px-4 py-4 border-b border-gray-700">
@@ -164,6 +163,13 @@ const Navbar = () => {
               onClick={() => setIsSidebarOpen(false)}
             >
               Post a job
+            </a>
+            <a
+              href="/allJobs"
+              className="text-lg hover:text-gray-400 transition"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              All Jobs
             </a>
             <a
               href="/aboutUs"
