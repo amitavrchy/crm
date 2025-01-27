@@ -71,7 +71,8 @@ function AllJobsHomePage() {
             <div className="max-w-7xl mx-auto px-4">
                 {/* Stats Section */}
                 <div className="bg-white rounded-lg shadow-md p-8 mb-12">
-                    <h2 className="text-2xl font-bold text-center mb-6">Find the Right Job</h2>
+                    <h2 className="text-base text-orange-500 font-bold text-center mb-6">Find the Right Job</h2>
+                    <h1 className="text-2xl md:text-4xl font-bold text-gray-800 text-center mb-8">Featured Job Opportunities</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div className="flex items-center space-x-4">
                             <div className="bg-blue-100 p-4 rounded-full">
@@ -113,7 +114,6 @@ function AllJobsHomePage() {
                 </div>
 
                 {/* Featured Job Opportunities */}
-                <h1 className="text-3xl font-bold text-center mb-8">Featured Job Opportunities</h1>
 
                 {/* Job Listings */}
                 {jobs.length > 0 ? (

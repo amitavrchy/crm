@@ -209,8 +209,6 @@ function Services() {
         </div>
       </section>
 
-
-
       {/* Vendors Section */}
       <Vendors />
       <Footer />

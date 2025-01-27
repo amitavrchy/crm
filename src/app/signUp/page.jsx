@@ -75,7 +75,7 @@ function SignUp() {
     return (
         <div>
             <Navbar />
-            <section className="relative flex items-center justify-center min-h-screen bg-gray-100">
+            <section className="relative flex items-center justify-center min-h-screen bg-gray-100 py-8">
                 {/* Animated Background */}
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute w-64 h-64 bg-orange-300 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>

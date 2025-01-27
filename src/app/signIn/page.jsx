@@ -67,7 +67,7 @@ function SignIn() {
     return (
         <div>
             <Navbar/>
-            <section className="relative flex items-center justify-center min-h-screen bg-gray-900">
+            <section className="relative flex items-center justify-center min-h-screen py-8 bg-gray-900">
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute w-64 h-64 bg-orange-700 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
                     <div className="absolute w-80 h-80 bg-orange-500 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
