@@ -1,10 +1,11 @@
-import DashboardLayout from "../../../components/DashboardLayout/index";
+import MainLayout from "@/components/dashboard/MainLayout";
 
 export default function ClientDashboard() {
     return (
-        <DashboardLayout>
-            <h1 className="text-3xl font-bold">Client Dashboard</h1>
-            <p>Welcome to your client dashboard.</p>
-        </DashboardLayout>
+        <>
+            <MainLayout>
+
+            </MainLayout>
+        </>
     );
 }

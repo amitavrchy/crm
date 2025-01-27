@@ -6,10 +6,13 @@ import img1 from "../../../public/about-us-wte/1.jpg";
 import img2 from "../../../public/about-us-wte/2.jpg";
 import img3 from "../../../public/about-us-wte/3.jpg";
 import img4 from "../../../public/about-us/about-2.jpg";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 function Services() {
   return (
     <div className="bg-gray-50">
+      <Navbar/>
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 text-white py-24 text-center">
         <div className="absolute inset-0 bg-opacity-40 bg-black"></div>
@@ -161,6 +164,7 @@ function Services() {
 
       {/* Vendors Section */}
       <Vendors />
+      <Footer/>
     </div>
   );
 }

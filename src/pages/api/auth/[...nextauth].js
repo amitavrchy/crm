@@ -17,11 +17,21 @@ const options = {
           const db = client.db();
           const usersCollection = db.collection("users");
 
+          console.log("Authorizing user with email:", credentials.email); // Debugging log
+          
           const user = await usersCollection.findOne({ email: credentials.email });
-          if (!user) throw new Error("No user found with the given email");
+          if (!user) {
+            console.error("No user found with email:", credentials.email); // Debugging log
+            throw new Error("No user found with the given email");
+          }
 
           const isValidPassword = await bcrypt.compare(credentials.password, user.password);
-          if (!isValidPassword) throw new Error("Invalid email or password");
+          if (!isValidPassword) {
+            console.error("Invalid password for email:", credentials.email); // Debugging log
+            throw new Error("Invalid email or password");
+          }
+
+          console.log("Authorization successful for email:", credentials.email); // Debugging log
 
           return {
             id: user._id.toString(),
@@ -31,7 +41,7 @@ const options = {
             user,
           };
         } catch (error) {
-          console.error("Authorize error:", error.message);
+          console.error("Authorize error:", error.message); // Debugging log
           throw new Error("Unable to authenticate. Please try again.");
         }
       },
@@ -46,6 +56,8 @@ const options = {
   },
   callbacks: {
     async jwt({ token, user }) {
+      console.log("JWT Callback - Before Update:", { token, user }); // Debugging log
+
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -53,18 +65,28 @@ const options = {
         token.userType = user.userType; // Add userType to token
       }
       token.user = user;
+
+      console.log("JWT Callback - After Update:", { token }); // Debugging log
       return token;
     },
     async session({ session, token }) {
+      console.log("Session Callback - Before Update:", { session, token }); // Debugging log
+
       if (token) {
         session.user.id = token.id;
         session.user.email = token.email;
-        session.user.name = token.name;
+        session.user.name = token.name || user.name;
         session.user.userType = token.userType; // Add userType to session
       }
       session.user = token.user;
+
+      console.log("Session Callback - After Update:", { session }); // Debugging log
       return session;
     },
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET, // Ensure this is set
+    encryption: true, // Enable encryption for added security
   },
   debug: process.env.NODE_ENV === "development",
 };

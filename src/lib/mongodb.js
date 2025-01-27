@@ -30,9 +30,11 @@ if (process.env.NODE_ENV === "development") {
 export async function connectMongoDB() {
   try {
     const client = await clientPromise;
-    return client;
+    const db = client.db();
+    return { client, db };
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error.message);
     throw new Error("Failed to connect to MongoDB");
   }
 }
+

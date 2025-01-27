@@ -1,15 +1,10 @@
-import DashboardLayout from "../../../components/DashboardLayout/index";
+import MainLayout from "@/components/dashboard/MainLayout";
 
 export default function AdminDashboard() {
     return (
-        <DashboardLayout>
-            <div className="flex flex-col items-start">
-                <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
-                <p className="text-gray-700">
-                    Welcome to your admin dashboard. Here you can manage all the administrative tasks efficiently.
-                </p>
-            </div>
-        </DashboardLayout>
+        <MainLayout>
+
+        </MainLayout>
     );
 }
 
