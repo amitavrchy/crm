@@ -5,12 +5,14 @@ import Services from "@/components/Services";
 import Vendors from "@/components/vendors";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AllJobsHomePage from '@/components/allJobsHomePage';
 
 function HomePage() {
   return (
     <div>
       <Navbar/>
       <Banner />
+      <AllJobsHomePage/>
       <AboutUs />
       <Services />
       <Vendors />

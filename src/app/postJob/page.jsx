@@ -75,67 +75,67 @@ function PostAJob() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex flex-col">
+    <div className="bg-gray-100 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-1 flex items-center justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl w-full p-6 lg:p-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-7xl w-full py-12">
           {/* Image Section */}
-          <div className="relative w-full h-96 lg:h-full">
+          <div className="relative w-full h-96 lg:h-auto">
             <img
               src={img.src}
               alt="Post a Job"
               className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-lg"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50 rounded-lg"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white opacity-50 rounded-lg"></div>
           </div>
 
           {/* Form Section */}
-          <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg shadow-lg p-6 lg:p-10">
-            <h1 className="text-3xl font-bold text-white text-center mb-8">Post a Job</h1>
+          <div className="bg-white rounded-lg shadow-lg p-8 lg:p-12">
+            <h1 className="text-3xl font-bold text-gray-800 text-center mb-6">Post a Job</h1>
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label className="block text-sm font-medium text-gray-300">Job Title</label>
+                <label className="block text-sm font-medium text-gray-700">Job Title</label>
                 <input
                   type="text"
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300">Company</label>
+                <label className="block text-sm font-medium text-gray-700">Company</label>
                 <input
                   type="text"
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300">Location</label>
+                <label className="block text-sm font-medium text-gray-700">Location</label>
                 <input
                   type="text"
                   name="location"
                   value={formData.location}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300">Job Type</label>
+                <label className="block text-sm font-medium text-gray-700">Job Type</label>
                 <select
                   name="jobType"
                   value={formData.jobType}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 >
                   <option value="" disabled>
@@ -150,12 +150,12 @@ function PostAJob() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300">Category</label>
+                <label className="block text-sm font-medium text-gray-700">Category</label>
                 <select
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 >
                   <option value="" disabled>
@@ -170,49 +170,49 @@ function PostAJob() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300">Job Description</label>
+                <label className="block text-sm font-medium text-gray-700">Job Description</label>
                 <textarea
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows="4"
                   required
                 ></textarea>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300">Salary</label>
+                <label className="block text-sm font-medium text-gray-700">Salary</label>
                 <input
                   type="number"
                   name="salary"
                   value={formData.salary}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter salary in numbers"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300">Job Reference</label>
+                <label className="block text-sm font-medium text-gray-700">Job Reference</label>
                 <input
                   type="text"
                   name="jobReference"
                   value={formData.jobReference}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300">Vacancy</label>
+                <label className="block text-sm font-medium text-gray-700">Vacancy</label>
                 <input
                   type="number"
                   name="vacancy"
                   value={formData.vacancy}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  className="mt-2 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
@@ -225,7 +225,7 @@ function PostAJob() {
                   onChange={handleChange}
                   className="h-5 w-5 text-blue-500 rounded focus:ring-blue-500"
                 />
-                <label className="ml-2 text-sm font-medium text-gray-300">Mark as Featured</label>
+                <label className="ml-2 text-sm font-medium text-gray-700">Mark as Featured</label>
               </div>
 
               <button

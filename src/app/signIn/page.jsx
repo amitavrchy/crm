@@ -6,6 +6,8 @@ import "tailwindcss/tailwind.css";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 function SignIn() {
     const router = useRouter();
@@ -63,69 +65,73 @@ function SignIn() {
     };
 
     return (
-        <section className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute w-64 h-64 bg-blue-500 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
-                <div className="absolute w-80 h-80 bg-purple-500 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
-            </div>
+        <div>
+            <Navbar/>
+            <section className="relative flex items-center justify-center min-h-screen py-8 bg-gray-900">
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute w-64 h-64 bg-orange-700 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
+                    <div className="absolute w-80 h-80 bg-orange-500 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
+                </div>
 
-            <div className="relative z-10 w-full max-w-md px-8 py-10 bg-gray-800 rounded-lg shadow-xl">
-                <h2 className="text-3xl font-extrabold text-center text-white">Sign In</h2>
-                <p className="text-sm text-center text-gray-400">
-                    Welcome back! Please sign in to your account.
-                </p>
+                <div className="relative z-10 w-full max-w-md px-8 py-10 bg-gray-800 rounded-lg shadow-xl">
+                    <h2 className="text-3xl font-extrabold text-center text-white">Sign In</h2>
+                    <p className="text-sm text-center text-gray-400">
+                        Welcome back! Please sign in to your account.
+                    </p>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
-                    <div>
-                        <label htmlFor="email" className="block text-sm text-gray-300">
-                            Email
-                        </label>
-                        <input
-                            id="email"
-                            type="email"
-                            {...register("email", { required: "Email is required" })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Enter your email"
-                        />
-                        {errors.email && (
-                            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-                        )}
-                    </div>
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
+                        <div>
+                            <label htmlFor="email" className="block text-sm text-gray-300">
+                                Email
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                {...register("email", { required: "Email is required" })}
+                                className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                placeholder="Enter your email"
+                            />
+                            {errors.email && (
+                                <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                            )}
+                        </div>
 
-                    <div>
-                        <label htmlFor="password" className="block text-sm text-gray-300">
-                            Password
-                        </label>
-                        <input
-                            id="password"
-                            type="password"
-                            {...register("password", { required: "Password is required" })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Enter your password"
-                        />
-                        {errors.password && (
-                            <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
-                        )}
-                    </div>
+                        <div>
+                            <label htmlFor="password" className="block text-sm text-gray-300">
+                                Password
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                {...register("password", { required: "Password is required" })}
+                                className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                placeholder="Enter your password"
+                            />
+                            {errors.password && (
+                                <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+                            )}
+                        </div>
 
-                    <button
-                        type="submit"
-                        className="w-full py-2 text-white bg-blue-600 rounded-md shadow-md hover:bg-blue-700"
-                    >
-                        Sign In
-                    </button>
-                </form>
+                        <button
+                            type="submit"
+                            className="w-full py-2 text-white bg-orange-500 rounded-md shadow-md hover:bg-orange-600"
+                        >
+                            Sign In
+                        </button>
+                    </form>
 
-                <p className="mt-4 text-sm text-center text-gray-300">
-                    Don’t have an account?{" "}
-                    <Link href="/signUp">
-                        <span className="flex items-center justify-center gap-1 text-blue-500 hover:text-blue-700">
-                            Sign Up <AiOutlineArrowRight />
-                        </span>
-                    </Link>
-                </p>
-            </div>
-        </section>
+                    <p className="mt-4 text-sm text-center text-gray-300">
+                        Don’t have an account?{" "}
+                        <Link href="/signUp">
+                            <span className="flex items-center justify-center gap-1 text-orange-500 hover:text-orange-600">
+                                Sign Up <AiOutlineArrowRight />
+                            </span>
+                        </Link>
+                    </p>
+                </div>
+            </section>
+            <Footer/>
+        </div>
     );
 }
 

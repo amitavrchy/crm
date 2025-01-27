@@ -7,6 +7,8 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
 import axios from "axios";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 function SignUp() {
     const [userType, setUserType] = useState("Client");
@@ -71,140 +73,144 @@ function SignUp() {
     };
 
     return (
-        <section className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-            {/* Animated Background */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute w-64 h-64 bg-purple-600 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
-                <div className="absolute w-80 h-80 bg-blue-500 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
-            </div>
+        <div>
+            <Navbar />
+            <section className="relative flex items-center justify-center min-h-screen bg-gray-100 py-8">
+                {/* Animated Background */}
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute w-64 h-64 bg-orange-300 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
+                    <div className="absolute w-80 h-80 bg-orange-400 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
+                </div>
 
-            <div className="relative z-10 w-full max-w-md px-8 py-10 bg-gray-800 rounded-lg shadow-xl">
-                <h2 className="text-3xl font-extrabold text-center text-white">Sign Up</h2>
-                <p className="text-sm text-center text-gray-400">
-                    Create your account and join as {userType.toLowerCase()}!
-                </p>
+                <div className="relative z-10 w-full max-w-md px-8 py-10 bg-white rounded-lg shadow-xl">
+                    <h2 className="text-3xl font-extrabold text-center text-gray-900">Sign Up</h2>
+                    <p className="text-sm text-center text-gray-600">
+                        Create your account and join as {userType.toLowerCase()}!
+                    </p>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
-                    <div>
-                        <label htmlFor="username" className="block text-sm text-gray-300">
-                            Username
-                        </label>
-                        <input
-                            id="username"
-                            type="text"
-                            {...register("username", { required: "Username is required" })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
-                            placeholder="Choose a username"
-                        />
-                        {errors.username && (
-                            <p className="mt-1 text-sm text-red-500">{errors.username.message}</p>
-                        )}
-                    </div>
-
-                    <div>
-                        <label htmlFor="email" className="block text-sm text-gray-300">
-                            Email
-                        </label>
-                        <input
-                            id="email"
-                            type="email"
-                            {...register("email", {
-                                required: "Email is required",
-                                pattern: {
-                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                                    message: "Enter a valid email",
-                                },
-                            })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
-                            placeholder="Enter your email"
-                        />
-                        {errors.email && (
-                            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-                        )}
-                    </div>
-
-                    <div>
-                        <label htmlFor="password" className="block text-sm text-gray-300">
-                            Password
-                        </label>
-                        <input
-                            id="password"
-                            type="password"
-                            {...register("password", { required: "Password is required" })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
-                            placeholder="Create a password"
-                        />
-                        {errors.password && (
-                            <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
-                        )}
-                    </div>
-
-                    <div>
-                        <label htmlFor="confirmPassword" className="block text-sm text-gray-300">
-                            Confirm Password
-                        </label>
-                        <input
-                            id="confirmPassword"
-                            type="password"
-                            {...register("confirmPassword", {
-                                required: "Please confirm your password",
-                                validate: (value) =>
-                                    value === watch("password") || "Passwords do not match",
-                            })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
-                            placeholder="Confirm your password"
-                        />
-                        {errors.confirmPassword && (
-                            <p className="mt-1 text-sm text-red-500">
-                                {errors.confirmPassword.message}
-                            </p>
-                        )}
-                    </div>
-
-                    {/* User Type Selection */}
-                    <div className="flex items-center justify-between">
-                        <p className="text-sm text-gray-300">Register as:</p>
-                        <div className="flex items-center space-x-4">
-                            {["Client", "Vendor", "Admin"].map((type) => (
-                                <button
-                                    key={type}
-                                    type="button"
-                                    className={`flex flex-col items-center px-3 py-2 rounded-md ${userType === type
-                                            ? "bg-purple-600 text-white"
-                                            : "bg-gray-700 text-gray-300 hover:bg-purple-500 hover:text-white"
-                                        }`}
-                                    onClick={() => handleUserTypeChange(type)}
-                                >
-                                    <span className="text-sm">{type}</span>
-                                </button>
-                            ))}
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
+                        <div>
+                            <label htmlFor="username" className="block text-sm text-gray-700">
+                                Username
+                            </label>
+                            <input
+                                id="username"
+                                type="text"
+                                {...register("username", { required: "Username is required" })}
+                                className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                placeholder="Choose a username"
+                            />
+                            {errors.username && (
+                                <p className="mt-1 text-sm text-red-500">{errors.username.message}</p>
+                            )}
                         </div>
-                    </div>
 
-                    {/* Submit Button */}
-                    <button
-                        type="submit"
-                        className="w-full py-2 text-white bg-purple-600 rounded-md shadow-md hover:bg-purple-700"
-                    >
-                        Sign Up
-                    </button>
-                </form>
+                        <div>
+                            <label htmlFor="email" className="block text-sm text-gray-700">
+                                Email
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                {...register("email", {
+                                    required: "Email is required",
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                                        message: "Enter a valid email",
+                                    },
+                                })}
+                                className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                placeholder="Enter your email"
+                            />
+                            {errors.email && (
+                                <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                            )}
+                        </div>
 
-                {/* Link to Sign In */}
-                <p className="mt-4 text-sm text-center text-gray-300">
-                    Already have an account?{" "}
-                    <Link href="/signIn">
-                        <span className="flex items-center justify-center gap-1 text-purple-500 hover:text-purple-700">
-                            Sign In <AiOutlineArrowRight />
-                        </span>
-                    </Link>
-                </p>
+                        <div>
+                            <label htmlFor="password" className="block text-sm text-gray-700">
+                                Password
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                {...register("password", { required: "Password is required" })}
+                                className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                placeholder="Create a password"
+                            />
+                            {errors.password && (
+                                <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+                            )}
+                        </div>
 
-                <p className="mt-4 text-xs text-center text-gray-500">
-                    By signing up, you agree to our Terms of Service and Privacy Policy.
-                </p>
-            </div>
-        </section>
+                        <div>
+                            <label htmlFor="confirmPassword" className="block text-sm text-gray-700">
+                                Confirm Password
+                            </label>
+                            <input
+                                id="confirmPassword"
+                                type="password"
+                                {...register("confirmPassword", {
+                                    required: "Please confirm your password",
+                                    validate: (value) =>
+                                        value === watch("password") || "Passwords do not match",
+                                })}
+                                className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                placeholder="Confirm your password"
+                            />
+                            {errors.confirmPassword && (
+                                <p className="mt-1 text-sm text-red-500">
+                                    {errors.confirmPassword.message}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* User Type Selection */}
+                        <div className="flex items-center justify-between">
+                            <p className="text-sm text-gray-700">Register as:</p>
+                            <div className="flex items-center space-x-4">
+                                {["Client", "Vendor", "Admin"].map((type) => (
+                                    <button
+                                        key={type}
+                                        type="button"
+                                        className={`flex flex-col items-center px-3 py-2 rounded-md ${userType === type
+                                            ? "bg-orange-500 text-white"
+                                            : "bg-gray-200 text-gray-700 hover:bg-orange-400 hover:text-white"
+                                            }`}
+                                        onClick={() => handleUserTypeChange(type)}
+                                    >
+                                        <span className="text-sm">{type}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            className="w-full py-2 text-white bg-orange-500 rounded-md shadow-md hover:bg-orange-600"
+                        >
+                            Sign Up
+                        </button>
+                    </form>
+
+                    {/* Link to Sign In */}
+                    <p className="mt-4 text-sm text-center text-gray-700">
+                        Already have an account?{" "}
+                        <Link href="/signIn">
+                            <span className="flex items-center justify-center gap-1 text-orange-500 hover:text-orange-700">
+                                Sign In <AiOutlineArrowRight />
+                            </span>
+                        </Link>
+                    </p>
+
+                    <p className="mt-4 text-xs text-center text-gray-500">
+                        By signing up, you agree to our Terms of Service and Privacy Policy.
+                    </p>
+                </div>
+            </section>
+            <Footer />
+        </div>
     );
 }
 
