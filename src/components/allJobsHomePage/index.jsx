@@ -15,7 +15,7 @@ function AllJobsHomePage() {
                 const res = await fetch("/jobs.json");
                 if (res.ok) {
                     const data = await res.json();
-                    setJobs(data.slice(0, 6)); // Fetch only the first 6 jobs
+                    setJobs(data.slice(0, 6));
                 } else {
                     setError("Failed to fetch jobs. Please try again later.");
                 }

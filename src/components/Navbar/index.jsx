@@ -96,7 +96,7 @@ const Navbar = () => {
             </a>
             <a
               href="/aboutUs"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition"
             >
               About us
             </a>
@@ -167,7 +167,7 @@ const Navbar = () => {
             </a>
             <a
               href="/aboutUs"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition text-center"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition text-center"
               onClick={() => setIsSidebarOpen(false)}
             >
               About us

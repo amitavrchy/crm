@@ -8,14 +8,22 @@ import img3 from "../../../public/about-us/about-3.jpg";
 import img4 from "../../../public/about-us-wte/4.jpg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import img from "../../../public/about_service.jpg";
 
 function AboutUs() {
   return (
     <div className="bg-gray-50">
-      <Navbar/>
+      <Navbar />
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-24 text-center">
-        <div className="absolute inset-0 bg-opacity-40 bg-black"></div>
+      <div className="relative text-white py-24 text-center">
+        <Image
+          src={img}
+          alt="Hero Background"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-0 w-full h-full z-0"
+        />
+        <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">
             About Us
@@ -24,7 +32,7 @@ function AboutUs() {
             Bridging businesses with exceptional talent through innovative and
             personalized recruitment solutions.
           </p>
-          <button className="mt-8 bg-white text-indigo-600 py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition">
+          <button className="mt-8 bg-orange-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition">
             Get in Touch
           </button>
         </div>
@@ -33,13 +41,13 @@ function AboutUs() {
       {/* Mission & Vision Section */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
         <div className="space-y-6">
-          <h2 className="text-4xl font-bold text-indigo-600">Our Mission</h2>
+          <h2 className="text-4xl font-bold text-gray-800">Our Mission</h2>
           <p className="text-gray-600 leading-relaxed">
             Our mission is to bridge the gap between businesses and exceptional
             talent by providing personalized solutions that drive growth and
             success for all stakeholders involved.
           </p>
-          <h2 className="text-4xl font-bold text-indigo-600">Our Vision</h2>
+          <h2 className="text-4xl font-bold text-gray-800">Our Vision</h2>
           <p className="text-gray-600 leading-relaxed">
             To be the global leader in client-focused recruitment, transforming
             the way businesses and individuals connect by fostering meaningful
@@ -68,7 +76,7 @@ function AboutUs() {
             />
           </div>
           <div>
-            <h2 className="text-4xl font-bold text-indigo-600">
+            <h2 className="text-4xl font-bold text-gray-800">
               We Are a Trustworthy Recruitment Service
             </h2>
             <p className="mt-4 text-gray-600 leading-relaxed">
@@ -76,7 +84,7 @@ function AboutUs() {
               offering high-quality recruitment solutions and ensuring the
               success of every individual and business we work with.
             </p>
-            <button className="mt-6 bg-indigo-600 text-white py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition">
+            <button className="mt-6 bg-orange-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition">
               Contact Us
             </button>
           </div>
@@ -87,7 +95,7 @@ function AboutUs() {
       <section className="bg-gradient-to-br from-pink-50 to-pink-100 py-16">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold text-indigo-600">
+            <h2 className="text-4xl font-bold text-gray-800">
               Connecting Top Talent with Leading Companies
             </h2>
             <p className="mt-4 text-gray-600 leading-relaxed">
@@ -119,7 +127,7 @@ function AboutUs() {
             />
           </div>
           <div>
-            <h2 className="text-4xl font-bold text-indigo-600">Why Choose Us?</h2>
+            <h2 className="text-4xl font-bold text-gray-800">Why Choose Us?</h2>
             <ul className="mt-4 space-y-4">
               {[
                 "Industry-leading expertise in recruitment",
@@ -128,7 +136,7 @@ function AboutUs() {
                 "Commitment to fostering growth and success",
               ].map((item, index) => (
                 <li key={index} className="flex items-start space-x-3">
-                  <FaCheckCircle className="text-indigo-600 mt-1" />
+                  <FaCheckCircle className="text-gray-800 mt-1" />
                   <span className="text-gray-600">{item}</span>
                 </li>
               ))}
@@ -139,7 +147,7 @@ function AboutUs() {
 
       {/* Vendors Section */}
       <Vendors />
-      <Footer/>
+      <Footer />
     </div>
   );
 }
