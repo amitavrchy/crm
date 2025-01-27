@@ -32,9 +32,6 @@ function AboutUs() {
             Bridging businesses with exceptional talent through innovative and
             personalized recruitment solutions.
           </p>
-          <button className="mt-8 bg-orange-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition">
-            Get in Touch
-          </button>
         </div>
       </div>
 

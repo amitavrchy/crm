@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaBuilding, FaMapMarkerAlt, FaMoneyBillWave } from "react-icons/fa";
+import { FaBuilding, FaMapMarkerAlt, FaMoneyBillWave, FaBriefcase, FaUsers } from "react-icons/fa";
 
 function AllJobsHomePage() {
     const [jobs, setJobs] = useState([]);
@@ -37,6 +37,19 @@ function AllJobsHomePage() {
         router.push(`/singleJob/${jobId}`);
     };
 
+    // Calculate stats
+    const jobStats = jobs.reduce(
+        (stats, job) => {
+            stats.totalJobs += 1;
+            stats.totalVacancies += job.vacancy || 0;
+            if (!stats.companies.includes(job.company)) {
+                stats.companies.push(job.company);
+            }
+            return stats;
+        },
+        { totalJobs: 0, totalVacancies: 0, companies: [] }
+    );
+
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 text-gray-800">
@@ -56,6 +69,50 @@ function AllJobsHomePage() {
     return (
         <div className="bg-gray-50 text-gray-800 py-12">
             <div className="max-w-7xl mx-auto px-4">
+                {/* Stats Section */}
+                <div className="bg-white rounded-lg shadow-md p-8 mb-12">
+                    <h2 className="text-2xl font-bold text-center mb-6">Find the Right Job</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="flex items-center space-x-4">
+                            <div className="bg-blue-100 p-4 rounded-full">
+                                <FaBriefcase className="text-blue-500 text-xl" />
+                            </div>
+                            <div>
+                                <p className="text-xl font-bold">{jobStats.totalJobs}</p>
+                                <p className="text-sm text-gray-500">Live Jobs</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <div className="bg-green-100 p-4 rounded-full">
+                                <FaUsers className="text-green-500 text-xl" />
+                            </div>
+                            <div>
+                                <p className="text-xl font-bold">{jobStats.totalVacancies}</p>
+                                <p className="text-sm text-gray-500">Vacancies</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <div className="bg-yellow-100 p-4 rounded-full">
+                                <FaBuilding className="text-yellow-500 text-xl" />
+                            </div>
+                            <div>
+                                <p className="text-xl font-bold">{jobStats.companies.length}</p>
+                                <p className="text-sm text-gray-500">Companies</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <div className="bg-orange-100 p-4 rounded-full">
+                                <FaMapMarkerAlt className="text-orange-500 text-xl" />
+                            </div>
+                            <div>
+                                <p className="text-xl font-bold">{jobs.length}</p>
+                                <p className="text-sm text-gray-500">New Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Featured Job Opportunities */}
                 <h1 className="text-3xl font-bold text-center mb-8">Featured Job Opportunities</h1>
 
                 {/* Job Listings */}
