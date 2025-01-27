@@ -71,29 +71,29 @@ function SignUp() {
     };
 
     return (
-        <section className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
+        <section className="relative flex items-center justify-center min-h-screen bg-gray-100">
             {/* Animated Background */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute w-64 h-64 bg-purple-600 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
-                <div className="absolute w-80 h-80 bg-blue-500 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
+                <div className="absolute w-64 h-64 bg-orange-300 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
+                <div className="absolute w-80 h-80 bg-orange-400 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
             </div>
 
-            <div className="relative z-10 w-full max-w-md px-8 py-10 bg-gray-800 rounded-lg shadow-xl">
-                <h2 className="text-3xl font-extrabold text-center text-white">Sign Up</h2>
-                <p className="text-sm text-center text-gray-400">
+            <div className="relative z-10 w-full max-w-md px-8 py-10 bg-white rounded-lg shadow-xl">
+                <h2 className="text-3xl font-extrabold text-center text-gray-900">Sign Up</h2>
+                <p className="text-sm text-center text-gray-600">
                     Create your account and join as {userType.toLowerCase()}!
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
                     <div>
-                        <label htmlFor="username" className="block text-sm text-gray-300">
+                        <label htmlFor="username" className="block text-sm text-gray-700">
                             Username
                         </label>
                         <input
                             id="username"
                             type="text"
                             {...register("username", { required: "Username is required" })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
+                            className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
                             placeholder="Choose a username"
                         />
                         {errors.username && (
@@ -102,7 +102,7 @@ function SignUp() {
                     </div>
 
                     <div>
-                        <label htmlFor="email" className="block text-sm text-gray-300">
+                        <label htmlFor="email" className="block text-sm text-gray-700">
                             Email
                         </label>
                         <input
@@ -115,7 +115,7 @@ function SignUp() {
                                     message: "Enter a valid email",
                                 },
                             })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
+                            className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
                             placeholder="Enter your email"
                         />
                         {errors.email && (
@@ -124,14 +124,14 @@ function SignUp() {
                     </div>
 
                     <div>
-                        <label htmlFor="password" className="block text-sm text-gray-300">
+                        <label htmlFor="password" className="block text-sm text-gray-700">
                             Password
                         </label>
                         <input
                             id="password"
                             type="password"
                             {...register("password", { required: "Password is required" })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
+                            className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
                             placeholder="Create a password"
                         />
                         {errors.password && (
@@ -140,7 +140,7 @@ function SignUp() {
                     </div>
 
                     <div>
-                        <label htmlFor="confirmPassword" className="block text-sm text-gray-300">
+                        <label htmlFor="confirmPassword" className="block text-sm text-gray-700">
                             Confirm Password
                         </label>
                         <input
@@ -151,7 +151,7 @@ function SignUp() {
                                 validate: (value) =>
                                     value === watch("password") || "Passwords do not match",
                             })}
-                            className="w-full px-4 py-2 mt-1 text-white bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500"
+                            className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
                             placeholder="Confirm your password"
                         />
                         {errors.confirmPassword && (
@@ -163,15 +163,15 @@ function SignUp() {
 
                     {/* User Type Selection */}
                     <div className="flex items-center justify-between">
-                        <p className="text-sm text-gray-300">Register as:</p>
+                        <p className="text-sm text-gray-700">Register as:</p>
                         <div className="flex items-center space-x-4">
                             {["Client", "Vendor", "Admin"].map((type) => (
                                 <button
                                     key={type}
                                     type="button"
                                     className={`flex flex-col items-center px-3 py-2 rounded-md ${userType === type
-                                            ? "bg-purple-600 text-white"
-                                            : "bg-gray-700 text-gray-300 hover:bg-purple-500 hover:text-white"
+                                            ? "bg-orange-500 text-white"
+                                            : "bg-gray-200 text-gray-700 hover:bg-orange-400 hover:text-white"
                                         }`}
                                     onClick={() => handleUserTypeChange(type)}
                                 >
@@ -184,17 +184,17 @@ function SignUp() {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full py-2 text-white bg-purple-600 rounded-md shadow-md hover:bg-purple-700"
+                        className="w-full py-2 text-white bg-orange-500 rounded-md shadow-md hover:bg-orange-600"
                     >
                         Sign Up
                     </button>
                 </form>
 
                 {/* Link to Sign In */}
-                <p className="mt-4 text-sm text-center text-gray-300">
+                <p className="mt-4 text-sm text-center text-gray-700">
                     Already have an account?{" "}
                     <Link href="/signIn">
-                        <span className="flex items-center justify-center gap-1 text-purple-500 hover:text-purple-700">
+                        <span className="flex items-center justify-center gap-1 text-orange-500 hover:text-orange-700">
                             Sign In <AiOutlineArrowRight />
                         </span>
                     </Link>

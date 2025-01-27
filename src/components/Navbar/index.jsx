@@ -53,7 +53,7 @@ const Navbar = () => {
   return (
     <div>
       {/* Top Navbar */}
-      <div className="bg-gray-800 text-white text-sm py-3 px-6 flex flex-col md:flex-row items-center justify-between">
+      <div className="bg-gray-700 text-white text-sm py-3 px-6 flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center space-x-4 mb-2 md:mb-0">
           <div className="flex items-center space-x-1">
             <FaEnvelope className="text-yellow-400" />
@@ -90,6 +90,9 @@ const Navbar = () => {
             </a>
             <a href="/postJob" className="hover:text-gray-400 transition">
               Post a job
+            </a>
+            <a href="/allJobs" className="hover:text-gray-400 transition">
+              All Jobs
             </a>
             <a
               href="/aboutUs"
