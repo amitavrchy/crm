@@ -68,7 +68,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navbar */}
-      <nav className="bg-black text-white py-4">
+      <nav className="bg-gray-800 text-white py-4">
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo Section */}
           <div className="flex items-center">
