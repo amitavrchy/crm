@@ -100,6 +100,9 @@ const Navbar = () => {
             <a href="/blogs" className="hover:text-gray-400 transition">
               Blogs
             </a>
+            <a href="/scheduleMeet" className="hover:text-gray-400 transition">
+              Schedule A Meeting
+            </a>
             <a
               href="/aboutUs"
               className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition"
@@ -190,6 +193,13 @@ const Navbar = () => {
               onClick={() => setIsSidebarOpen(false)}
             >
               Blogs
+            </a>
+            <a
+              href="/scheduleMeet"
+              className="text-lg hover:text-gray-400 transition"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              Schedule A Meet
             </a>
             <a
               href="/aboutUs"
