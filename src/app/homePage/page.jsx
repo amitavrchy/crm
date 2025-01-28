@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AllJobsHomePage from '@/components/allJobsHomePage';
 import ContactUsHomePage from '@/components/ContactHomePage';
+import BlogsHomePage from '@/components/BlogsHomePage';
 
 function HomePage() {
   return (
@@ -15,6 +16,7 @@ function HomePage() {
       <Banner />
       <AllJobsHomePage />
       <AboutUs />
+      <BlogsHomePage />
       <Services />
       <ContactUsHomePage />
       <Vendors />
