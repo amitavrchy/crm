@@ -6,17 +6,19 @@ import Vendors from "@/components/vendors";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AllJobsHomePage from '@/components/allJobsHomePage';
+import ContactUsHomePage from '@/components/ContactHomePage';
 
 function HomePage() {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Banner />
-      <AllJobsHomePage/>
+      <AllJobsHomePage />
       <AboutUs />
       <Services />
+      <ContactUsHomePage />
       <Vendors />
-      <Footer/>
+      <Footer />
     </div>
   )
 }
