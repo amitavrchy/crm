@@ -24,7 +24,7 @@ function ContactUsHomePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Contact Details */}
                     <div className="flex flex-col justify-center items-start">
-                        <h2 className="text-3xl font-bold mb-6">Get In Touch</h2>
+                        <h2 className="text-3xl font-bold mb-6 text-gray-700">Get In Touch</h2>
                         <p className="text-lg mb-4">
                             If you have any questions, feel free to contact us. We’d love to hear from you.
                         </p>
@@ -51,10 +51,10 @@ function ContactUsHomePage() {
 
                     {/* Contact Form */}
                     <div>
-                        <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
+                        <h2 className="text-3xl font-bold mb-6 text-gray-700">Send Us a Message</h2>
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div>
-                                <label htmlFor="name" className="block text-lg font-medium mb-2">
+                                <label htmlFor="name" className="block text-lg font-medium mb-2 text-gray-700">
                                     Your Name
                                 </label>
                                 <input
@@ -68,7 +68,7 @@ function ContactUsHomePage() {
                             </div>
 
                             <div>
-                                <label htmlFor="email" className="block text-lg font-medium mb-2">
+                                <label htmlFor="email" className="block text-lg font-medium mb-2 text-gray-700">
                                     Your Email
                                 </label>
                                 <input
@@ -82,7 +82,7 @@ function ContactUsHomePage() {
                             </div>
 
                             <div>
-                                <label htmlFor="message" className="block text-lg font-medium mb-2">
+                                <label htmlFor="message" className="block text-lg font-medium mb-2 text-gray-700">
                                     Your Message
                                 </label>
                                 <textarea
