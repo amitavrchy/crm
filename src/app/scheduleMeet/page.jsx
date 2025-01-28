@@ -66,7 +66,7 @@ function ScheduleMeet() {
                 <div className="w-full lg:w-1/2 bg-white rounded-lg shadow-lg p-6 lg:p-12">
                     <h2 className="text-3xl font-semibold text-center mb-4">B2B Call with Demand Recruitment</h2>
                     <p className="text-center text-gray-600 mb-6">Please select a date and time for your meeting.</p>
-                    
+
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Date</label>
                         <DatePicker
@@ -76,30 +76,33 @@ function ScheduleMeet() {
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Time</label>
-                        <div className="flex space-x-2">
-                            {["10:30 PM", "11:00 PM", "11:30 PM"].map(time => (
-                                <button 
-                                    key={time}
-                                    onClick={() => setFormData({ ...formData, meetingTime: time })}
-                                    className={`px-4 py-2 border rounded-lg ${formData.meetingTime === time ? 'bg-orange-500 text-white' : 'bg-gray-200'}`}
-                                >
+                    <div className="mb-4 py-4">
+                        <label htmlFor="time-select" className="block text-sm font-medium text-gray-700">Time</label>
+                        <select
+                            id="time-select"
+                            value={formData.meetingTime}
+                            onChange={(e) => setFormData({ ...formData, meetingTime: e.target.value })}
+                            className="mt-2 w-full px-4 py-2 border rounded-lg bg-gray-200 text-gray-700 focus:ring-orange-500 focus:border-orange-500"
+                        >
+                            <option value="" disabled>Select a time</option>
+                            {["10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"].map(time => (
+                                <option key={time} value={time}>
                                     {time}
-                                </button>
+                                </option>
                             ))}
-                        </div>
+                        </select>
                     </div>
-                    
+
+
                     <p className="text-center text-sm text-gray-500 mb-6">All times are in (UTC+06:00) Dhaka</p>
-                    
+
                     <div className="space-y-4 py-6">
                         <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="w-full p-3 border rounded-lg focus:ring-orange-500 focus:border-orange-500" placeholder="Full Name *" />
                         <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full p-3 border rounded-lg focus:ring-orange-500 focus:border-orange-500" placeholder="Email *" />
                         <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full p-3 border rounded-lg focus:ring-orange-500 focus:border-orange-500" placeholder="Phone Number *" />
                         <textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleInputChange} className="w-full p-3 border rounded-lg focus:ring-orange-500 focus:border-orange-500" placeholder="Additional Information" />
                     </div>
-                    
+
                     <div className="text-center mt-6">
                         <button type="submit" onClick={handleSubmit} className="w-full px-4 py-3 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                             Book
