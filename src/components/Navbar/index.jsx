@@ -94,6 +94,12 @@ const Navbar = () => {
             <a href="/allJobs" className="hover:text-gray-400 transition">
               All Jobs
             </a>
+            <a href="/contactUs" className="hover:text-gray-400 transition">
+              Contact Us
+            </a>
+            <a href="/blogs" className="hover:text-gray-400 transition">
+              Blogs
+            </a>
             <a
               href="/aboutUs"
               className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition"
@@ -170,6 +176,20 @@ const Navbar = () => {
               onClick={() => setIsSidebarOpen(false)}
             >
               All Jobs
+            </a>
+            <a
+              href="/contactUs"
+              className="text-lg hover:text-gray-400 transition"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              Contact Us
+            </a>
+            <a
+              href="/blogs"
+              className="text-lg hover:text-gray-400 transition"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              Blogs
             </a>
             <a
               href="/aboutUs"
