@@ -55,7 +55,7 @@ export default function Services() {
       {/* Main Services Section */}
       <div className="container mx-auto px-6 text-center">
         <h2 className="text-4xl font-bold text-gray-900">Our Services</h2>
-        <p className="mt-4 text-orange-500 max-w-2xl mx-auto">
+        <p className="mt-4 text-orange-500 max-w-2xl mx-auto font-bold">
           We offer a wide range of recruitment services to help you find the
           perfect candidate or land your dream job.
         </p>
