@@ -29,8 +29,6 @@ function SignUp() {
         defaultValues: {
             username: "",
             email: "",
-            password: "",
-            confirmPassword: "",
         },
     });
 
@@ -40,7 +38,6 @@ function SignUp() {
             const response = await axiosInstance.post("api/auth/register", {
                 username: data.username,
                 email: data.email,
-                password: data.password,
                 userType,
             });
 
@@ -127,44 +124,6 @@ function SignUp() {
                             )}
                         </div>
 
-                        <div>
-                            <label htmlFor="password" className="block text-sm text-gray-700">
-                                Password
-                            </label>
-                            <input
-                                id="password"
-                                type="password"
-                                {...register("password", { required: "Password is required" })}
-                                className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
-                                placeholder="Create a password"
-                            />
-                            {errors.password && (
-                                <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
-                            )}
-                        </div>
-
-                        <div>
-                            <label htmlFor="confirmPassword" className="block text-sm text-gray-700">
-                                Confirm Password
-                            </label>
-                            <input
-                                id="confirmPassword"
-                                type="password"
-                                {...register("confirmPassword", {
-                                    required: "Please confirm your password",
-                                    validate: (value) =>
-                                        value === watch("password") || "Passwords do not match",
-                                })}
-                                className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
-                                placeholder="Confirm your password"
-                            />
-                            {errors.confirmPassword && (
-                                <p className="mt-1 text-sm text-red-500">
-                                    {errors.confirmPassword.message}
-                                </p>
-                            )}
-                        </div>
-
                         {/* User Type Selection */}
                         <div className="flex items-center justify-between">
                             <p className="text-sm text-gray-700">Register as:</p>
@@ -183,6 +142,10 @@ function SignUp() {
                                     </button>
                                 ))}
                             </div>
+                        </div>
+
+                        <div className="text-center text-orange-500 font-bold">
+                            We will send your password through email after approval.
                         </div>
 
                         {/* Submit Button */}
