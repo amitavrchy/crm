@@ -128,7 +128,7 @@ function SignUp() {
                         <div className="flex items-center justify-between">
                             <p className="text-sm text-gray-700">Register as:</p>
                             <div className="flex items-center space-x-4">
-                                {["Client", "Vendor", "Admin"].map((type) => (
+                                {["Client", "Vendor", "Employee"].map((type) => (
                                     <button
                                         key={type}
                                         type="button"

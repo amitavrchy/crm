@@ -22,8 +22,8 @@ function HomePage() {
       <BlogsHomePage />
       <Benefits />
       <Services />
-      <Testimonials />
       <Achievements />
+      <Testimonials />
       <ContactUsHomePage />
       <Vendors />
       <Footer />
