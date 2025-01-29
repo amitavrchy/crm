@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import AllJobsHomePage from '@/components/allJobsHomePage';
 import ContactUsHomePage from '@/components/ContactHomePage';
 import BlogsHomePage from '@/components/BlogsHomePage';
+import Benefits from '@/components/Benefits';
 
 function HomePage() {
   return (
@@ -18,6 +19,7 @@ function HomePage() {
       <AboutUs />
       <BlogsHomePage />
       <Services />
+      <Benefits />
       <ContactUsHomePage />
       <Vendors />
       <Footer />
