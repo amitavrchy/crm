@@ -9,6 +9,7 @@ import AllJobsHomePage from '@/components/allJobsHomePage';
 import ContactUsHomePage from '@/components/ContactHomePage';
 import BlogsHomePage from '@/components/BlogsHomePage';
 import Benefits from '@/components/Benefits';
+import Testimonials from '@/components/Testimonials';
 
 function HomePage() {
   return (
@@ -18,8 +19,9 @@ function HomePage() {
       <AllJobsHomePage />
       <AboutUs />
       <BlogsHomePage />
-      <Services />
       <Benefits />
+      <Services />
+      <Testimonials />
       <ContactUsHomePage />
       <Vendors />
       <Footer />
