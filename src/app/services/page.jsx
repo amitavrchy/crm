@@ -80,7 +80,7 @@ function Services() {
       <section className="bg-gray-100 py-16">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold text-gray-800">
+            <h2 className="text-4xl font-bold text-gray-700">
               Connecting Top Talent with Leading Companies
             </h2>
             <p className="mt-4 text-gray-600 leading-relaxed">
@@ -103,7 +103,7 @@ function Services() {
       {/* What to Expect Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-gray-800">What to Expect</h2>
+          <h2 className="text-4xl font-bold text-gray-700">What to Expect</h2>
           <p className="mt-4 text-gray-600">
             Here's what you can expect when working with us:
           </p>
@@ -118,7 +118,7 @@ function Services() {
               {
                 title: "Streamlined Process",
                 description: "Efficient and hassle-free recruitment solutions.",
-                icon: <FaTools className="text-gray-800 text-4xl mx-auto" />,
+                icon: <FaTools className="text-gray-700 text-4xl mx-auto" />,
               },
             ].map((item, index) => (
               <div
@@ -136,16 +136,16 @@ function Services() {
       {/* Our Services Section */}
       <section className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center text-gray-800">
+          <h2 className="text-4xl font-bold text-center text-gray-700">
             Our Services
           </h2>
           <p className="mt-4 text-center text-gray-600">
             We offer a wide range of recruitment solutions to help you find the
             perfect candidate or your dream job.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12 text-center">
             {[
-              { title: "Candidate Sourcing", description: "Identify top talent.", icon: <FaBriefcase className="text-gray-800 text-4xl mx-auto" /> },
+              { title: "Candidate Sourcing", description: "Identify top talent.", icon: <FaBriefcase className="text-gray-700 text-4xl mx-auto" /> },
               {
                 title: "Job Placement",
                 description: "Match candidates with ideal roles.",

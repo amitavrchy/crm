@@ -8,6 +8,9 @@ import Footer from '@/components/Footer';
 import AllJobsHomePage from '@/components/allJobsHomePage';
 import ContactUsHomePage from '@/components/ContactHomePage';
 import BlogsHomePage from '@/components/BlogsHomePage';
+import Benefits from '@/components/Benefits';
+import Testimonials from '@/components/Testimonials';
+import Achievements from '@/components/Achievements';
 
 function HomePage() {
   return (
@@ -17,7 +20,10 @@ function HomePage() {
       <AllJobsHomePage />
       <AboutUs />
       <BlogsHomePage />
+      <Benefits />
       <Services />
+      <Testimonials />
+      <Achievements />
       <ContactUsHomePage />
       <Vendors />
       <Footer />

@@ -9,6 +9,8 @@ import img4 from "../../../public/about-us-wte/4.jpg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import img from "../../../public/about_service.jpg";
+import Testimonials from "@/components/Testimonials";
+import Achievements from "@/components/Achievements";
 
 function AboutUs() {
   return (
@@ -145,6 +147,8 @@ function AboutUs() {
       </section>
 
       {/* Vendors Section */}
+      <Testimonials />
+      <Achievements />
       <Vendors />
       <Footer />
     </div>
