@@ -9,6 +9,7 @@ import img2 from "../../../public/about-us-wte/2.jpg";
 import img3 from "../../../public/about-us-wte/3.jpg";
 import img4 from "../../../public/about-us/about-2.jpg";
 import heroImg from "../../../public/about_service.jpg";
+import EmployeeSchedule from "@/components/EmployeeSchedule";
 
 function Services() {
   return (
@@ -184,6 +185,7 @@ function Services() {
           </div>
         </div>
       </section>
+      <EmployeeSchedule />
 
       {/* Job Offers Section */}
       <section className="bg-gray-800 py-12">

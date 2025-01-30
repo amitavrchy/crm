@@ -11,6 +11,7 @@ import BlogsHomePage from '@/components/BlogsHomePage';
 import Benefits from '@/components/Benefits';
 import Testimonials from '@/components/Testimonials';
 import Achievements from '@/components/Achievements';
+import SmallMighty from '@/components/SmallMighty';
 
 function HomePage() {
   return (
@@ -24,6 +25,7 @@ function HomePage() {
       <Services />
       <Achievements />
       <Testimonials />
+      <SmallMighty />
       <ContactUsHomePage />
       <Vendors />
       <Footer />
