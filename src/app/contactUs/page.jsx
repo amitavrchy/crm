@@ -8,6 +8,7 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import img1 from "../../../public/about_service.jpg";
 import img2 from "../../../public/about-us/about-2.jpg";
+import Chat from "@/components/Chat";
 
 function ContactUs() {
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -177,6 +178,7 @@ function ContactUs() {
                     ></iframe>
                 </div>
             </main>
+            <Chat />
             <Footer />
         </div>
     );

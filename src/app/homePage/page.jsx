@@ -13,6 +13,7 @@ import Testimonials from '@/components/Testimonials';
 import Achievements from '@/components/Achievements';
 import SmallMighty from '@/components/SmallMighty';
 import JobSchedule from '@/components/JobSchedule';
+import Chat from '@/components/Chat';
 
 function HomePage() {
   return (
@@ -30,6 +31,7 @@ function HomePage() {
       <SmallMighty />
       <ContactUsHomePage />
       <Vendors />
+      <Chat />
       <Footer />
     </div>
   )
