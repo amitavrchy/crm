@@ -60,7 +60,7 @@ function ContactUs() {
                                 <div className="flex items-center space-x-4">
                                     <FaPhoneAlt className="text-orange-500 text-xl" />
                                     <a href="tel:+1234567890" className="text-lg hover:underline">
-                                        +1 234 567 890
+                                        +00000000000
                                     </a>
                                 </div>
                                 <div className="flex items-center space-x-4">

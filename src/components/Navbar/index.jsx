@@ -61,7 +61,7 @@ const Navbar = () => {
           </div>
           <div className="flex items-center space-x-1">
             <FaPhoneAlt className="text-yellow-400" />
-            <span>+8801716059625</span>
+            <span>+00000000000</span>
           </div>
         </div>
         <div className="flex space-x-6">{authLinks}</div>
