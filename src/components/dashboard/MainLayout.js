@@ -9,6 +9,7 @@ import Dashboard1 from "./layouts/Dashboard1";
 import Client from "./Client";
 import Vendor from "./Vendor";
 import Admin from "./Admin";
+import Employee from "./Employee";
 
 
 const MainLayout = () => {
@@ -44,9 +45,10 @@ const MainLayout = () => {
           <div className="mt-8">
             {pathname === "/dashboard" && <Dashboard1 />}
             {/* Add more conditions as necessary */}
-            {pathname === "/dashboard/client" && <Client/>}
-            {pathname === "/dashboard/vendor" && <Vendor/>}
-            {pathname === "/dashboard/admin" && <Admin/>}
+            {pathname === "/dashboard/client" && <Client />}
+            {pathname === "/dashboard/vendor" && <Vendor />}
+            {pathname === "/dashboard/admin" && <Admin />}
+            {pathname === "/dashboard/employee" && <Employee />}
           </div>
         </section>
       </div>
