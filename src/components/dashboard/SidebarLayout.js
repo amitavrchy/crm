@@ -36,7 +36,11 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     } else if (pathname.startsWith("/dashboard/client")) {
       return [
         ...commonMenuItems,
-        // Add client-specific items here
+        {
+          href: "/dashboard/client/postedJobs",
+          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          label: "Posted Jobs",
+        },
       ];
     } else if (pathname.startsWith("/dashboard/admin")) {
       return [
@@ -55,6 +59,16 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           href: "/dashboard/employee/approvedJobs",
           icon: <MdOutlineDashboard className="text-2xl mr-2" />,
           label: "Approved Jobs",
+        },
+        {
+          href: "/dashboard/employee/rejectedJobs",
+          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          label: "Rejected Jobs",
+        },
+        {
+          href: "/dashboard/employee/completedJobs",
+          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          label: "Completed Jobs",
         },
       ];
     } else {

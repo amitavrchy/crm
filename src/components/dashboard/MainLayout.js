@@ -12,6 +12,9 @@ import Admin from "./Admin";
 import Employee from "./Employee";
 import AppliedJobs from "./AppliedJobs";
 import ApprovedJobs from "./ApprovedJobs";
+import RejectedJobs from "./RejectedJobs";
+import CompletedJobs from "./CompletedJobs";
+import PostedJobs from "./PostedJobs";
 
 
 const MainLayout = () => {
@@ -48,6 +51,7 @@ const MainLayout = () => {
             {pathname === "/dashboard" && <Dashboard1 />}
 
             {pathname === "/dashboard/client" && <Client />}
+            {pathname === "/dashboard/client/postedJobs" && <PostedJobs />}
 
             {pathname === "/dashboard/vendor" && <Vendor />}
 
@@ -56,6 +60,8 @@ const MainLayout = () => {
             {pathname === "/dashboard/employee" && <Employee />}
             {pathname === "/dashboard/employee/appliedJobs" && <AppliedJobs />}
             {pathname === "/dashboard/employee/approvedJobs" && <ApprovedJobs />}
+            {pathname === "/dashboard/employee/rejectedJobs" && <RejectedJobs />}
+            {pathname === "/dashboard/employee/completedJobs" && <CompletedJobs />}
           </div>
 
         </section>
