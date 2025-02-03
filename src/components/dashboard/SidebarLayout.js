@@ -1,83 +1,82 @@
 import { MdOutlineDashboard } from "react-icons/md";
+import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle } from "react-icons/bi";
+import { FaClipboardList, FaMoneyCheckAlt } from "react-icons/fa";
+import { RiFileList3Line } from "react-icons/ri";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { BiHomeAlt } from "react-icons/bi";
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
 
-  // Helper function to check if the link is active
   const isActive = (route) =>
     pathname === route
       ? "bg-[#d9f3ea] text-green-700"
       : "text-gray-800 hover:bg-[#d9f3ea]";
 
-  // Define common menu items
   const commonMenuItems = [
     {
       href: "/dashboard",
-      icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+      icon: <MdOutlineDashboard className="text-2xl mr-2" />, 
       label: "Dashboard",
     },
     {
       href: "/",
-      icon: <BiHomeAlt className="text-2xl mr-2" />,
+      icon: <BiHomeAlt className="text-2xl mr-2" />, 
       label: "Back to Home",
     },
   ];
 
-  // Define menu items based on the current route
   const getMenuItems = () => {
     if (pathname.startsWith("/dashboard/vendor")) {
       return [
         ...commonMenuItems,
-        // Add vendor-specific items here
+        // Add more menu items for vendor
       ];
     } else if (pathname.startsWith("/dashboard/client")) {
       return [
         ...commonMenuItems,
         {
           href: "/dashboard/client/postedJobs",
-          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          icon: <BiBriefcase className="text-2xl mr-2" />, 
           label: "Posted Jobs",
         },
         {
           href: "/dashboard/client/completedJobsClient",
-          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          icon: <FaClipboardList className="text-2xl mr-2" />, 
           label: "Completed Jobs Client",
         },
         {
           href: "/dashboard/client/paymentHistory",
-          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          icon: <FaMoneyCheckAlt className="text-2xl mr-2" />, 
           label: "Payment History",
         },
       ];
     } else if (pathname.startsWith("/dashboard/admin")) {
       return [
         ...commonMenuItems,
-        // Add admin-specific items here
+      // Add more menu items for admin  
       ];
     } else if (pathname.startsWith("/dashboard/employee")) {
       return [
         ...commonMenuItems,
         {
           href: "/dashboard/employee/appliedJobs",
-          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          icon: <RiFileList3Line className="text-2xl mr-2" />, 
           label: "Applied Jobs",
         },
         {
           href: "/dashboard/employee/approvedJobs",
-          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          icon: <BiCheckCircle className="text-2xl mr-2" />, 
           label: "Approved Jobs",
         },
         {
           href: "/dashboard/employee/rejectedJobs",
-          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          icon: <BiXCircle className="text-2xl mr-2" />, 
           label: "Rejected Jobs",
         },
         {
           href: "/dashboard/employee/completedJobs",
-          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          icon: <FaClipboardList className="text-2xl mr-2" />, 
           label: "Completed Jobs",
         },
       ];
@@ -86,12 +85,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     }
   };
 
-
   return (
     <nav
       id="sidebar"
-      className={`lg:min-w-[250px] w-max max-lg:min-w-8 transition-all duration-500 ${isSidebarOpen ? "w-max" : "max-lg:w-0 max-lg:invisible"
-        }`}
+      className={`lg:min-w-[250px] w-max max-lg:min-w-8 transition-all duration-500 ${
+        isSidebarOpen ? "w-max" : "max-lg:w-0 max-lg:invisible"
+      }`}
     >
       <div
         id="sidebar-collapse-menu"
