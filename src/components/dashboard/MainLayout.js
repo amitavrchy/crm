@@ -10,6 +10,8 @@ import Client from "./Client";
 import Vendor from "./Vendor";
 import Admin from "./Admin";
 import Employee from "./Employee";
+import AppliedJobs from "./AppliedJobs";
+import ApprovedJobs from "./ApprovedJobs";
 
 
 const MainLayout = () => {
@@ -44,12 +46,18 @@ const MainLayout = () => {
           {/* Content based on route */}
           <div className="mt-8">
             {pathname === "/dashboard" && <Dashboard1 />}
-            {/* Add more conditions as necessary */}
+
             {pathname === "/dashboard/client" && <Client />}
+
             {pathname === "/dashboard/vendor" && <Vendor />}
+
             {pathname === "/dashboard/admin" && <Admin />}
+
             {pathname === "/dashboard/employee" && <Employee />}
+            {pathname === "/dashboard/employee/appliedJobs" && <AppliedJobs />}
+            {pathname === "/dashboard/employee/approvedJobs" && <ApprovedJobs />}
           </div>
+
         </section>
       </div>
     </div>

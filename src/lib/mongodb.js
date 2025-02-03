@@ -8,22 +8,21 @@ const uri = process.env.MONGODB_URI;
 let client;
 let clientPromise;
 
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tls: true, // Enforce TLS
+  tlsAllowInvalidCertificates: true, // Allow invalid certs (use only if needed)
+};
+
 if (process.env.NODE_ENV === "development") {
-  // In development, use a global variable to preserve the MongoDB connection across hot reloads
   if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    client = new MongoClient(uri, options);
     global._mongoClientPromise = client.connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  // In production, create a new connection
-  client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
 
@@ -37,4 +36,3 @@ export async function connectMongoDB() {
     throw new Error("Failed to connect to MongoDB");
   }
 }
-
