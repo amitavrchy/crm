@@ -15,6 +15,8 @@ import ApprovedJobs from "./ApprovedJobs";
 import RejectedJobs from "./RejectedJobs";
 import CompletedJobs from "./CompletedJobs";
 import PostedJobs from "./PostedJobs";
+import CompletedJobsClient from "./CompletedJobsClient";
+import PaymentHistory from "./PaymentHistory";
 
 
 const MainLayout = () => {
@@ -52,6 +54,8 @@ const MainLayout = () => {
 
             {pathname === "/dashboard/client" && <Client />}
             {pathname === "/dashboard/client/postedJobs" && <PostedJobs />}
+            {pathname === "/dashboard/client/completedJobsClient" && <CompletedJobsClient />}
+            {pathname === "/dashboard/client/paymentHistory" && <PaymentHistory />}
 
             {pathname === "/dashboard/vendor" && <Vendor />}
 

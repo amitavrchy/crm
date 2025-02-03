@@ -41,6 +41,16 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           icon: <MdOutlineDashboard className="text-2xl mr-2" />,
           label: "Posted Jobs",
         },
+        {
+          href: "/dashboard/client/completedJobsClient",
+          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          label: "Completed Jobs Client",
+        },
+        {
+          href: "/dashboard/client/paymentHistory",
+          icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+          label: "Payment History",
+        },
       ];
     } else if (pathname.startsWith("/dashboard/admin")) {
       return [
