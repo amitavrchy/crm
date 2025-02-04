@@ -69,6 +69,11 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           label: "Vendor Interaction",
         },
         {
+          href: "/dashboard/client/jobManagement",
+          icon: <MdWork className="text-2xl mr-2" />, 
+          label: "Job Management",
+        },
+        {
           href: "/dashboard/client/jobHistoryReports",
           icon: <MdHistory className="text-2xl mr-2" />, 
           label: "Job History & Reports",
