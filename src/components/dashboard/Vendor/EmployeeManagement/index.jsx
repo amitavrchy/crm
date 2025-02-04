@@ -35,7 +35,7 @@ export default function EmployeeManagement() {
     return (
         <div className="p-6 bg-gray-100 min-h-screen flex flex-col items-center">
             <h1 className="text-3xl font-bold mb-6 text-center">Employee Management</h1>
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl overflow-x-auto">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-6xl overflow-x-auto">
                 <table className="w-full table-auto border-collapse border border-gray-300 text-sm md:text-base">
                     <thead>
                         <tr className="bg-gray-200 text-left">

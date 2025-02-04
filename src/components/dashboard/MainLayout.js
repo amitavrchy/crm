@@ -23,6 +23,9 @@ import ReportsAnalytics from "./Admin/ReportAnalytics";
 import JobManagementV from "./Vendor/JobManagement";
 import EmployeeManagement from "./Vendor/EmployeeManagement";
 import ReportsAnalyticsV from "./Vendor/ReportsAnalytics";
+import JobApplyManagement from "./Employee/JobApplyManagement";
+import JobHistory from "./Employee/JobHistory";
+import ProfileManagement from "./Employee/ProfileManagement";
 
 
 const MainLayout = () => {
@@ -78,6 +81,9 @@ const MainLayout = () => {
             {pathname === "/dashboard/employee/approvedJobs" && <ApprovedJobs />}
             {pathname === "/dashboard/employee/rejectedJobs" && <RejectedJobs />}
             {pathname === "/dashboard/employee/completedJobs" && <CompletedJobs />}
+            {pathname === "/dashboard/employee/jobApplyManagement" && <JobApplyManagement />}
+            {pathname === "/dashboard/employee/jobHistory" && <JobHistory />}
+            {pathname === "/dashboard/employee/profileManagement" && <ProfileManagement />}
           </div>
 
         </section>

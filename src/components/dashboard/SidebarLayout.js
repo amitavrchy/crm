@@ -107,6 +107,21 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           icon: <FaClipboardList className="text-2xl mr-2" />,
           label: "Completed Jobs",
         },
+        {
+          href: "/dashboard/employee/jobApplyManagement",
+          icon: <FaClipboardList className="text-2xl mr-2" />,
+          label: "Job Application & Management",
+        },
+        {
+          href: "/dashboard/employee/jobHistory",
+          icon: <FaClipboardList className="text-2xl mr-2" />,
+          label: "Job History",
+        },
+        {
+          href: "/dashboard/employee/profileManagement",
+          icon: <FaClipboardList className="text-2xl mr-2" />,
+          label: "Profile Management",
+        },
       ];
     } else {
       return commonMenuItems;
