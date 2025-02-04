@@ -127,6 +127,11 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           label: "Job History",
         },
         {
+          href: "/dashboard/employee/jobApplyManagement",
+          icon: <MdWork className="text-2xl mr-2" />, 
+          label: "Job Application & Management",
+        },
+        {
           href: "/dashboard/employee/profileManagement",
           icon: <MdPerson className="text-2xl mr-2" />, 
           label: "Profile Management",
