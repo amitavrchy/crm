@@ -26,6 +26,9 @@ import ReportsAnalyticsV from "./Vendor/ReportsAnalytics";
 import JobApplyManagement from "./Employee/JobApplyManagement";
 import JobHistory from "./Employee/JobHistory";
 import ProfileManagement from "./Employee/ProfileManagement";
+import JobManagementC from "./Client/JobManagement";
+import VendorInteraction from "./Client/VendorInteraction";
+import JobHistoryReports from "./Client/JobHistoryReports";
 
 
 const MainLayout = () => {
@@ -65,6 +68,9 @@ const MainLayout = () => {
             {pathname === "/dashboard/client/postedJobs" && <PostedJobs />}
             {pathname === "/dashboard/client/completedJobsClient" && <CompletedJobsClient />}
             {pathname === "/dashboard/client/paymentHistory" && <PaymentHistory />}
+            {pathname === "/dashboard/client/jobManagement" && <JobManagementC />}
+            {pathname === "/dashboard/client/vendorInteraction" && <VendorInteraction />}
+            {pathname === "/dashboard/client/jobHistoryReports" && <JobHistoryReports />}
 
             {pathname === "/dashboard/vendor" && <Vendor />}
             {pathname === "/dashboard/vendor/jobManagement" && <JobManagementV />}

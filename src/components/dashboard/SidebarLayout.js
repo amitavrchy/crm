@@ -1,7 +1,6 @@
-import { MdOutlineDashboard } from "react-icons/md";
-import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle } from "react-icons/bi";
-import { FaClipboardList, FaMoneyCheckAlt } from "react-icons/fa";
-import { RiFileList3Line } from "react-icons/ri";
+import { MdOutlineDashboard, MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson } from "react-icons/md";
+import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle, BiMessageSquareDetail } from "react-icons/bi";
+import { FaClipboardList, FaFileInvoiceDollar, FaUsers } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -16,12 +15,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const commonMenuItems = [
     {
       href: "/dashboard",
-      icon: <MdOutlineDashboard className="text-2xl mr-2" />,
+      icon: <MdOutlineDashboard className="text-2xl mr-2" />, 
       label: "Dashboard",
     },
     {
       href: "/",
-      icon: <BiHomeAlt className="text-2xl mr-2" />,
+      icon: <BiHomeAlt className="text-2xl mr-2" />, 
       label: "Back to Home",
     },
   ];
@@ -32,17 +31,17 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         ...commonMenuItems,
         {
           href: "/dashboard/vendor/jobManagement",
-          icon: <BiBriefcase className="text-2xl mr-2" />,
+          icon: <MdWork className="text-2xl mr-2" />, 
           label: "Job Management",
         },
         {
           href: "/dashboard/vendor/employeeManagement",
-          icon: <BiBriefcase className="text-2xl mr-2" />,
+          icon: <MdPeopleAlt className="text-2xl mr-2" />, 
           label: "Employee Management",
         },
         {
           href: "/dashboard/vendor/reportsAnalytics",
-          icon: <BiBriefcase className="text-2xl mr-2" />,
+          icon: <MdOutlineReport className="text-2xl mr-2" />, 
           label: "Reports & Analytics",
         },
       ];
@@ -51,18 +50,28 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         ...commonMenuItems,
         {
           href: "/dashboard/client/postedJobs",
-          icon: <BiBriefcase className="text-2xl mr-2" />,
+          icon: <BiBriefcase className="text-2xl mr-2" />, 
           label: "Posted Jobs",
         },
         {
           href: "/dashboard/client/completedJobsClient",
-          icon: <FaClipboardList className="text-2xl mr-2" />,
-          label: "Completed Jobs Client",
+          icon: <FaClipboardList className="text-2xl mr-2" />, 
+          label: "Completed Jobs",
         },
         {
           href: "/dashboard/client/paymentHistory",
-          icon: <FaMoneyCheckAlt className="text-2xl mr-2" />,
+          icon: <FaFileInvoiceDollar className="text-2xl mr-2" />, 
           label: "Payment History",
+        },
+        {
+          href: "/dashboard/client/vendorInteraction",
+          icon: <BiMessageSquareDetail className="text-2xl mr-2" />, 
+          label: "Vendor Interaction",
+        },
+        {
+          href: "/dashboard/client/jobHistoryReports",
+          icon: <MdHistory className="text-2xl mr-2" />, 
+          label: "Job History & Reports",
         },
       ];
     } else if (pathname.startsWith("/dashboard/admin")) {
@@ -70,17 +79,17 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         ...commonMenuItems,
         {
           href: "/dashboard/admin/userManagement",
-          icon: <RiFileList3Line className="text-2xl mr-2" />,
+          icon: <FaUsers className="text-2xl mr-2" />, 
           label: "User Management",
         },
         {
           href: "/dashboard/admin/jobManagement",
-          icon: <RiFileList3Line className="text-2xl mr-2" />,
+          icon: <MdWork className="text-2xl mr-2" />, 
           label: "Job Management",
         },
         {
           href: "/dashboard/admin/reportsAnalytics",
-          icon: <RiFileList3Line className="text-2xl mr-2" />,
+          icon: <MdOutlineReport className="text-2xl mr-2" />, 
           label: "Reports & Analytics",
         },
       ];
@@ -89,43 +98,37 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         ...commonMenuItems,
         {
           href: "/dashboard/employee/appliedJobs",
-          icon: <RiFileList3Line className="text-2xl mr-2" />,
+          icon: <BiBriefcase className="text-2xl mr-2" />, 
           label: "Applied Jobs",
         },
         {
           href: "/dashboard/employee/approvedJobs",
-          icon: <BiCheckCircle className="text-2xl mr-2" />,
+          icon: <BiCheckCircle className="text-2xl mr-2" />, 
           label: "Approved Jobs",
         },
         {
           href: "/dashboard/employee/rejectedJobs",
-          icon: <BiXCircle className="text-2xl mr-2" />,
+          icon: <BiXCircle className="text-2xl mr-2" />, 
           label: "Rejected Jobs",
         },
         {
           href: "/dashboard/employee/completedJobs",
-          icon: <FaClipboardList className="text-2xl mr-2" />,
+          icon: <FaClipboardList className="text-2xl mr-2" />, 
           label: "Completed Jobs",
         },
         {
-          href: "/dashboard/employee/jobApplyManagement",
-          icon: <FaClipboardList className="text-2xl mr-2" />,
-          label: "Job Application & Management",
-        },
-        {
           href: "/dashboard/employee/jobHistory",
-          icon: <FaClipboardList className="text-2xl mr-2" />,
+          icon: <MdHistory className="text-2xl mr-2" />, 
           label: "Job History",
         },
         {
           href: "/dashboard/employee/profileManagement",
-          icon: <FaClipboardList className="text-2xl mr-2" />,
+          icon: <MdPerson className="text-2xl mr-2" />, 
           label: "Profile Management",
         },
       ];
     } else {
       return commonMenuItems;
-
     }
   };
 
