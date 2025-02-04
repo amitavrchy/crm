@@ -1,11 +1,11 @@
 import MainLayout from "@/components/dashboard/MainLayout";
 
 const Dashboard = () => {
-return(
-    <>
-   <MainLayout />
-    </>
-)
+    return (
+        <>
+            <MainLayout />
+        </>
+    )
 };
 
 export default Dashboard;
