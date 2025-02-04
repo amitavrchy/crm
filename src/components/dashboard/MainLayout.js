@@ -20,6 +20,9 @@ import PaymentHistory from "./Client/PaymentHistory";
 import UserManagement from "./Admin/UserManagement";
 import JobManagement from "./Admin/JobManagement";
 import ReportsAnalytics from "./Admin/ReportAnalytics";
+import JobManagementV from "./Vendor/JobManagement";
+import EmployeeManagement from "./Vendor/EmployeeManagement";
+import ReportsAnalyticsV from "./Vendor/ReportsAnalytics";
 
 
 const MainLayout = () => {
@@ -61,6 +64,9 @@ const MainLayout = () => {
             {pathname === "/dashboard/client/paymentHistory" && <PaymentHistory />}
 
             {pathname === "/dashboard/vendor" && <Vendor />}
+            {pathname === "/dashboard/vendor/jobManagement" && <JobManagementV />}
+            {pathname === "/dashboard/vendor/employeeManagement" && <EmployeeManagement />}
+            {pathname === "/dashboard/vendor/reportsAnalytics" && <ReportsAnalyticsV />}
 
             {pathname === "/dashboard/admin" && <Admin />}
             {pathname === "/dashboard/admin/userManagement" && <UserManagement />}

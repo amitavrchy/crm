@@ -30,7 +30,21 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     if (pathname.startsWith("/dashboard/vendor")) {
       return [
         ...commonMenuItems,
-        // Add more menu items for vendor
+        {
+          href: "/dashboard/vendor/jobManagement",
+          icon: <BiBriefcase className="text-2xl mr-2" />,
+          label: "Job Management",
+        },
+        {
+          href: "/dashboard/vendor/employeeManagement",
+          icon: <BiBriefcase className="text-2xl mr-2" />,
+          label: "Employee Management",
+        },
+        {
+          href: "/dashboard/vendor/reportsAnalytics",
+          icon: <BiBriefcase className="text-2xl mr-2" />,
+          label: "Reports & Analytics",
+        },
       ];
     } else if (pathname.startsWith("/dashboard/client")) {
       return [
@@ -96,6 +110,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
       ];
     } else {
       return commonMenuItems;
+
     }
   };
 
