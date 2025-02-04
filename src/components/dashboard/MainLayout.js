@@ -10,13 +10,16 @@ import Client from "./Client";
 import Vendor from "./Vendor";
 import Admin from "./Admin";
 import Employee from "./Employee";
-import AppliedJobs from "./AppliedJobs";
-import ApprovedJobs from "./ApprovedJobs";
-import RejectedJobs from "./RejectedJobs";
-import CompletedJobs from "./CompletedJobs";
-import PostedJobs from "./PostedJobs";
-import CompletedJobsClient from "./CompletedJobsClient";
-import PaymentHistory from "./PaymentHistory";
+import AppliedJobs from "./Employee/AppliedJobs";
+import ApprovedJobs from "./Employee/ApprovedJobs";
+import RejectedJobs from "./Employee/RejectedJobs";
+import CompletedJobs from "./Employee/CompletedJobs";
+import PostedJobs from "./Client/PostedJobs";
+import CompletedJobsClient from "./Client/CompletedJobsClient";
+import PaymentHistory from "./Client/PaymentHistory";
+import UserManagement from "./Admin/UserManagement";
+import JobManagement from "./Admin/JobManagement";
+import ReportsAnalytics from "./Admin/ReportAnalytics";
 
 
 const MainLayout = () => {
@@ -60,6 +63,9 @@ const MainLayout = () => {
             {pathname === "/dashboard/vendor" && <Vendor />}
 
             {pathname === "/dashboard/admin" && <Admin />}
+            {pathname === "/dashboard/admin/userManagement" && <UserManagement />}
+            {pathname === "/dashboard/admin/jobManagement" && <JobManagement />}
+            {pathname === "/dashboard/admin/reportsAnalytics" && <ReportsAnalytics />}
 
             {pathname === "/dashboard/employee" && <Employee />}
             {pathname === "/dashboard/employee/appliedJobs" && <AppliedJobs />}
