@@ -10,28 +10,30 @@ const generateFakeJobs = () => {
         id: i + 1,
         title: faker.person.jobTitle(),
         description: faker.lorem.sentence(),
+        vendor: faker.company.name(),
         employee: null,
+        createdAt: faker.date.past().toDateString(),
         status: faker.helpers.arrayElement(['Ongoing', 'Completed', 'Pending']),
     }));
 };
 
-export default function JobManagement() {
+export default function VendorJobManagement() {
     const [jobs, setJobs] = useState(generateFakeJobs());
 
     // Assign Employee
-    const handleAssignEmployee = (id) => {
-        Swal.fire({
+    const handleAssignEmployee = async (id) => {
+        const { value } = await Swal.fire({
             title: 'Assign Employee',
             input: 'text',
             inputLabel: 'Enter Employee Name',
             showCancelButton: true,
             confirmButtonText: 'Assign',
-        }).then((result) => {
-            if (result.isConfirmed && result.value) {
-                setJobs(jobs.map(job => job.id === id ? { ...job, employee: result.value } : job));
-                Swal.fire('Success!', 'Employee assigned successfully.', 'success');
-            }
         });
+
+        if (value) {
+            setJobs(jobs.map(job => job.id === id ? { ...job, employee: value } : job));
+            Swal.fire('Success!', `Employee ${value} assigned successfully.`, 'success');
+        }
     };
 
     // Mark Job as Completed
@@ -41,9 +43,19 @@ export default function JobManagement() {
     };
 
     // Remove Vendor from Job
-    const handleRemoveVendor = (id) => {
-        setJobs(jobs.filter(job => job.id !== id));
-        Swal.fire('Removed!', 'Vendor has been removed from the job.', 'warning');
+    const handleRemoveJob = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, remove it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setJobs(jobs.filter(job => job.id !== id));
+                Swal.fire('Removed!', 'Job has been removed.', 'error');
+            }
+        });
     };
 
     return (
@@ -55,7 +67,9 @@ export default function JobManagement() {
                         <tr className="bg-gray-200 text-left">
                             <th className="border border-gray-300 p-3">Title</th>
                             <th className="border border-gray-300 p-3">Description</th>
+                            <th className="border border-gray-300 p-3">Vendor</th>
                             <th className="border border-gray-300 p-3">Assigned Employee</th>
+                            <th className="border border-gray-300 p-3">Created On</th>
                             <th className="border border-gray-300 p-3">Status</th>
                             <th className="border border-gray-300 p-3 text-center">Actions</th>
                         </tr>
@@ -64,22 +78,24 @@ export default function JobManagement() {
                         {jobs.map((job) => (
                             <tr key={job.id} className="bg-white border-b border-gray-200 text-center hover:bg-gray-100">
                                 <td className="border border-gray-300 p-3">{job.title}</td>
-                                <td className="border border-gray-300 p-3">{job.description}</td>
+                                <td className="border border-gray-300 p-3 truncate max-w-xs">{job.description}</td>
+                                <td className="border border-gray-300 p-3 font-semibold">{job.vendor}</td>
                                 <td className="border border-gray-300 p-3">{job.employee || 'Not Assigned'}</td>
+                                <td className="border border-gray-300 p-3">{job.createdAt}</td>
                                 <td className={`border border-gray-300 p-3 font-semibold ${job.status === 'Completed' ? 'text-green-600' : 'text-yellow-600'}`}>{job.status}</td>
                                 <td className="border border-gray-300 p-3 flex justify-center gap-2 flex-wrap">
                                     {job.status !== 'Completed' && (
                                         <button onClick={() => handleAssignEmployee(job.id)} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center">
-                                            <FaUserPlus className="mr-2" /> Assign Employee
+                                            <FaUserPlus className="mr-2" /> Assign
                                         </button>
                                     )}
                                     {job.status !== 'Completed' && (
                                         <button onClick={() => handleCompleteJob(job.id)} className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center">
-                                            <FaCheck className="mr-2" /> Mark Completed
+                                            <FaCheck className="mr-2" /> Complete
                                         </button>
                                     )}
-                                    <button onClick={() => handleRemoveVendor(job.id)} className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center">
-                                        <FaTrash className="mr-2" /> Remove Vendor
+                                    <button onClick={() => handleRemoveJob(job.id)} className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center">
+                                        <FaTrash className="mr-2" /> Remove
                                     </button>
                                 </td>
                             </tr>

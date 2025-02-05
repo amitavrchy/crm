@@ -69,7 +69,7 @@ function PostedJobs() {
             <div className="overflow-x-auto">
                 <table className="w-full border border-gray-300 shadow-lg rounded-lg">
                     <thead>
-                        <tr className="bg-blue-800 text-white">
+                        <tr className="bg-orange-800 text-white">
                             <th className="p-3 text-left">Job Title</th>
                             <th className="p-3 text-left">Description</th>
                             <th className="p-3 text-left">Location</th>
@@ -98,7 +98,7 @@ function PostedJobs() {
                 {Array.from({ length: totalPages }, (_, index) => (
                     <button
                         key={index}
-                        className={`px-4 py-2 mx-1 border ${currentPage === index + 1 ? 'bg-blue-800 text-white' : 'bg-white text-blue-800'}`}
+                        className={`px-4 py-2 mx-1 border ${currentPage === index + 1 ? 'bg-orange-800 text-white' : 'bg-white text-orange-800'}`}
                         onClick={() => setCurrentPage(index + 1)}
                     >
                         {index + 1}

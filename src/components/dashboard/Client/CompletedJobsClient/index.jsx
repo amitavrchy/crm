@@ -63,7 +63,7 @@ function CompletedJobsClient() {
             <div className="overflow-x-auto">
                 <table className="w-full border border-gray-300 shadow-lg rounded-lg">
                     <thead>
-                        <tr className="bg-blue-800 text-white">
+                        <tr className="bg-orange-800 text-white">
                             <th className="p-3 text-left">Job Title</th>
                             <th className="p-3 text-left">Description</th>
                             <th className="p-3 text-left">Completion Date</th>
@@ -89,7 +89,7 @@ function CompletedJobsClient() {
                     <button
                         key={i + 1}
                         onClick={() => handlePageChange(i + 1)}
-                        className={`px-4 py-2 mx-1 border rounded ${currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                        className={`px-4 py-2 mx-1 border rounded ${currentPage === i + 1 ? 'bg-orange-500 text-white' : 'bg-gray-200'}`}
                     >
                         {i + 1}
                     </button>
