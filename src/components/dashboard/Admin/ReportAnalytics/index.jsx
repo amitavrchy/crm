@@ -1,31 +1,48 @@
 import React from "react";
+import { Bar, Line } from "react-chartjs-2";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { faker } from "@faker-js/faker";
+import "tailwindcss/tailwind.css";
+
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
-    PointElement,
+    BarElement,
     LineElement,
+    PointElement, // Add this
     Title,
     Tooltip,
     Legend,
     ArcElement,
 } from "chart.js";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
-    PointElement,
+    BarElement,
     LineElement,
+    PointElement,
     Title,
     Tooltip,
     Legend,
     ArcElement
 );
 
+
 function ReportsAnalytics() {
+    const generatePerformanceData = (num) => {
+        return Array.from({ length: num }, () => ({
+            name: faker.person.fullName(),
+            performance: faker.number.int({ min: 50, max: 100 }),
+        }));
+    };
+    
+
+    const vendors = generatePerformanceData(5);
+    const employees = generatePerformanceData(5);
+
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
             {/* Page Header */}
@@ -36,9 +53,8 @@ function ReportsAnalytics() {
                 </button>
             </header>
 
-            {/* Main Content */}
+            {/* Overview Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {/* Overview Cards */}
                 {[
                     { title: "Sales", value: "2,382", change: "+8.2%", color: "text-green-500" },
                     { title: "Earnings", value: "$21,300", change: "+6.3%", color: "text-green-500" },
@@ -60,36 +76,18 @@ function ReportsAnalytics() {
 
             {/* Charts Section */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-                {/* Recent Movement Chart */}
+                {/* Job Status Chart */}
                 <div className="p-4 bg-white rounded-lg shadow-md col-span-2">
-                    <h2 className="text-lg font-medium text-gray-700 mb-4">Recent Movement</h2>
+                    <h2 className="text-lg font-medium text-gray-700 mb-4">Job Status Overview</h2>
                     <div className="h-60">
-                        <Line
+                        <Bar
                             data={{
-                                labels: [
-                                    "Jan",
-                                    "Feb",
-                                    "Mar",
-                                    "Apr",
-                                    "May",
-                                    "Jun",
-                                    "Jul",
-                                    "Aug",
-                                    "Sep",
-                                    "Oct",
-                                    "Nov",
-                                    "Dec",
-                                ],
+                                labels: ["Active Jobs", "Completed Jobs", "Pending Requests"],
                                 datasets: [
                                     {
-                                        label: "Movement",
-                                        data: [
-                                            1000, 2000, 3000, 4000, 3500, 4500, 3000, 4000, 5000,
-                                            6000, 5000, 7000,
-                                        ],
-                                        borderColor: "#4F46E5",
-                                        fill: true,
-                                        backgroundColor: "rgba(79, 70, 229, 0.1)",
+                                        label: "Jobs",
+                                        data: [50, 120, 30],
+                                        backgroundColor: ["#4F46E5", "#10B981", "#F59E0B"],
                                     },
                                 ],
                             }}
@@ -101,28 +99,27 @@ function ReportsAnalytics() {
                     </div>
                 </div>
 
-                {/* Browser Usage Chart */}
+                {/* Financial Overview Chart */}
                 <div className="p-4 bg-white rounded-lg shadow-md">
-                    <h2 className="text-lg font-medium text-gray-700 mb-4">Browser Usage</h2>
+                    <h2 className="text-lg font-medium text-gray-700 mb-4">Financial Overview</h2>
                     <div className="h-60">
-                        <Doughnut
+                        <Line
                             data={{
-                                labels: ["Chrome", "Firefox", "Edge", "Other"],
+                                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
                                 datasets: [
                                     {
-                                        data: [4306, 3801, 1689, 3251],
-                                        backgroundColor: [
-                                            "#FF6384",
-                                            "#36A2EB",
-                                            "#FFCE56",
-                                            "#4BC0C0",
-                                        ],
-                                        hoverBackgroundColor: [
-                                            "#FF6384",
-                                            "#36A2EB",
-                                            "#FFCE56",
-                                            "#4BC0C0",
-                                        ],
+                                        label: "Revenue",
+                                        data: [5000, 7000, 8000, 6000, 9000, 10000],
+                                        borderColor: "#10B981",
+                                        fill: true,
+                                        backgroundColor: "rgba(16, 185, 129, 0.1)",
+                                    },
+                                    {
+                                        label: "Expenses",
+                                        data: [3000, 4000, 3000, 5000, 4000, 6000],
+                                        borderColor: "#EF4444",
+                                        fill: true,
+                                        backgroundColor: "rgba(239, 68, 68, 0.1)",
                                     },
                                 ],
                             }}
@@ -135,55 +132,67 @@ function ReportsAnalytics() {
                 </div>
             </div>
 
-            {/* Lower Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                {/* Calendar */}
+            {/* Performance Metrics Section */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                {/* Vendor Performance */}
                 <div className="p-4 bg-white rounded-lg shadow-md">
-                    <h2 className="text-lg font-medium text-gray-700 mb-4">Calendar</h2>
-                    <div className="text-center">
-                        <p className="text-sm text-gray-500">May 2021</p>
-                        <div className="grid grid-cols-7 gap-2 mt-2 text-sm">
-                            {[...Array(31)].map((_, day) => (
-                                <div
-                                    key={day}
-                                    className={`p-2 rounded-md ${
-                                        day === 4
-                                            ? "bg-blue-600 text-white"
-                                            : "text-gray-700 hover:bg-gray-100"
-                                    }`}
-                                >
-                                    {day + 1}
-                                </div>
+                    <h2 className="text-lg font-medium text-gray-700 mb-4">Vendor Performance</h2>
+                    <table className="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th className="py-2">Vendor Name</th>
+                                <th className="py-2">Performance (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {vendors.map((vendor, idx) => (
+                                <tr key={idx} className="text-center">
+                                    <td className="py-2">{vendor.name}</td>
+                                    <td className="py-2">{vendor.performance}</td>
+                                </tr>
                             ))}
-                        </div>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
 
-                {/* Map Section */}
-                <div className="p-4 bg-white rounded-lg shadow-md col-span-2">
-                    <h2 className="text-lg font-medium text-gray-700 mb-4">Map</h2>
-                    <div className="h-64">
-                        <MapContainer
-                            center={[51.505, -0.09]}
-                            zoom={13}
-                            scrollWheelZoom={false}
-                            className="h-full rounded-lg"
-                        >
-                            <TileLayer
-                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                            <Marker position={[51.505, -0.09]}>
-                                <Popup>
-                                    A sample location on the map!
-                                </Popup>
-                            </Marker>
-                        </MapContainer>
-                    </div>
+                {/* Employee Performance */}
+                <div className="p-4 bg-white rounded-lg shadow-md">
+                    <h2 className="text-lg font-medium text-gray-700 mb-4">Employee Performance</h2>
+                    <table className="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th className="py-2">Employee Name</th>
+                                <th className="py-2">Performance (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {employees.map((employee, idx) => (
+                                <tr key={idx} className="text-center">
+                                    <td className="py-2">{employee.name}</td>
+                                    <td className="py-2">{employee.performance}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
+            </div>
+
+            {/* Map Section */}
+            <div className="p-4 bg-white rounded-lg shadow-md mt-6">
+                <h2 className="text-lg font-medium text-gray-700 mb-4">Operational Locations</h2>
+                <MapContainer center={[51.505, -0.09]} zoom={13} className="h-60 w-full">
+                    <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={[51.505, -0.09]}>
+                        <Popup> Headquarters </Popup>
+                    </Marker>
+                </MapContainer>
             </div>
         </div>
     );
 }
 
 export default ReportsAnalytics;
+
+
