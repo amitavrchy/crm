@@ -2,12 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaPhoneAlt, FaBars, FaTimes, FaTachometerAlt } from "react-icons/fa";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, getSession } from "next-auth/react";
 import logo from "../../../public/dr white logo.png";
 import Image from "next/image";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
+  useEffect(() => {
+    async function fetchSession() {
+      const session = await getSession();
+      console.log("Session:", session);
+    }
+    fetchSession();
+  }, []);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   console.log("Session in Navbar:", session);

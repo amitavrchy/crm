@@ -11,7 +11,7 @@ import {
     LinearScale,
     BarElement,
     LineElement,
-    PointElement, // Add this
+    PointElement,
     Title,
     Tooltip,
     Legend,

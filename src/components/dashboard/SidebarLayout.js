@@ -1,3 +1,4 @@
+'use client';
 import { MdOutlineDashboard, MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson } from "react-icons/md";
 import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle, BiMessageSquareDetail } from "react-icons/bi";
 import { FaClipboardList, FaFileInvoiceDollar, FaUsers } from "react-icons/fa";
