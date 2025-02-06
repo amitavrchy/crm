@@ -1,8 +1,6 @@
-// app/layout.js or a similar layout component
-
-'use client'
+'use client';
 import { useState } from "react";
-import { usePathname } from "next/navigation"; // usePathname hook for Next.js 13+
+import { usePathname } from "next/navigation";
 import Sidebar from "./SidebarLayout";
 import Header from "./HeaderLayout";
 import Dashboard1 from "./layouts/Dashboard1";
@@ -38,7 +36,7 @@ const MainLayout = () => {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-  const pathname = usePathname();  // usePathname instead of useRouter()
+  const pathname = usePathname();
 
   return (
     <div className="relative bg-[#f7f6f9] h-full min-h-screen font-[sans-serif]">

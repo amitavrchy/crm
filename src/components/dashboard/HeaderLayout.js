@@ -1,14 +1,8 @@
 "use client";
 
 import { CiSearch } from "react-icons/ci";
-import { useSession } from "next-auth/react";
 
 const Header = () => {
-  const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return null; // Or add a loading spinner
-  }
 
   return (
     <header className="z-50 bg-[#f7f6f9] sticky top-0 pt-8">
@@ -24,16 +18,9 @@ const Header = () => {
           </div>
 
           <div className="flex gap-2 items-center self-center">
-            {/* Check if session and user are available */}
-            {session?.user?.username ? (
-              <div className="px-2 border rounded-full uppercase bg-blue-600 text-white">
-                {session.user.username[0]} {/* Display first letter of username */}
-              </div>
-            ) : (
-              <div className="px-2 border rounded-full uppercase bg-gray-400 text-white">
-                G
-              </div> // Default fallback
-            )}
+            <div className="px-2 border rounded-full uppercase bg-gray-400 text-white">
+              G
+            </div>
           </div>
         </div>
       </div>
