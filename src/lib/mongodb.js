@@ -1,38 +1,31 @@
 import { MongoClient } from "mongodb";
 
-if (!process.env.MONGODB_URI) {
-  throw new Error("Error");
-}
-
 const uri = process.env.MONGODB_URI;
-let client;
+if (!uri) throw new Error("MONGODB_URI is not defined in .env");
+
 let clientPromise;
 
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  tls: true,
-  tlsAllowInvalidCertificates: true,
 };
 
 if (process.env.NODE_ENV === "development") {
   if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
+    const client = new MongoClient(uri, options);
     global._mongoClientPromise = client.connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  client = new MongoClient(uri, options);
+  const client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
 
 export async function connectMongoDB() {
   try {
-    const client = await clientPromise;
-    const db = client.db();
-    return { client, db };
+    return (await clientPromise).db();
   } catch (error) {
-    console.error("Failed to connect to MongoDB:", error.message);
+    console.error("MongoDB Connection Error:", error);
     throw new Error("Failed to connect to MongoDB");
   }
 }

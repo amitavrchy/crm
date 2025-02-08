@@ -58,11 +58,11 @@ function PostAJob() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      });
+      });      
 
       if (res.ok) {
         toast.success("Job posted successfully!");
-        router.push("/dashboard/allJobs");
+        router.push("/allJobs");
       } else {
         const error = await res.json();
         toast.error(error.message || "Failed to post job. Please try again.");

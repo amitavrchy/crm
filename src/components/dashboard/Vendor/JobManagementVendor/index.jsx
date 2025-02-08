@@ -8,7 +8,7 @@ export default function JobManagementVendor() {
 
     useEffect(() => {
         const loadJobs = async () => {
-            const { faker } = await import('@faker-js/faker'); // Dynamic import
+            const { faker } = await import('@faker-js/faker');
 
             const generateFakeJobs = () => {
                 return Array.from({ length: 10 }, (_, i) => ({

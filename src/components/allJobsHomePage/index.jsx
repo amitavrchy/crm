@@ -12,7 +12,7 @@ function AllJobsHomePage() {
     useEffect(() => {
         async function fetchJobs() {
             try {
-                const res = await fetch("/jobs.json");
+                const res = await fetch("/api/jobs");
                 if (res.ok) {
                     const data = await res.json();
                     setJobs(data.slice(0, 6));

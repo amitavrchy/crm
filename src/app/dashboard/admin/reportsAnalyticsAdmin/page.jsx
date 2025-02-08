@@ -1,10 +1,10 @@
 'use client';
-import MainLayout from "@/components/dashboard/MainLayout";
+// import MainLayout from "@/components/dashboard/MainLayout";
 
 export default function reportsAnalyticsAdmin() {
     return (
-        <MainLayout>
-
-        </MainLayout>
+        // <MainLayout>
+            <div>hi</div>
+        // </MainLayout>
     );
 }

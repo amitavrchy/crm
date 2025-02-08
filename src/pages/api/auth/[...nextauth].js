@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectMongoDB } from "../../../lib/mongodb";
 import bcrypt from "bcrypt";
 
-const options = {
+export default NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -13,82 +13,45 @@ const options = {
       },
       async authorize(credentials) {
         try {
-          const client = await connectMongoDB();
-          const db = client.db();
+          const db = await connectMongoDB();
           const usersCollection = db.collection("users");
 
-          console.log("Authorizing user with email:", credentials.email); // Debugging log
-          
           const user = await usersCollection.findOne({ email: credentials.email });
-          if (!user) {
-            console.error("No user found with email:", credentials.email); // Debugging log
-            throw new Error("No user found with the given email");
-          }
+          if (!user) throw new Error("Invalid email or password");
 
           const isValidPassword = await bcrypt.compare(credentials.password, user.password);
-          if (!isValidPassword) {
-            console.error("Invalid password for email:", credentials.email); // Debugging log
-            throw new Error("Invalid email or password");
-          }
+          if (!isValidPassword) throw new Error("Invalid email or password");
 
-          console.log("Authorization successful for email:", credentials.email); // Debugging log
-
-          return {
-            id: user._id.toString(),
-            name: user.username,
-            email: user.email,
-            userType: user.userType, // Include userType
-            user,
-          };
+          return { id: user._id.toString(), name: user.username, email: user.email, userType: user.userType };
         } catch (error) {
-          console.error("Authorize error:", error.message); // Debugging log
-          throw new Error("Unable to authenticate. Please try again.");
+          console.error("Authentication Error:", error);
+          throw new Error("Unable to authenticate");
         }
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    strategy: "jwt",
-  },
-  pages: {
-    signIn: "/signIn",
-  },
+  session: { strategy: "jwt" },
+  pages: { signIn: "/signIn" },
   callbacks: {
     async jwt({ token, user }) {
-      console.log("JWT Callback - Before Update:", { token, user }); // Debugging log
-
       if (user) {
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
-        token.userType = user.userType; // Add userType to token
+        token.userType = user.userType;
       }
-      token.user = user;
-
-      console.log("JWT Callback - After Update:", { token }); // Debugging log
       return token;
     },
     async session({ session, token }) {
-      console.log("Session Callback - Before Update:", { session, token }); // Debugging log
-
       if (token) {
         session.user.id = token.id;
         session.user.email = token.email;
-        session.user.name = token.name || user.name;
-        session.user.userType = token.userType; // Add userType to session
+        session.user.name = token.name;
+        session.user.userType = token.userType;
       }
-      session.user = token.user;
-
-      console.log("Session Callback - After Update:", { session }); // Debugging log
       return session;
     },
   },
-  jwt: {
-    secret: process.env.NEXTAUTH_SECRET, // Ensure this is set
-    encryption: true, // Enable encryption for added security
-  },
   debug: process.env.NODE_ENV === "development",
-};
-
-export default NextAuth(options);
+});
