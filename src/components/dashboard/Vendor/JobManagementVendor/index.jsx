@@ -1,26 +1,33 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { faker } from '@faker-js/faker';
 import { FaCheck, FaUserPlus, FaTrash } from 'react-icons/fa';
 
-// Generate fake assigned jobs
-const generateFakeJobs = () => {
-    return Array.from({ length: 10 }, (_, i) => ({
-        id: i + 1,
-        title: faker.person.jobTitle(),
-        description: faker.lorem.sentence(),
-        vendor: faker.company.name(),
-        employee: null,
-        createdAt: faker.date.past().toDateString(),
-        status: faker.helpers.arrayElement(['Ongoing', 'Completed', 'Pending']),
-    }));
-};
-
 export default function JobManagementVendor() {
-    const [jobs, setJobs] = useState(generateFakeJobs());
+    const [jobs, setJobs] = useState([]);
 
-    // Assign Employee
+    useEffect(() => {
+        const loadJobs = async () => {
+            const { faker } = await import('@faker-js/faker'); // Dynamic import
+
+            const generateFakeJobs = () => {
+                return Array.from({ length: 10 }, (_, i) => ({
+                    id: i + 1,
+                    title: faker.person.jobTitle(),
+                    description: faker.lorem.sentence(),
+                    vendor: faker.company.name(),
+                    employee: null,
+                    createdAt: faker.date.past().toDateString(),
+                    status: faker.helpers.arrayElement(['Ongoing', 'Completed', 'Pending']),
+                }));
+            };
+
+            setJobs(generateFakeJobs());
+        };
+
+        loadJobs();
+    }, []);
+
     const handleAssignEmployee = async (id) => {
         const { value } = await Swal.fire({
             title: 'Assign Employee',
@@ -36,13 +43,11 @@ export default function JobManagementVendor() {
         }
     };
 
-    // Mark Job as Completed
     const handleCompleteJob = (id) => {
         setJobs(jobs.map(job => job.id === id ? { ...job, status: 'Completed' } : job));
         Swal.fire('Completed!', 'Job has been marked as completed.', 'success');
     };
 
-    // Remove Vendor from Job
     const handleRemoveJob = (id) => {
         Swal.fire({
             title: 'Are you sure?',
