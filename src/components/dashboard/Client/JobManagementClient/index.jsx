@@ -1,24 +1,33 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { faker } from "@faker-js/faker";
-import { FaEdit, FaTrash, FaUsers, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
+import { FaEdit, FaTrash, FaPlusCircle } from "react-icons/fa";
 
-// Generate fake job postings
-const generateFakeJobs = () => {
-  return Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-    title: faker.person.jobTitle(),
-    description: faker.lorem.sentences(2),
-    payment: faker.finance.amount(100, 1000, 2, "$"),
-    deadline: faker.date.future().toDateString(),
-    status: "Open",
-    applicants: faker.number.int({ min: 1, max: 10 }),
-  }));
-};
+export default function JobManagementClient() {
+  const [jobs, setJobs] = useState([]);
 
-export default function JobManagement() {
-  const [jobs, setJobs] = useState(generateFakeJobs());
+  // Generate fake job postings on mount
+  useEffect(() => {
+    const loadJobs = async () => {
+      const { faker } = await import("@faker-js/faker"); // Dynamic import
+
+      const generateFakeJobs = () => {
+        return Array.from({ length: 10 }, (_, i) => ({
+          id: i + 1,
+          title: faker.person.jobTitle(),
+          description: faker.lorem.sentences(2),
+          payment: faker.finance.amount(100, 1000, 2, "$"),
+          deadline: faker.date.future().toDateString(),
+          status: "Open",
+          applicants: faker.number.int({ min: 1, max: 10 }),
+        }));
+      };
+
+      setJobs(generateFakeJobs());
+    };
+
+    loadJobs();
+  }, []);
 
   // Create a new job
   const handleCreateJob = async () => {
@@ -32,14 +41,12 @@ export default function JobManagement() {
       `,
       showCancelButton: true,
       confirmButtonText: "Create",
-      preConfirm: () => {
-        return {
-          title: document.getElementById("jobTitle").value,
-          description: document.getElementById("jobDesc").value,
-          payment: `$${document.getElementById("jobPayment").value}`,
-          deadline: document.getElementById("jobDeadline").value,
-        };
-      },
+      preConfirm: () => ({
+        title: document.getElementById("jobTitle").value,
+        description: document.getElementById("jobDesc").value,
+        payment: `$${document.getElementById("jobPayment").value}`,
+        deadline: document.getElementById("jobDeadline").value,
+      }),
     });
 
     if (value && value.title && value.description && value.payment && value.deadline) {
@@ -69,14 +76,12 @@ export default function JobManagement() {
       `,
       showCancelButton: true,
       confirmButtonText: "Update",
-      preConfirm: () => {
-        return {
-          title: document.getElementById("jobTitle").value,
-          description: document.getElementById("jobDesc").value,
-          payment: `$${document.getElementById("jobPayment").value}`,
-          deadline: document.getElementById("jobDeadline").value,
-        };
-      },
+      preConfirm: () => ({
+        title: document.getElementById("jobTitle").value,
+        description: document.getElementById("jobDesc").value,
+        payment: `$${document.getElementById("jobPayment").value}`,
+        deadline: document.getElementById("jobDeadline").value,
+      }),
     });
 
     if (value) {

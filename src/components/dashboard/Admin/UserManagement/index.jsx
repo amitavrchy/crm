@@ -146,13 +146,13 @@ export default function UserManagement() {
                                 <td className="border border-gray-300 p-2">{user.job}</td>
                                 <td className="border border-gray-300 p-2">
                                     <button onClick={() => handleEditUser(user.id)} className="px-3 py-1 bg-yellow-500 text-white rounded-md mr-2 hover:bg-yellow-700 flex items-center">
-                                        <FaEdit className="" />
+                                        <FaEdit />
                                     </button>
                                     <button onClick={() => handleAssignJob(user.id)} className="px-3 py-1 bg-blue-500 text-white rounded-md mr-2 hover:bg-blue-700 flex items-center">
-                                        <FaTasks className="" />
+                                        <FaTasks />
                                     </button>
                                     <button onClick={() => handleDelete(user.id)} className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-700 flex items-center">
-                                        <FaTrash className="" />
+                                        <FaTrash />
                                     </button>
                                 </td>
                             </tr>

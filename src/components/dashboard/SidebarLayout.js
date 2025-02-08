@@ -31,7 +31,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
       return [
         ...commonMenuItems,
         {
-          href: "/dashboard/vendor/jobManagement",
+          href: "/dashboard/vendor/jobManagementVendor",
           icon: <MdWork className="text-2xl mr-2" />, 
           label: "Job Management",
         },
@@ -41,7 +41,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           label: "Employee Management",
         },
         {
-          href: "/dashboard/vendor/reportsAnalytics",
+          href: "/dashboard/vendor/reportsAnalyticsVendor",
           icon: <MdOutlineReport className="text-2xl mr-2" />, 
           label: "Reports & Analytics",
         },
@@ -70,7 +70,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           label: "Vendor Interaction",
         },
         {
-          href: "/dashboard/client/jobManagement",
+          href: "/dashboard/client/jobManagementClient",
           icon: <MdWork className="text-2xl mr-2" />, 
           label: "Job Management",
         },
@@ -89,12 +89,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           label: "User Management",
         },
         {
-          href: "/dashboard/admin/jobManagement",
+          href: "/dashboard/admin/jobManagementAdmin",
           icon: <MdWork className="text-2xl mr-2" />, 
           label: "Job Management",
         },
         {
-          href: "/dashboard/admin/reportsAnalytics",
+          href: "/dashboard/admin/reportsAnalyticsAdmin",
           icon: <MdOutlineReport className="text-2xl mr-2" />, 
           label: "Reports & Analytics",
         },

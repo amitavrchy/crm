@@ -1,7 +1,6 @@
 'use client';
 import MainLayout from "@/components/dashboard/MainLayout";
-
-export default function reportsAnalytics() {
+export default function ReportsAnalyticsVendor() {
     return (
         <MainLayout>
 

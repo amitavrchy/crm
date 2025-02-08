@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 
 if (!process.env.MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable in .env");
+  throw new Error("Error");
 }
 
 const uri = process.env.MONGODB_URI;
@@ -11,8 +11,8 @@ let clientPromise;
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  tls: true, // Enforce TLS
-  tlsAllowInvalidCertificates: true, // Allow invalid certs (use only if needed)
+  tls: true,
+  tlsAllowInvalidCertificates: true,
 };
 
 if (process.env.NODE_ENV === "development") {

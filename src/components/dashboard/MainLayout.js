@@ -16,17 +16,17 @@ import PostedJobs from "./Client/PostedJobs";
 import CompletedJobsClient from "./Client/CompletedJobsClient";
 import PaymentHistory from "./Client/PaymentHistory";
 import UserManagement from "./Admin/UserManagement";
-import JobManagement from "./Admin/JobManagement";
-import ReportsAnalytics from "./Admin/ReportAnalytics";
-import JobManagementV from "./Vendor/JobManagement";
 import EmployeeManagement from "./Vendor/EmployeeManagement";
-import ReportsAnalyticsV from "./Vendor/ReportsAnalytics";
 import JobApplyManagement from "./Employee/JobApplyManagement";
 import JobHistory from "./Employee/JobHistory";
 import ProfileManagement from "./Employee/ProfileManagement";
-import JobManagementC from "./Client/JobManagement";
 import VendorInteraction from "./Client/VendorInteraction";
 import JobHistoryReports from "./Client/JobHistoryReports";
+import JobManagementAdmin from "./Admin/JobManagementAdmin";
+import JobManagementClient from "./Client/JobManagementClient";
+import JobManagementVendor from "./Vendor/JobManagementVendor";
+import ReportsAnalyticsAdmin from "./Admin/ReportAnalyticsAdmin";
+import ReportsAnalyticsVendor from "./Vendor/ReportsAnalyticsVendor";
 
 
 const MainLayout = () => {
@@ -66,19 +66,19 @@ const MainLayout = () => {
             {pathname === "/dashboard/client/postedJobs" && <PostedJobs />}
             {pathname === "/dashboard/client/completedJobsClient" && <CompletedJobsClient />}
             {pathname === "/dashboard/client/paymentHistory" && <PaymentHistory />}
-            {pathname === "/dashboard/client/jobManagement" && <JobManagementC />}
+            {pathname === "/dashboard/client/jobManagementClient" && <JobManagementClient />}
             {pathname === "/dashboard/client/vendorInteraction" && <VendorInteraction />}
             {pathname === "/dashboard/client/jobHistoryReports" && <JobHistoryReports />}
 
             {pathname === "/dashboard/vendor" && <Vendor />}
-            {pathname === "/dashboard/vendor/jobManagement" && <JobManagementV />}
+            {pathname === "/dashboard/vendor/jobManagementVendor" && <JobManagementVendor />}
             {pathname === "/dashboard/vendor/employeeManagement" && <EmployeeManagement />}
-            {pathname === "/dashboard/vendor/reportsAnalytics" && <ReportsAnalyticsV />}
+            {pathname === "/dashboard/vendor/reportsAnalyticsVendor" && <ReportsAnalyticsVendor />}
 
             {pathname === "/dashboard/admin" && <Admin />}
             {pathname === "/dashboard/admin/userManagement" && <UserManagement />}
-            {pathname === "/dashboard/admin/jobManagement" && <JobManagement />}
-            {pathname === "/dashboard/admin/reportsAnalytics" && <ReportsAnalytics />}
+            {pathname === "/dashboard/admin/jobManagementAdmin" && <JobManagementAdmin />}
+            {pathname === "/dashboard/admin/reportsAnalyticsAdmin" && <ReportsAnalyticsAdmin />}
 
             {pathname === "/dashboard/employee" && <Employee />}
             {pathname === "/dashboard/employee/appliedJobs" && <AppliedJobs />}
