@@ -29,7 +29,7 @@ function SingleJob() {
 
     async function fetchJob() {
       try {
-        const res = await fetch(`/jobs.json`);
+        const res = await fetch(`/api/jobs`);
         if (!res.ok) {
           throw new Error("Failed to fetch job details.");
         }

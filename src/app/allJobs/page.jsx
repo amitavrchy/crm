@@ -24,7 +24,7 @@ function AllJobs() {
     useEffect(() => {
         async function fetchJobs() {
             try {
-                const res = await fetch("/jobs.json");
+                const res = await fetch("/api/jobs");
                 if (res.ok) {
                     const data = await res.json();
                     setJobs(data);
@@ -35,6 +35,7 @@ function AllJobs() {
                     setError("Failed to fetch jobs. Please try again later.");
                 }
             } catch (error) {
+                console.error("Error fetching jobs:", error);
                 setError("An error occurred while fetching jobs.");
             } finally {
                 setLoading(false);
@@ -43,6 +44,7 @@ function AllJobs() {
 
         fetchJobs();
     }, []);
+
 
     useEffect(() => {
         let filtered = jobs;
@@ -179,8 +181,8 @@ function AllJobs() {
                                     key={page}
                                     onClick={() => setCurrentPage(page)}
                                     className={`px-4 py-2 mx-1 rounded ${page === currentPage
-                                            ? "bg-blue-500 text-white"
-                                            : "bg-gray-200 text-gray-700"
+                                        ? "bg-blue-500 text-white"
+                                        : "bg-gray-200 text-gray-700"
                                         } hover:bg-blue-100`}
                                 >
                                     {page}
