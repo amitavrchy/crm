@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FaSearch } from 'react-icons/fa';
 import img from '../../../public/singleJob.jpg';
-import Link from 'next/link'; // Import Next.js Link
+import Link from 'next/link';
 
 function Blogs() {
     const [blogs, setBlogs] = useState([]);
@@ -19,7 +19,7 @@ function Blogs() {
     useEffect(() => {
         async function fetchBlogs() {
             try {
-                const res = await fetch('/blogs.json');
+                const res = await fetch('/api/blogs');
                 if (res.ok) {
                     const data = await res.json();
                     setBlogs(data);

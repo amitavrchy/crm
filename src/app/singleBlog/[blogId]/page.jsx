@@ -11,7 +11,6 @@ function SingleBlog() {
     const [selectedCategory, setSelectedCategory] = useState("All");
 
     useEffect(() => {
-        // Simulating fetching categories (you can replace this with a real API call)
         const fetchCategories = async () => {
             const mockCategories = ["All", "Technology", "Business", "Health", "Travel"];
             setCategories(mockCategories);

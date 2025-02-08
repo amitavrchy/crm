@@ -1,5 +1,5 @@
 'use client';
-import { MdOutlineDashboard, MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson } from "react-icons/md";
+import { MdOutlineDashboard, MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson, MdPostAdd  } from "react-icons/md";
 import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle, BiMessageSquareDetail } from "react-icons/bi";
 import { FaClipboardList, FaFileInvoiceDollar, FaUsers } from "react-icons/fa";
 import { usePathname } from "next/navigation";
@@ -80,25 +80,30 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           label: "Job History & Reports",
         },
       ];
-    // } else if (pathname.startsWith("/dashboard/admin")) {
-    //   return [
-    //     ...commonMenuItems,
-    //     {
-    //       href: "/dashboard/admin/userManagement",
-    //       icon: <FaUsers className="text-2xl mr-2" />, 
-    //       label: "User Management",
-    //     },
-    //     // {
-    //     //   href: "/dashboard/admin/jobManagementAdmin",
-    //     //   icon: <MdWork className="text-2xl mr-2" />, 
-    //     //   label: "Job Management",
-    //     // },
-    //     {
-    //       href: "/dashboard/admin/reportsAnalyticsAdmin",
-    //       icon: <MdOutlineReport className="text-2xl mr-2" />, 
-    //       label: "Reports & Analytics",
-    //     },
-    //   ];
+    } else if (pathname.startsWith("/dashboard/admin")) {
+      return [
+        ...commonMenuItems,
+        {
+          href: "/dashboard/admin/userManagement",
+          icon: <FaUsers className="text-2xl mr-2" />, 
+          label: "User Management",
+        },
+        {
+          href: "/dashboard/admin/jobManagementAdmin",
+          icon: <MdWork className="text-2xl mr-2" />, 
+          label: "Job Management",
+        },
+        {
+          href: "/dashboard/admin/reportsAnalyticsAdmin",
+          icon: <MdOutlineReport className="text-2xl mr-2" />, 
+          label: "Reports & Analytics",
+        },
+        {
+          href: "/dashboard/admin/postBlogs",
+          icon: <MdPostAdd className="text-2xl mr-2" />, 
+          label: "Post Blogs",
+        },
+      ];
     } else if (pathname.startsWith("/dashboard/employee")) {
       return [
         ...commonMenuItems,

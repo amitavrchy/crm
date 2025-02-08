@@ -38,7 +38,7 @@
     {
         "_id": "5",
         "title": "Managing Remote Teams: Tools and Strategies",
-        "author": "Gini Talent",
+        "author": "Demand Talent",
         "date_published": "2024-12-30",
         "excerpt": "Performance reviews are essential for employee growth. Find out how to conduct effective performance reviews.",
         "category": "PEO",
@@ -47,7 +47,7 @@
     {
         "_id": "6",
         "title": "Creating a Successful Employee Development Plan",
-        "author": "Gini Talent",
+        "author": "Demand Talent",
         "date_published": "2024-12-10",
         "excerpt": "Diversity hiring brings a wealth of new perspectives to your team. Here's how you can foster diversity in your hiring practices.",
         "category": "HR",
@@ -56,7 +56,7 @@
     {
         "_id": "7",
         "title": "How to Attract Gen Z Talent to Your Organization",
-        "author": "Gini Talent",
+        "author": "Demand Talent",
         "date_published": "2024-12-19",
         "excerpt": "Recruiting Gen Z talent is a challenge. Here's how to adjust your recruitment approach to better attract this new generation.",
         "category": "Hiring",
@@ -65,7 +65,7 @@
     {
         "_id": "8",
         "title": "Optimizing Your Hiring Process with Technology",
-        "author": "Gini Talent",
+        "author": "Demand Talent",
         "date_published": "2024-12-16",
         "excerpt": "Technology can streamline your hiring process. Explore the tools and strategies that can make recruitment more efficient.",
         "category": "AI",
@@ -74,7 +74,7 @@
     {
         "_id": "9",
         "title": "Employee Motivation: Understanding What Drives Performance",
-        "author": "Gini Talent",
+        "author": "Demand Talent",
         "date_published": "2024-12-17",
         "excerpt": "Personalizing recruitment with AI is changing the landscape of talent acquisition. Discover how this technology can help you find the best candidates.",
         "category": "Remote Work",
@@ -83,100 +83,10 @@
     {
         "_id": "10",
         "title": "Scaling Your Startup: When and How to Hire",
-        "author": "Gini Talent",
+        "author": "Demand Talent",
         "date_published": "2024-12-22",
         "excerpt": "Attracting Gen Z talent requires a different approach. Here’s what you need to know about recruiting this new generation of workers.",
         "category": "Hiring",
         "image": "https://source.unsplash.com/random/800x600?sig=59"
-    },
-    {
-        "_id": "11",
-        "title": "Onboarding for Success: A Guide for HR Managers",
-        "author": "Gini Talent",
-        "date_published": "2024-12-30",
-        "excerpt": "Company culture is an essential element for business success. Learn how to create and nurture a positive company culture in your organization.",
-        "category": "PEO",
-        "image": "https://source.unsplash.com/random/800x600?sig=3"
-    },
-    {
-        "_id": "12",
-        "title": "Managing a Multi-generational Workforce: Tips and Strategies",
-        "author": "Gini Talent",
-        "date_published": "2024-12-09",
-        "excerpt": "Explore the best Employer of Record (EOR) and Professional Employer Organization (PEO) services available in Kazakhstan.",
-        "category": "Content Creation",
-        "image": "https://source.unsplash.com/random/800x600?sig=28"
-    },
-    {
-        "_id": "13",
-        "title": "The Importance of Building a Strong Company Culture",
-        "author": "Gini Talent",
-        "date_published": "2024-12-03",
-        "excerpt": "Onboarding sets the stage for employee success. Here’s a guide for HR managers to implement effective onboarding strategies.",
-        "category": "Employee Retention",
-        "image": "https://source.unsplash.com/random/800x600?sig=47"
-    },
-    {
-        "_id": "14",
-        "title": "How to Write a Job Description that Attracts Top Talent",
-        "author": "Gini Talent",
-        "date_published": "2024-12-11",
-        "excerpt": "Crafting the perfect job description can attract top candidates. Here’s a guide to writing descriptions that stand out.",
-        "category": "Hiring",
-        "image": "https://source.unsplash.com/random/800x600?sig=12"
-    },
-    {
-        "_id": "15",
-        "title": "The Benefits of Employee Wellness Programs",
-        "author": "Gini Talent",
-        "date_published": "2024-12-14",
-        "excerpt": "Employee wellness programs are more important than ever. Learn the benefits of offering wellness programs and how they can improve productivity.",
-        "category": "HR",
-        "image": "https://source.unsplash.com/random/800x600?sig=34"
-    },
-    {
-        "_id": "16",
-        "title": "How to Conduct Effective Performance Reviews",
-        "author": "Gini Talent",
-        "date_published": "2024-12-21",
-        "excerpt": "Performance reviews are crucial to employee development. Learn how to conduct reviews that motivate employees to grow and excel.",
-        "category": "HR",
-        "image": "https://source.unsplash.com/random/800x600?sig=56"
-    },
-    {
-        "_id": "17",
-        "title": "Managing Employee Stress in High-Pressure Environments",
-        "author": "Gini Talent",
-        "date_published": "2024-12-18",
-        "excerpt": "Learn strategies to manage employee stress in high-pressure environments and help your team stay productive and healthy.",
-        "category": "HR",
-        "image": "https://source.unsplash.com/random/800x600?sig=88"
-    },
-    {
-        "_id": "18",
-        "title": "Building a Remote Work Culture",
-        "author": "Gini Talent",
-        "date_published": "2024-12-23",
-        "excerpt": "A strong remote work culture keeps teams connected and motivated. Learn how to build a remote culture that promotes success.",
-        "category": "Remote Work",
-        "image": "https://source.unsplash.com/random/800x600?sig=77"
-    },
-    {
-        "_id": "19",
-        "title": "The Role of AI in Personalizing Recruitment",
-        "author": "Gini Talent",
-        "date_published": "2024-12-25",
-        "excerpt": "Artificial intelligence is transforming the recruitment process. Discover how AI can help you personalize your recruitment strategy.",
-        "category": "AI",
-        "image": "https://source.unsplash.com/random/800x600?sig=5"
-    },
-    {
-        "_id": "20",
-        "title": "How to Build a Successful Employee Referral Program",
-        "author": "Gini Talent",
-        "date_published": "2024-12-07",
-        "excerpt": "Employee referral programs are an effective tool for finding top talent. Learn how to build a program that works for your company.",
-        "category": "Hiring",
-        "image": "https://source.unsplash.com/random/800x600?sig=63"
     }
 ]

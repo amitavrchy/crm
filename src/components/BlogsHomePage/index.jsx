@@ -10,12 +10,12 @@ import img3 from "../../../public/about-us/about-3.jpg";
 function BlogsHomePage() {
     const [blogs, setBlogs] = useState([]);
 
-    const images = [img, img1, img2, img3]; // Array of images to be used
+    const images = [img, img1, img2, img3];
 
     useEffect(() => {
         async function fetchBlogs() {
             try {
-                const res = await fetch("/blogs.json");
+                const res = await fetch("api/blogs");
                 if (res.ok) {
                     const data = await res.json();
                     setBlogs(data.slice(0, 4));

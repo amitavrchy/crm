@@ -6,7 +6,7 @@ import Header from "./HeaderLayout";
 import Dashboard1 from "./layouts/Dashboard1";
 import Client from "./Client";
 import Vendor from "./Vendor";
-// import Admin from "./Admin";
+import Admin from "./Admin";
 import Employee from "./Employee";
 import AppliedJobs from "./Employee/AppliedJobs";
 import ApprovedJobs from "./Employee/ApprovedJobs";
@@ -15,18 +15,19 @@ import CompletedJobs from "./Employee/CompletedJobs";
 import PostedJobs from "./Client/PostedJobs";
 import CompletedJobsClient from "./Client/CompletedJobsClient";
 import PaymentHistory from "./Client/PaymentHistory";
-// import UserManagement from "./Admin/UserManagement";
+import UserManagement from "./Admin/UserManagement";
 import EmployeeManagement from "./Vendor/EmployeeManagement";
 import JobApplyManagement from "./Employee/JobApplyManagement";
 import JobHistory from "./Employee/JobHistory";
 import ProfileManagement from "./Employee/ProfileManagement";
 import VendorInteraction from "./Client/VendorInteraction";
 import JobHistoryReports from "./Client/JobHistoryReports";
-// import JobManagementAdmin from "./Admin/JobManagementAdmin";
+import JobManagementAdmin from "./Admin/JobManagementAdmin";
 import JobManagementClient from "./Client/JobManagementClient";
 import JobManagementVendor from "./Vendor/JobManagementVendor";
-// import ReportsAnalyticsAdmin from "./Admin/ReportAnalyticsAdmin";
+import ReportsAnalyticsAdmin from "./Admin/ReportAnalyticsAdmin";
 import ReportsAnalyticsVendor from "./Vendor/ReportsAnalyticsVendor";
+import PostBlogs from "./Admin/PostBlogs";
 
 
 const MainLayout = () => {
@@ -75,10 +76,11 @@ const MainLayout = () => {
             {pathname === "/dashboard/vendor/employeeManagement" && <EmployeeManagement />}
             {pathname === "/dashboard/vendor/reportsAnalyticsVendor" && <ReportsAnalyticsVendor />}
 
-            {/* {pathname === "/dashboard/admin" && <Admin />} */}
-            {/* {pathname === "/dashboard/admin/userManagement" && <UserManagement />}
-            {/* {pathname === "/dashboard/admin/jobManagementAdmin" && <JobManagementAdmin />} */}
-            {/* {pathname === "/dashboard/admin/reportsAnalyticsAdmin" && <ReportsAnalyticsAdmin />} */}
+            {pathname === "/dashboard/admin" && <Admin />}
+            {pathname === "/dashboard/admin/userManagement" && <UserManagement />}
+            {pathname === "/dashboard/admin/jobManagementAdmin" && <JobManagementAdmin />}
+            {pathname === "/dashboard/admin/reportsAnalyticsAdmin" && <ReportsAnalyticsAdmin />}
+            {pathname === "/dashboard/admin/postBlogs" && <PostBlogs />}
 
             {pathname === "/dashboard/employee" && <Employee />}
             {pathname === "/dashboard/employee/appliedJobs" && <AppliedJobs />}

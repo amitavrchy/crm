@@ -13,17 +13,45 @@ import Chat from "@/components/Chat";
 function ContactUs() {
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Simulate email sending
-        Swal.fire({
-            title: "Success!",
-            text: "Your message has been sent.",
-            icon: "success",
-            confirmButtonColor: "#F97316", // Orange color
-        });
-        setFormData({ name: "", email: "", message: "" });
+
+        try {
+            const response = await fetch("/api/enquire", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Your message has been sent.",
+                    icon: "success",
+                    confirmButtonColor: "#F97316",
+                });
+                setFormData({ name: "", email: "", message: "" });
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: data.message || "Something went wrong.",
+                    icon: "error",
+                    confirmButtonColor: "#F97316",
+                });
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to send message. Try again later.",
+                icon: "error",
+                confirmButtonColor: "#F97316",
+            });
+        }
     };
+
 
     return (
         <div className="flex flex-col min-h-screen">
