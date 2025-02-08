@@ -80,25 +80,25 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           label: "Job History & Reports",
         },
       ];
-    // } else if (pathname.startsWith("/dashboard/admin")) {
-    //   return [
-    //     ...commonMenuItems,
-    //     {
-    //       href: "/dashboard/admin/userManagement",
-    //       icon: <FaUsers className="text-2xl mr-2" />, 
-    //       label: "User Management",
-    //     },
-    //     // {
-    //     //   href: "/dashboard/admin/jobManagementAdmin",
-    //     //   icon: <MdWork className="text-2xl mr-2" />, 
-    //     //   label: "Job Management",
-    //     // },
-    //     {
-    //       href: "/dashboard/admin/reportsAnalyticsAdmin",
-    //       icon: <MdOutlineReport className="text-2xl mr-2" />, 
-    //       label: "Reports & Analytics",
-    //     },
-    //   ];
+    } else if (pathname.startsWith("/dashboard/admin")) {
+      return [
+        ...commonMenuItems,
+        {
+          href: "/dashboard/admin/userManagement",
+          icon: <FaUsers className="text-2xl mr-2" />, 
+          label: "User Management",
+        },
+        {
+          href: "/dashboard/admin/jobManagementAdmin",
+          icon: <MdWork className="text-2xl mr-2" />, 
+          label: "Job Management",
+        },
+        {
+          href: "/dashboard/admin/reportsAnalyticsAdmin",
+          icon: <MdOutlineReport className="text-2xl mr-2" />, 
+          label: "Reports & Analytics",
+        },
+      ];
     } else if (pathname.startsWith("/dashboard/employee")) {
       return [
         ...commonMenuItems,
