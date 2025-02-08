@@ -36,19 +36,29 @@ function SignIn() {
                 const { userType } = result.user;
                 console.log("User Type:", userType);
 
-                if (userType === "Admin") {
-                    router.push("/dashboard/admin");
-                } else if (userType === "Client") {
-                    router.push("/dashboard/client");
-                } else if (userType === "Vendor") {
-                    router.push("/dashboard/vendor");
+                // Redirect based on user type
+                switch (userType) {
+                    case "Admin":
+                        router.push("/dashboard/admin");
+                        break;
+                    case "Client":
+                        router.push("/dashboard/client");
+                        break;
+                    case "Vendor":
+                        router.push("/dashboard/vendor");
+                        break;
+                    case "Employee":
+                        router.push("/dashboard/employee");
+                        break;
+                    default:
+                        router.push("/dashboard");
                 }
 
                 reset();
             } else {
                 Swal.fire({
                     title: "Sign In Failed",
-                    text: result.message || "Something went wrong",
+                    text: result.message || "Invalid credentials. Please try again.",
                     icon: "error",
                     confirmButtonColor: "#EF4444",
                 });
