@@ -31,7 +31,7 @@ ChartJS.register(
 );
 
 
-function ReportsAnalytics() {
+function ReportsAnalyticsAdmin() {
     const generatePerformanceData = (num) => {
         return Array.from({ length: num }, () => ({
             name: faker.person.fullName(),
@@ -193,6 +193,6 @@ function ReportsAnalytics() {
     );
 }
 
-export default ReportsAnalytics;
+export default ReportsAnalyticsAdmin;
 
 

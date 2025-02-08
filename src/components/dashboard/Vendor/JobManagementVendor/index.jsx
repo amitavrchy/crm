@@ -17,7 +17,7 @@ const generateFakeJobs = () => {
     }));
 };
 
-export default function VendorJobManagement() {
+export default function JobManagementVendor() {
     const [jobs, setJobs] = useState(generateFakeJobs());
 
     // Assign Employee

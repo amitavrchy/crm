@@ -21,7 +21,7 @@ ChartJS.register(
     ArcElement
 );
 
-const ReportsAnalytics = () => {
+const ReportsAnalyticsVendor = () => {
     const barData = {
         labels: ["Collaboration", "Data Center", "Borderless Network"],
         datasets: [
@@ -140,4 +140,4 @@ const ReportsAnalytics = () => {
     );
 };
 
-export default ReportsAnalytics;
+export default ReportsAnalyticsVendor;

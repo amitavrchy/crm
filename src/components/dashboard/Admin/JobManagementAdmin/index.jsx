@@ -15,7 +15,7 @@ const generateFakeJobs = () => {
     }));
 };
 
-export default function JobManagement() {
+export default function JobManagementAdmin() {
     const [jobs, setJobs] = useState(generateFakeJobs());
 
     // Approve Job

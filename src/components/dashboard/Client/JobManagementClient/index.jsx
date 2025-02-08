@@ -17,7 +17,7 @@ const generateFakeJobs = () => {
   }));
 };
 
-export default function JobManagement() {
+export default function JobManagementClient() {
   const [jobs, setJobs] = useState(generateFakeJobs());
 
   // Create a new job
