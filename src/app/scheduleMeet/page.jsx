@@ -17,6 +17,8 @@ function ScheduleMeet() {
         meetingTime: ''
     });
 
+    const [loading, setLoading] = useState(false);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -25,7 +27,7 @@ function ScheduleMeet() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!formData.name || !formData.email || !formData.phone || !formData.meetingTime) {
@@ -37,20 +39,49 @@ function ScheduleMeet() {
             return;
         }
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Meeting Scheduled',
-            text: `Thank you, ${formData.name}. Your meeting is set for ${formData.meetingDate.toDateString()} at ${formData.meetingTime}.`,
-        });
+        setLoading(true);
 
-        setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            additionalInfo: '',
-            meetingDate: new Date(),
-            meetingTime: ''
-        });
+        try {
+            const response = await fetch('/api/meet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    meetingDate: formData.meetingDate.toISOString(),
+                }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Meeting Scheduled',
+                    text: `Thank you, ${formData.name}. Your meeting is set for ${new Date(formData.meetingDate).toDateString()} at ${formData.meetingTime}.`,
+                });
+
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    additionalInfo: '',
+                    meetingDate: new Date(),
+                    meetingTime: ''
+                });
+            } else {
+                throw new Error(result.error);
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.message || 'Something went wrong. Please try again.',
+            });
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -80,8 +111,9 @@ function ScheduleMeet() {
                         <label htmlFor="time-select" className="block text-sm font-medium text-gray-700">Time</label>
                         <select
                             id="time-select"
+                            name="meetingTime"
                             value={formData.meetingTime}
-                            onChange={(e) => setFormData({ ...formData, meetingTime: e.target.value })}
+                            onChange={handleInputChange}
                             className="mt-2 w-full px-4 py-2 border rounded-lg bg-gray-200 text-gray-700 focus:ring-orange-500 focus:border-orange-500"
                         >
                             <option value="" disabled>Select a time</option>
@@ -93,7 +125,6 @@ function ScheduleMeet() {
                         </select>
                     </div>
 
-
                     <p className="text-center text-sm text-gray-500 mb-6">All times are in (UTC+06:00) Dhaka</p>
 
                     <div className="space-y-4 py-6">
@@ -104,8 +135,8 @@ function ScheduleMeet() {
                     </div>
 
                     <div className="text-center mt-6">
-                        <button type="submit" onClick={handleSubmit} className="w-full px-4 py-3 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-                            Book
+                        <button type="submit" onClick={handleSubmit} disabled={loading} className="w-full px-4 py-3 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+                            {loading ? "Booking..." : "Book"}
                         </button>
                     </div>
                 </div>
