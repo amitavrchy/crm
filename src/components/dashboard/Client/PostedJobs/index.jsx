@@ -86,7 +86,7 @@ function PostedJobs() {
                                 <td className="p-3">{job.location}</td>
                                 <td className="p-3">{job.datePosted}</td>
                                 <td className="p-3">{job.applicationDeadline}</td>
-                                <td className="p-3">{job.status}</td>
+                                <td className="p-3 font-semibold text-green-600">{job.status}</td>
                             </tr>
                         ))}
                     </tbody>

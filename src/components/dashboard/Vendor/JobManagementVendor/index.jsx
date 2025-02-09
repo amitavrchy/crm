@@ -91,16 +91,16 @@ export default function JobManagementVendor() {
                                 <td className="border border-gray-300 p-3 flex justify-center gap-2 flex-wrap">
                                     {job.status !== 'Completed' && (
                                         <button onClick={() => handleAssignEmployee(job.id)} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center">
-                                            <FaUserPlus className="mr-2" /> Assign
+                                            <FaUserPlus className="" />
                                         </button>
                                     )}
                                     {job.status !== 'Completed' && (
                                         <button onClick={() => handleCompleteJob(job.id)} className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center">
-                                            <FaCheck className="mr-2" /> Complete
+                                            <FaCheck className="" />
                                         </button>
                                     )}
                                     <button onClick={() => handleRemoveJob(job.id)} className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center">
-                                        <FaTrash className="mr-2" /> Remove
+                                        <FaTrash className="" />
                                     </button>
                                 </td>
                             </tr>

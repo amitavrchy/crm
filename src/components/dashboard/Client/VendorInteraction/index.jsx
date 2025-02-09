@@ -9,6 +9,7 @@ function VendorInteraction() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [selectedVendor, setSelectedVendor] = useState(null);
+  const [hasVendorResponded, setHasVendorResponded] = useState(false);
 
   useEffect(() => {
     const vendorList = Array.from({ length: 5 }, () => ({
@@ -32,6 +33,19 @@ function VendorInteraction() {
       socket.emit("sendMessage", newMessage);
       setMessages((prev) => [...prev, newMessage]);
       setMessage("");
+
+      // Automated vendor response only if not responded before
+      if (!hasVendorResponded) {
+        setTimeout(() => {
+          const vendorResponse = {
+            sender: selectedVendor.name,
+            text: "Thank you for reaching out! How can I assist you?",
+            vendorId: selectedVendor.id,
+          };
+          setMessages((prev) => [...prev, vendorResponse]);
+          setHasVendorResponded(true);
+        }, 1000);
+      }
     }
   };
 
@@ -51,7 +65,10 @@ function VendorInteraction() {
                       ? "bg-orange-500 text-white"
                       : "bg-gray-50 text-gray-800"
                   }`}
-                  onClick={() => setSelectedVendor(vendor)}
+                  onClick={() => {
+                    setSelectedVendor(vendor);
+                    setHasVendorResponded(false);
+                  }}
                 >
                   <div>
                     <span className="text-lg font-medium">{vendor.name}</span>

@@ -1,5 +1,5 @@
 'use client';
-import { MdOutlineDashboard, MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson, MdPostAdd  } from "react-icons/md";
+import { MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson, MdPostAdd  } from "react-icons/md";
 import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle, BiMessageSquareDetail } from "react-icons/bi";
 import { FaClipboardList, FaFileInvoiceDollar, FaUsers } from "react-icons/fa";
 import { usePathname } from "next/navigation";
@@ -14,11 +14,6 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
       : "text-gray-800 hover:bg-[#d9f3ea]";
 
   const commonMenuItems = [
-    {
-      href: "/dashboard",
-      icon: <MdOutlineDashboard className="text-2xl mr-2" />, 
-      label: "Dashboard",
-    },
     {
       href: "/",
       icon: <BiHomeAlt className="text-2xl mr-2" />, 

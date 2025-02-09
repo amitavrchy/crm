@@ -146,10 +146,10 @@ export default function JobManagementClient() {
                 </td>
                 <td className="border border-gray-300 p-3 flex justify-center gap-2 flex-wrap">
                   <button onClick={() => handleEditJob(job)} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center">
-                    <FaEdit className="mr-2" /> Edit
+                    <FaEdit className="" />
                   </button>
                   <button onClick={() => handleDeleteJob(job.id)} className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center">
-                    <FaTrash className="mr-2" /> Delete
+                    <FaTrash className="" />
                   </button>
                 </td>
               </tr>

@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { connectMongoDB } from "../../../lib/mongodb";
 
 export default async function handler(req, res) {
@@ -9,39 +10,31 @@ export default async function handler(req, res) {
     const { email, password } = req.body;
 
     if (!email || !password) {
-        console.error("❌ Missing email or password");
         return res.status(400).json({ message: "Email and password are required" });
     }
 
     try {
-        console.log("🔄 Connecting to MongoDB...");
         const db = await connectMongoDB();
-        console.log("✅ Connected to MongoDB");
-
-        console.log("🔎 Searching for user with email:", email);
-
         const user = await db.collection("users").findOne({ email });
 
-        if (!user) {
-            console.error("❌ User not found:", email);
+        if (!user || user.password !== password) {
             return res.status(401).json({ message: "Invalid email or password" });
         }
 
-        console.log("✅ User found:", user);
+        // Generate a secure random session token
+        const sessionToken = crypto.randomBytes(32).toString("hex");
 
-        console.log("🔍 Checking password...");
-        console.log("Entered Password:", password);
-        console.log("Stored Password:", user.password); // This should match exactly
-
-        if (password !== user.password) {
-            console.error("❌ Incorrect password for:", email);
-            return res.status(401).json({ message: "Invalid email or password" });
-        }
-
-        console.log("✅ Login successful for:", email);
+        // Store the session token in the database
+        await db.collection("sessions").insertOne({
+            userId: user._id,
+            token: sessionToken,
+            createdAt: new Date(),
+            expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // Expires in 7 days
+        });
 
         return res.status(200).json({
             message: "Login successful",
+            token: sessionToken,
             user: {
                 id: user._id,
                 username: user.username,
