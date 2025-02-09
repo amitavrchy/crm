@@ -58,7 +58,7 @@ function PaymentHistory() {
                                 <td className="p-3">{payment.date}</td>
                                 <td className="p-3">{payment.description}</td>
                                 <td className="p-3">{payment.amount}</td>
-                                <td className="p-3">{payment.status}</td>
+                                <td className="p-3 font-semibold text-green-600">{payment.status}</td>
                             </tr>
                         ))}
                     </tbody>

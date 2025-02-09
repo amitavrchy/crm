@@ -8,6 +8,7 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [hasAutomatedResponse, setHasAutomatedResponse] = useState(false);
 
   useEffect(() => {
     // Listen for incoming messages
@@ -26,6 +27,18 @@ function Chat() {
       socket.emit("message", newMessage);
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setInput("");
+
+      // Automated vendor response (only once per session)
+      if (!hasAutomatedResponse) {
+        setTimeout(() => {
+          const automatedResponse = {
+            text: "Hello! How can I assist you today?",
+            sender: "Vendor",
+          };
+          setMessages((prevMessages) => [...prevMessages, automatedResponse]);
+          setHasAutomatedResponse(true);
+        }, 1000);
+      }
     }
   };
 

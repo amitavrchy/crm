@@ -3,7 +3,6 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Sidebar from "./SidebarLayout";
 import Header from "./HeaderLayout";
-import Dashboard1 from "./layouts/Dashboard1";
 import Client from "./Client";
 import Vendor from "./Vendor";
 import Admin from "./Admin";
@@ -62,7 +61,6 @@ const MainLayout = () => {
 
           {/* Content based on route */}
           <div className="mt-8">
-            {pathname === "/dashboard" && <Dashboard1 />}
 
             {pathname === "/dashboard/client" && <Client />}
             {pathname === "/dashboard/client/postedJobs" && <PostedJobs />}
