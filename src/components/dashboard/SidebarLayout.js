@@ -103,6 +103,11 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           icon: <MdPostAdd className="text-2xl mr-2" />, 
           label: "Post Blogs",
         },
+        {
+          href: "/dashboard/admin/postProjects",
+          icon: <MdPostAdd className="text-2xl mr-2" />, 
+          label: "Post Projects",
+        },
       ];
     } else if (pathname.startsWith("/dashboard/employee")) {
       return [

@@ -2,7 +2,7 @@
 
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tab } from '@headlessui/react';
 import Image from 'next/image';
 import { FaSearch } from 'react-icons/fa';
@@ -16,19 +16,33 @@ import img5 from '../../../public/about-us-wte/2.jpg';
 import img6 from '../../../public/about-us-wte/3.jpg';
 import img7 from '../../../public/about-us-wte/4.jpg';
 
-const ongoingProjects = [
-    { src: img1, name: 'Project Alpha', location: 'New York', date: 'Started: Jan 2023' },
-    { src: img2, name: 'Project Beta', location: 'London', date: 'Started: Mar 2023' },
-    { src: img3, name: 'Project Gamma', location: 'Berlin', date: 'Started: May 2023' },
-];
-
-const completedProjects = [
-    { src: img5, name: 'Project Delta', location: 'Paris', date: 'Completed: Dec 2022' },
-    { src: img6, name: 'Project Epsilon', location: 'Tokyo', date: 'Completed: Nov 2022' },
-    { src: img7, name: 'Project Zeta', location: 'Sydney', date: 'Completed: Oct 2022' },
-];
+const imageMap = {
+    "Project Alpha": img1,
+    "Project Beta": img2,
+    "Project Gamma": img3,
+    "Project Delta": img5,
+    "Project Epsilon": img6,
+    "Project Zeta": img7
+};
 
 function ProjectsPage() {
+    const [ongoingProjects, setOngoingProjects] = useState([]);
+    const [completedProjects, setCompletedProjects] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/projects')
+            .then(response => response.json())
+            .then(data => {
+                const ongoing = data.filter(project => project.status === 'ongoing')
+                                    .map(project => ({ ...project, src: imageMap[project.name] || img }));
+                const completed = data.filter(project => project.status === 'completed')
+                                      .map(project => ({ ...project, src: imageMap[project.name] || img }));
+                setOngoingProjects(ongoing);
+                setCompletedProjects(completed);
+            })
+            .catch(error => console.error("Error fetching projects:", error));
+    }, []);
+
     return (
         <div className="bg-gray-100 min-h-screen">
             <Navbar />
