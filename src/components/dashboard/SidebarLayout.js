@@ -1,7 +1,7 @@
 'use client';
-import { MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson, MdPostAdd  } from "react-icons/md";
-import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle, BiMessageSquareDetail } from "react-icons/bi";
-import { FaClipboardList, FaFileInvoiceDollar, FaUsers } from "react-icons/fa";
+import { MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson, MdPostAdd, MdMeetingRoom, MdDashboard, MdLibraryBooks } from "react-icons/md";
+import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle, BiMessageSquareDetail, BiTask } from "react-icons/bi";
+import { FaClipboardList, FaFileInvoiceDollar, FaUsers, FaBlog, FaProjectDiagram } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -39,6 +39,21 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           href: "/dashboard/vendor/reportsAnalyticsVendor",
           icon: <MdOutlineReport className="text-2xl mr-2" />, 
           label: "Reports & Analytics",
+        },
+        {
+          href: "/dashboard/vendor/meeting",
+          icon: <MdMeetingRoom className="text-2xl mr-2" />, 
+          label: "Meeting",
+        },
+        {
+          href: "/dashboard/vendor/jobProgressVendor",
+          icon: <BiTask className="text-2xl mr-2" />, 
+          label: "Job Progress",
+        },
+        {
+          href: "/dashboard/vendor/viewResumeVendor",
+          icon: <MdLibraryBooks className="text-2xl mr-2" />, 
+          label: "View Resume",
         },
       ];
     } else if (pathname.startsWith("/dashboard/client")) {
@@ -85,7 +100,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         },
         {
           href: "/dashboard/admin/jobManagementAdmin",
-          icon: <MdWork className="text-2xl mr-2" />, 
+          icon: <MdDashboard className="text-2xl mr-2" />, 
           label: "Job Management",
         },
         {
@@ -95,13 +110,23 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         },
         {
           href: "/dashboard/admin/postBlogs",
-          icon: <MdPostAdd className="text-2xl mr-2" />, 
+          icon: <FaBlog className="text-2xl mr-2" />, 
           label: "Post Blogs",
         },
         {
           href: "/dashboard/admin/postProjects",
-          icon: <MdPostAdd className="text-2xl mr-2" />, 
+          icon: <FaProjectDiagram className="text-2xl mr-2" />, 
           label: "Post Projects",
+        },
+        {
+          href: "/dashboard/admin/jobProgressAdmin",
+          icon: <BiTask className="text-2xl mr-2" />, 
+          label: "Job Progress",
+        },
+        {
+          href: "/dashboard/admin/viewResumeAdmin",
+          icon: <MdLibraryBooks className="text-2xl mr-2" />, 
+          label: "View Resume",
         },
       ];
     } else if (pathname.startsWith("/dashboard/employee")) {
@@ -149,34 +174,13 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   };
 
   return (
-    <nav
-      id="sidebar"
-      className={`lg:min-w-[250px] w-max max-lg:min-w-8 transition-all duration-500 ${isSidebarOpen ? "w-max" : "max-lg:w-0 max-lg:invisible"
-        }`}
-    >
-      <div
-        id="sidebar-collapse-menu"
-        className="bg-white shadow-lg h-screen fixed top-0 left-0 overflow-auto z-[99]"
-      >
+    <nav id="sidebar" className={`lg:min-w-[250px] w-max max-lg:min-w-8 transition-all duration-500 ${isSidebarOpen ? "w-max" : "max-lg:w-0 max-lg:invisible"}`}>
+      <div id="sidebar-collapse-menu" className="bg-white shadow-lg h-screen fixed top-0 left-0 overflow-auto z-[99]">
         <div className="pt-8 pb-2 px-6 sticky top-0 bg-white min-h-[80px] z-[100]">
           <button type="button" onClick={toggleSidebar}> </button>
         </div>
         <div className="py-6 px-6">
-          <ul className="space-y-2">
-            {getMenuItems().map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item.href}
-                  className={`menu-item text-sm flex items-center cursor-pointer rounded-md px-3 py-3 transition-all duration-300 ${isActive(
-                    item.href
-                  )}`}
-                >
-                  {item.icon}
-                  <span>{item.label}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <ul className="space-y-2">{getMenuItems().map((item, index) => (<li key={index}><Link href={item.href} className={`menu-item text-sm flex items-center cursor-pointer rounded-md px-3 py-3 transition-all duration-300 ${isActive(item.href)}`}>{item.icon}<span>{item.label}</span></Link></li>))}</ul>
         </div>
       </div>
     </nav>
