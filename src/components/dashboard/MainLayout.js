@@ -29,6 +29,10 @@ import ReportsAnalyticsVendor from "./Vendor/ReportsAnalyticsVendor";
 import PostBlogs from "./Admin/PostBlogs";
 import PostProjects from "./Admin/PostProjects";
 import Meeting from "./Vendor/Meeting";
+import JobProgressVendor from "./Vendor/JobProgressVendor";
+import ViewResumeVendor from "./Vendor/ViewResumeVendor";
+import ViewResumeAdmin from "./Admin/ViewResumeAdmin";
+import JobProgressAdmin from "./Admin/JobProgressAdmin";
 
 
 const MainLayout = () => {
@@ -76,6 +80,8 @@ const MainLayout = () => {
             {pathname === "/dashboard/vendor/employeeManagement" && <EmployeeManagement />}
             {pathname === "/dashboard/vendor/reportsAnalyticsVendor" && <ReportsAnalyticsVendor />}
             {pathname === "/dashboard/vendor/meeting" && <Meeting />}
+            {pathname === "/dashboard/vendor/jobProgressVendor" && <JobProgressVendor />}
+            {pathname === "/dashboard/vendor/viewResumeVendor" && <ViewResumeVendor />}
 
             {pathname === "/dashboard/admin" && <Admin />}
             {pathname === "/dashboard/admin/userManagement" && <UserManagement />}
@@ -83,6 +89,8 @@ const MainLayout = () => {
             {pathname === "/dashboard/admin/reportsAnalyticsAdmin" && <ReportsAnalyticsAdmin />}
             {pathname === "/dashboard/admin/postBlogs" && <PostBlogs />}
             {pathname === "/dashboard/admin/postProjects" && <PostProjects />}
+            {pathname === "/dashboard/admin/jobProgressAdmin" && <JobProgressAdmin />}
+            {pathname === "/dashboard/admin/viewResumeAdmin" && <ViewResumeAdmin />}
 
             {pathname === "/dashboard/employee" && <Employee />}
             {pathname === "/dashboard/employee/appliedJobs" && <AppliedJobs />}

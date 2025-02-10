@@ -45,6 +45,16 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           icon: <MdOutlineReport className="text-2xl mr-2" />, 
           label: "Meeting",
         },
+        {
+          href: "/dashboard/vendor/jobProgressVendor",
+          icon: <MdOutlineReport className="text-2xl mr-2" />, 
+          label: "Job Progress",
+        },
+        {
+          href: "/dashboard/vendor/viewResumeVendor",
+          icon: <MdOutlineReport className="text-2xl mr-2" />, 
+          label: "View Resume",
+        },
       ];
     } else if (pathname.startsWith("/dashboard/client")) {
       return [
@@ -107,6 +117,16 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           href: "/dashboard/admin/postProjects",
           icon: <MdPostAdd className="text-2xl mr-2" />, 
           label: "Post Projects",
+        },
+        {
+          href: "/dashboard/admin/jobProgressAdmin",
+          icon: <MdPostAdd className="text-2xl mr-2" />, 
+          label: "Job Progress",
+        },
+        {
+          href: "/dashboard/admin/viewResumeAdmin",
+          icon: <MdPostAdd className="text-2xl mr-2" />, 
+          label: "View Resume",
         },
       ];
     } else if (pathname.startsWith("/dashboard/employee")) {
