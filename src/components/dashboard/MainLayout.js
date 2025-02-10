@@ -28,6 +28,7 @@ import ReportsAnalyticsAdmin from "./Admin/ReportAnalyticsAdmin";
 import ReportsAnalyticsVendor from "./Vendor/ReportsAnalyticsVendor";
 import PostBlogs from "./Admin/PostBlogs";
 import PostProjects from "./Admin/PostProjects";
+import Meeting from "./Vendor/Meeting";
 
 
 const MainLayout = () => {
@@ -74,6 +75,7 @@ const MainLayout = () => {
             {pathname === "/dashboard/vendor/jobManagementVendor" && <JobManagementVendor />}
             {pathname === "/dashboard/vendor/employeeManagement" && <EmployeeManagement />}
             {pathname === "/dashboard/vendor/reportsAnalyticsVendor" && <ReportsAnalyticsVendor />}
+            {pathname === "/dashboard/vendor/meeting" && <Meeting />}
 
             {pathname === "/dashboard/admin" && <Admin />}
             {pathname === "/dashboard/admin/userManagement" && <UserManagement />}

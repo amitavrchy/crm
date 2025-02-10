@@ -1,64 +1,99 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
-import { FaCheck, FaUserPlus, FaTrash } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
+import { FaCheck, FaUserPlus, FaTrash } from "react-icons/fa";
 
 export default function JobManagementVendor() {
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
         const loadJobs = async () => {
-            const { faker } = await import('@faker-js/faker');
-
-            const generateFakeJobs = () => {
-                return Array.from({ length: 10 }, (_, i) => ({
-                    id: i + 1,
-                    title: faker.person.jobTitle(),
-                    description: faker.lorem.sentence(),
-                    vendor: faker.company.name(),
-                    employee: null,
-                    createdAt: faker.date.past().toDateString(),
-                    status: faker.helpers.arrayElement(['Ongoing', 'Completed', 'Pending']),
-                }));
-            };
-
-            setJobs(generateFakeJobs());
+            try {
+                const response = await fetch("/api/jobManagementVendor");
+                const data = await response.json();
+                setJobs(data);
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            }
         };
-
         loadJobs();
     }, []);
 
     const handleAssignEmployee = async (id) => {
         const { value } = await Swal.fire({
-            title: 'Assign Employee',
-            input: 'text',
-            inputLabel: 'Enter Employee Name',
+            title: "Assign Employee",
+            input: "text",
+            inputLabel: "Enter Employee Name",
             showCancelButton: true,
-            confirmButtonText: 'Assign',
+            confirmButtonText: "Assign",
         });
 
         if (value) {
-            setJobs(jobs.map(job => job.id === id ? { ...job, employee: value } : job));
-            Swal.fire('Success!', `Employee ${value} assigned successfully.`, 'success');
+            try {
+                const response = await fetch(`/api/jobManagementVendor`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id, employee: value }),
+                });
+
+                if (response.ok) {
+                    setJobs((prevJobs) =>
+                        prevJobs.map((job) =>
+                            job._id === id ? { ...job, employee: value } : job
+                        )
+                    );
+                    Swal.fire("Success!", `Employee ${value} assigned successfully.`, "success");
+                }
+            } catch (error) {
+                console.error("Error updating job:", error);
+            }
         }
     };
 
-    const handleCompleteJob = (id) => {
-        setJobs(jobs.map(job => job.id === id ? { ...job, status: 'Completed' } : job));
-        Swal.fire('Completed!', 'Job has been marked as completed.', 'success');
+    const handleCompleteJob = async (id) => {
+        try {
+            const response = await fetch(`/api/jobManagementVendor`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id, status: "Completed" }),
+            });
+
+            if (response.ok) {
+                setJobs((prevJobs) =>
+                    prevJobs.map((job) =>
+                        job._id === id ? { ...job, status: "Completed" } : job
+                    )
+                );
+                Swal.fire("Completed!", "Job has been marked as completed.", "success");
+            }
+        } catch (error) {
+            console.error("Error completing job:", error);
+        }
     };
 
     const handleRemoveJob = (id) => {
         Swal.fire({
-            title: 'Are you sure?',
+            title: "Are you sure?",
             text: "This action cannot be undone!",
-            icon: 'warning',
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonText: 'Yes, remove it!',
-        }).then((result) => {
+            confirmButtonText: "Yes, remove it!",
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                setJobs(jobs.filter(job => job.id !== id));
-                Swal.fire('Removed!', 'Job has been removed.', 'error');
+                try {
+                    const response = await fetch(`/api/jobManagementVendor`, {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ id }),
+                    });
+
+                    if (response.ok) {
+                        setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
+                        Swal.fire("Removed!", "Job has been removed.", "error");
+                    }
+                } catch (error) {
+                    console.error("Error removing job:", error);
+                }
             }
         });
     };
@@ -81,25 +116,42 @@ export default function JobManagementVendor() {
                     </thead>
                     <tbody>
                         {jobs.map((job) => (
-                            <tr key={job.id} className="bg-white border-b border-gray-200 text-center hover:bg-gray-100">
+                            <tr key={job._id} className="bg-white border-b border-gray-200 text-center hover:bg-gray-100">
                                 <td className="border border-gray-300 p-3">{job.title}</td>
                                 <td className="border border-gray-300 p-3 truncate max-w-xs">{job.description}</td>
                                 <td className="border border-gray-300 p-3 font-semibold">{job.vendor}</td>
-                                <td className="border border-gray-300 p-3">{job.employee || 'Not Assigned'}</td>
-                                <td className="border border-gray-300 p-3">{job.createdAt}</td>
-                                <td className={`border border-gray-300 p-3 font-semibold ${job.status === 'Completed' ? 'text-green-600' : 'text-yellow-600'}`}>{job.status}</td>
+                                <td className="border border-gray-300 p-3">{job.employee || "Not Assigned"}</td>
+                                <td className="border border-gray-300 p-3">
+                                    {new Date(job.createdAt).toLocaleDateString()}
+                                </td>
+                                <td
+                                    className={`border border-gray-300 p-3 font-semibold ${
+                                        job.status === "Completed" ? "text-green-600" : "text-yellow-600"
+                                    }`}
+                                >
+                                    {job.status}
+                                </td>
                                 <td className="border border-gray-300 p-3 flex justify-center gap-2 flex-wrap">
-                                    {job.status !== 'Completed' && (
-                                        <button onClick={() => handleAssignEmployee(job.id)} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center">
+                                    {job.status !== "Completed" && (
+                                        <button
+                                            onClick={() => handleAssignEmployee(job._id)}
+                                            className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
+                                        >
                                             <FaUserPlus className="" />
                                         </button>
                                     )}
-                                    {job.status !== 'Completed' && (
-                                        <button onClick={() => handleCompleteJob(job.id)} className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center">
+                                    {job.status !== "Completed" && (
+                                        <button
+                                            onClick={() => handleCompleteJob(job._id)}
+                                            className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
+                                        >
                                             <FaCheck className="" />
                                         </button>
                                     )}
-                                    <button onClick={() => handleRemoveJob(job.id)} className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center">
+                                    <button
+                                        onClick={() => handleRemoveJob(job._id)}
+                                        className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center"
+                                    >
                                         <FaTrash className="" />
                                     </button>
                                 </td>

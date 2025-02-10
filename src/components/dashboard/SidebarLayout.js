@@ -40,6 +40,11 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           icon: <MdOutlineReport className="text-2xl mr-2" />, 
           label: "Reports & Analytics",
         },
+        {
+          href: "/dashboard/vendor/meeting",
+          icon: <MdOutlineReport className="text-2xl mr-2" />, 
+          label: "Meeting",
+        },
       ];
     } else if (pathname.startsWith("/dashboard/client")) {
       return [
