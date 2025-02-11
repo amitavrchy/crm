@@ -1,5 +1,7 @@
-import crypto from "crypto";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { connectMongoDB } from "../../../lib/mongodb";
+import { serialize } from "cookie";
 
 export default async function handler(req, res) {
     if (req.method !== "POST") {
@@ -17,30 +19,43 @@ export default async function handler(req, res) {
         const db = await connectMongoDB();
         const user = await db.collection("users").findOne({ email });
 
-        if (!user || user.password !== password) {
+        if (!user) {
             return res.status(401).json({ message: "Invalid email or password" });
         }
 
-        // Generate a secure random session token
-        const sessionToken = crypto.randomBytes(32).toString("hex");
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
 
-        // Store the session token in the database
-        await db.collection("sessions").insertOne({
-            userId: user._id,
-            token: sessionToken,
-            createdAt: new Date(),
-            expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // Expires in 7 days
-        });
+        // Generate JWT token
+        const token = jwt.sign(
+            { id: user._id, email: user.email, userType: user.userType },
+            process.env.JWT_SECRET,
+            { expiresIn: "7d" }
+        );
+
+        // Set token as an HTTP-only cookie
+        res.setHeader(
+            "Set-Cookie",
+            serialize("authToken", token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "strict",
+                path: "/",
+                maxAge: 7 * 24 * 60 * 60, // 7 days
+            })
+        );
 
         return res.status(200).json({
             message: "Login successful",
-            token: sessionToken,
             user: {
                 id: user._id,
                 username: user.username,
                 email: user.email,
                 userType: user.userType,
             },
+            token,
         });
 
     } catch (error) {

@@ -8,11 +8,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { useSession } from "@/hooks/useSession"; // Custom hook to fetch user session
 
 function SignIn() {
     const router = useRouter();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
+    const { user, refreshSession } = useSession(); // Fetch session and refresh function
+
+    // Redirect if already logged in
+    if (user) {
+        router.push("/dashboard");
+        return null;
+    }
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -21,6 +29,7 @@ function SignIn() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
+                credentials: "include", // Ensures cookies are included
             });
 
             const result = await response.json();
@@ -34,17 +43,14 @@ function SignIn() {
                     confirmButtonColor: "#4F46E5",
                 });
 
-                localStorage.setItem("token", result.token);
-                const { userType } = result.user;
-                console.log("User Type:", userType);
-
+                // Redirect based on user role
                 const userRoutes = {
                     Admin: "/dashboard/admin",
                     Client: "/dashboard/client",
                     Vendor: "/dashboard/vendor",
                     Employee: "/dashboard/employee",
                 };
-                router.push(userRoutes[userType] || "/dashboard");
+                router.push(userRoutes[result.user.userType] || "/dashboard");
                 reset();
             } else {
                 Swal.fire({
@@ -115,7 +121,7 @@ function SignIn() {
                     </form>
 
                     <p className="mt-4 text-sm text-center text-gray-700">
-                        Don’t have an account? {" "}
+                        Don’t have an account?{" "}
                         <Link href="/signUp">
                             <span className="flex items-center justify-center gap-1 text-orange-500 hover:text-orange-700">
                                 Sign Up <AiOutlineArrowRight />
