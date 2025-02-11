@@ -13,8 +13,12 @@ export default NextAuth({
       },
       async authorize(credentials) {
         try {
-          const db = await connectMongoDB();
-          const usersCollection = db.collection("users");
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("Email and password are required");
+          }
+
+          const client = await connectMongoDB();
+          const usersCollection = client.db().collection("users");
 
           const user = await usersCollection.findOne({ email: credentials.email });
           if (!user) throw new Error("Invalid email or password");
@@ -22,17 +26,26 @@ export default NextAuth({
           const isValidPassword = await bcrypt.compare(credentials.password, user.password);
           if (!isValidPassword) throw new Error("Invalid email or password");
 
-          return { id: user._id.toString(), name: user.username, email: user.email, userType: user.userType };
+          return {
+            id: user._id.toString(),
+            name: user.username,
+            email: user.email,
+            userType: user.userType,
+          };
         } catch (error) {
-          console.error("Authentication Error:", error);
-          throw new Error("Unable to authenticate");
+          console.error("Authentication Error:", error.message);
+          throw new Error(error.message || "Unable to authenticate");
         }
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  session: { strategy: "jwt" },
-  pages: { signIn: "/signIn" },
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/signIn",
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -44,12 +57,12 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id;
-        session.user.email = token.email;
-        session.user.name = token.name;
-        session.user.userType = token.userType;
-      }
+      session.user = {
+        id: token.id,
+        email: token.email,
+        name: token.name,
+        userType: token.userType,
+      };
       return session;
     },
   },

@@ -28,6 +28,7 @@ function SignUp() {
     defaultValues: {
       username: "",
       email: "",
+      password: "",
     },
   });
 
@@ -37,13 +38,14 @@ function SignUp() {
       const response = await axiosInstance.post("api/auth/register", {
         username: data.username,
         email: data.email,
+        password: data.password,
         userType,
       });
 
       if (response.status === 201) {
         Swal.fire({
           title: "Success!",
-          text: "You have signed up successfully! Check your email for the temporary password.",
+          text: "You have signed up successfully! You can now sign in.",
           icon: "success",
           confirmButtonColor: "#4F46E5",
         }).then(() => {
@@ -123,6 +125,22 @@ function SignUp() {
               )}
             </div>
 
+            <div>
+              <label htmlFor="password" className="block text-sm text-gray-700">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be at least 6 characters" } })}
+                className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                placeholder="Enter your password"
+              />
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+              )}
+            </div>
+
             {/* User Type Selection */}
             <div className="flex items-center justify-between">
               <p className="text-sm text-gray-700">Register as:</p>
@@ -143,10 +161,6 @@ function SignUp() {
               </div>
             </div>
 
-            <div className="text-center text-orange-500 font-bold">
-              We will send your password through email after approval.
-            </div>
-
             {/* Submit Button */}
             <button
               type="submit"
@@ -157,7 +171,6 @@ function SignUp() {
             </button>
           </form>
 
-          {/* Link to Sign In */}
           <p className="mt-4 text-sm text-center text-gray-700">
             Already have an account?{" "}
             <Link href="/signIn">
@@ -165,10 +178,6 @@ function SignUp() {
                 Sign In <AiOutlineArrowRight />
               </span>
             </Link>
-          </p>
-
-          <p className="mt-4 text-xs text-center text-gray-500">
-            By signing up, you agree to our Terms of Service and Privacy Policy.
           </p>
         </div>
       </section>

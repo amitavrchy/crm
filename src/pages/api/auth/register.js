@@ -6,9 +6,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
   }
 
-  const { username, email, userType } = req.body;
+  const { username, email, password, userType } = req.body;
 
-  if (!username || !email || !userType) {
+  if (!username || !email || !password || !userType) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const hashedPassword = await bcrypt.hash("defaultPassword123", 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     await usersCollection.insertOne({
       username,
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       createdAt: new Date(),
     });
 
-    return res.status(201).json({ message: "User registered successfully. Default password: defaultPassword123" });
+    return res.status(201).json({ message: "User registered successfully!" });
   } catch (error) {
     console.error("User Registration Error:", error);
     return res.status(500).json({ message: "Internal Server Error" });
