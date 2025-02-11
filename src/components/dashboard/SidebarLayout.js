@@ -1,9 +1,10 @@
 'use client';
-import { MdPeopleAlt, MdWork, MdHistory, MdPayment, MdOutlineReport, MdPerson, MdPostAdd, MdMeetingRoom, MdDashboard, MdLibraryBooks } from "react-icons/md";
+import { MdPeopleAlt, MdWork, MdHistory, MdOutlineReport, MdPerson, MdMeetingRoom, MdDashboard, MdLibraryBooks, MdCategory } from "react-icons/md";
 import { BiHomeAlt, BiBriefcase, BiCheckCircle, BiXCircle, BiMessageSquareDetail, BiTask } from "react-icons/bi";
-import { FaClipboardList, FaFileInvoiceDollar, FaUsers, FaBlog, FaProjectDiagram } from "react-icons/fa";
+import { FaClipboardList, FaFileInvoiceDollar, FaUsers, FaBlog, FaProjectDiagram, FaUserCog } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { AiOutlineFieldTime } from "react-icons/ai";
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
@@ -127,6 +128,21 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           href: "/dashboard/admin/viewResumeAdmin",
           icon: <MdLibraryBooks className="text-2xl mr-2" />, 
           label: "View Resume",
+        },
+        {
+          href: "/dashboard/admin/createJobCategory",
+          icon: <MdCategory className="text-2xl mr-2" />, 
+          label: "Create Job Category",
+        },
+        {
+          href: "/dashboard/admin/applicationManagementE",
+          icon: <FaUserCog className="text-2xl mr-2" />, 
+          label: "Apply Manage Employee",
+        },
+        {
+          href: "/dashboard/admin/timeSheetJob",
+          icon: <AiOutlineFieldTime className="text-2xl mr-2" />, 
+          label: "Time Sheet Jobs",
         },
       ];
     } else if (pathname.startsWith("/dashboard/employee")) {

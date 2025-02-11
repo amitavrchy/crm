@@ -33,6 +33,9 @@ import JobProgressVendor from "./Vendor/JobProgressVendor";
 import ViewResumeVendor from "./Vendor/ViewResumeVendor";
 import ViewResumeAdmin from "./Admin/ViewResumeAdmin";
 import JobProgressAdmin from "./Admin/JobProgressAdmin";
+import CreateJobCategory from "./Admin/CreateJobCategory";
+import ApplicationManagementE from "./Admin/ApplicationManagementE";
+import TimeSheetJob from "./Admin/TimeSheetJob";
 
 
 const MainLayout = () => {
@@ -91,6 +94,9 @@ const MainLayout = () => {
             {pathname === "/dashboard/admin/postProjects" && <PostProjects />}
             {pathname === "/dashboard/admin/jobProgressAdmin" && <JobProgressAdmin />}
             {pathname === "/dashboard/admin/viewResumeAdmin" && <ViewResumeAdmin />}
+            {pathname === "/dashboard/admin/createJobCategory" && <CreateJobCategory />}
+            {pathname === "/dashboard/admin/applicationManagementE" && <ApplicationManagementE />}
+            {pathname === "/dashboard/admin/timeSheetJob" && <TimeSheetJob />}
 
             {pathname === "/dashboard/employee" && <Employee />}
             {pathname === "/dashboard/employee/appliedJobs" && <AppliedJobs />}
