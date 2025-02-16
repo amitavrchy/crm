@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic"; // Ensures fresh data every time
 export async function POST(req) {
     try {
         const db = await connectMongoDB();
-        const jobsCollection = db.collection("jobManagementVendor");
+        const jobsCollection = db.collection("jobs"); // ✅ Store jobs in "jobs" collection
 
         const { title, description, vendor, category, priority, location, salary } = await req.json();
 
@@ -39,7 +39,7 @@ export async function POST(req) {
 export async function GET() {
     try {
         const db = await connectMongoDB();
-        const jobsCollection = db.collection("jobManagementVendor");
+        const jobsCollection = db.collection("jobs"); // ✅ Fetch from "jobs" collection
 
         const jobs = await jobsCollection.find({}).toArray();
         return NextResponse.json(jobs, { status: 200 });
@@ -52,7 +52,7 @@ export async function GET() {
 export async function PUT(req) {
     try {
         const db = await connectMongoDB();
-        const jobsCollection = db.collection("jobManagementVendor");
+        const jobsCollection = db.collection("jobs");
 
         const { id, employee, status, category, priority, location, salary } = await req.json();
 
@@ -87,7 +87,7 @@ export async function PUT(req) {
 export async function DELETE(req) {
     try {
         const db = await connectMongoDB();
-        const jobsCollection = db.collection("jobManagementVendor");
+        const jobsCollection = db.collection("jobs");
 
         const { id } = await req.json();
         if (!id || !ObjectId.isValid(id)) {
