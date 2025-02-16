@@ -16,6 +16,8 @@ function ContactUs() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log("Submitting form:", formData); // Debug log
+
         try {
             const response = await fetch("/api/enquire", {
                 method: "POST",
@@ -24,6 +26,7 @@ function ContactUs() {
             });
 
             const data = await response.json();
+            console.log("Response from server:", data); // Debug log
 
             if (response.ok) {
                 Swal.fire({
@@ -51,7 +54,6 @@ function ContactUs() {
             });
         }
     };
-
 
     return (
         <div className="flex flex-col min-h-screen">

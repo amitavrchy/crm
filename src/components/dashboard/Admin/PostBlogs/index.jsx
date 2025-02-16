@@ -95,7 +95,7 @@ function PostBlogs() {
 
             <textarea name="content" placeholder="Content" value={formData.content} onChange={handleChange} className="w-full p-3 border rounded-lg" rows="4" required></textarea>
 
-            <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold transition duration-300 hover:bg-blue-600" disabled={loading}>
+            <button type="submit" className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold transition duration-300 hover:bg-orange-600" disabled={loading}>
               {loading ? "Posting..." : "Post Blog"}
             </button>
           </form>

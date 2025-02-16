@@ -1,23 +1,18 @@
 "use client";
+import { ToastContainer, toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import Swal from "sweetalert2";
-import "tailwindcss/tailwind.css";
 import axios from "axios";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-function SignUp() {
+const SignUp = () => {
   const [userType, setUserType] = useState("Client");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const axiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
-    timeout: 30000,
-  });
 
   const {
     register,
@@ -35,46 +30,36 @@ function SignUp() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axiosInstance.post("api/auth/register", {
+      const response = await axios.post("/api/auth/register", {
         username: data.username,
         email: data.email,
         password: data.password,
         userType,
       });
+      console.log(response)
 
       if (response.status === 201) {
-        Swal.fire({
-          title: "Success!",
-          text: "You have signed up successfully! You can now sign in.",
-          icon: "success",
-          confirmButtonColor: "#4F46E5",
-        }).then(() => {
-          router.push("/signIn");
+        toast.success("Signup successful! You can now sign in.", {
+          position: "top-right",
+          autoClose: 3000,
         });
         reset();
       }
     } catch (error) {
-      console.error("Error registering user:", error);
-      Swal.fire({
-        title: "Error!",
-        text: error.response?.data?.message || "Something went wrong",
-        icon: "error",
-        confirmButtonColor: "#E53E3E",
+      toast.error(error.response?.data?.message || "Something went wrong", {
+        position: "top-right",
+        autoClose: 3000,
       });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleUserTypeChange = (type) => {
-    setUserType(type);
-  };
-
   return (
     <div>
+      <ToastContainer />
       <Navbar />
       <section className="relative flex items-center justify-center min-h-screen bg-gray-100 py-8">
-        {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute w-64 h-64 bg-orange-300 rounded-full top-10 left-10 opacity-30 blur-3xl animate-pulse"></div>
           <div className="absolute w-80 h-80 bg-orange-400 rounded-full bottom-20 right-20 opacity-30 blur-3xl animate-pulse"></div>
@@ -98,9 +83,7 @@ function SignUp() {
                 className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
                 placeholder="Choose a username"
               />
-              {errors.username && (
-                <p className="mt-1 text-sm text-red-500">{errors.username.message}</p>
-              )}
+              {errors.username && <p className="mt-1 text-sm text-red-500">{errors.username.message}</p>}
             </div>
 
             <div>
@@ -120,9 +103,7 @@ function SignUp() {
                 className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
                 placeholder="Enter your email"
               />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-              )}
+              {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
             </div>
 
             <div>
@@ -136,12 +117,9 @@ function SignUp() {
                 className="w-full px-4 py-2 mt-1 text-gray-900 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
                 placeholder="Enter your password"
               />
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
-              )}
+              {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>}
             </div>
 
-            {/* User Type Selection */}
             <div className="flex items-center justify-between">
               <p className="text-sm text-gray-700">Register as:</p>
               <div className="flex items-center space-x-4">
@@ -149,11 +127,8 @@ function SignUp() {
                   <button
                     key={type}
                     type="button"
-                    className={`flex flex-col items-center px-3 py-2 rounded-md ${userType === type
-                      ? "bg-orange-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-orange-400 hover:text-white"
-                      }`}
-                    onClick={() => handleUserTypeChange(type)}
+                    className={`px-3 py-2 rounded-md ${userType === type ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700 hover:bg-orange-400 hover:text-white"}`}
+                    onClick={() => setUserType(type)}
                   >
                     <span className="text-sm">{type}</span>
                   </button>
@@ -161,22 +136,15 @@ function SignUp() {
               </div>
             </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full py-2 text-white bg-orange-500 rounded-md shadow-md hover:bg-orange-600"
-              disabled={isLoading}
-            >
+            <button type="submit" className="w-full py-2 text-white bg-orange-500 rounded-md shadow-md hover:bg-orange-600" disabled={isLoading}>
               {isLoading ? "Signing Up..." : "Sign Up"}
             </button>
           </form>
 
           <p className="mt-4 text-sm text-center text-gray-700">
             Already have an account?{" "}
-            <Link href="/signIn">
-              <span className="flex items-center justify-center gap-1 text-orange-500 hover:text-orange-700">
-                Sign In <AiOutlineArrowRight />
-              </span>
+            <Link href="/signIn" className="flex items-center justify-center gap-1 text-orange-500 hover:text-orange-700">
+              Sign In <AiOutlineArrowRight />
             </Link>
           </p>
         </div>
@@ -184,6 +152,6 @@ function SignUp() {
       <Footer />
     </div>
   );
-}
+};
 
 export default SignUp;
