@@ -19,6 +19,26 @@ export default function JobManagementVendor() {
         loadJobs();
     }, []);
 
+    const updateJob = async (id, updateData, successMessage) => {
+        try {
+            const response = await fetch(`/api/jobManagementVendor`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id, ...updateData }),
+            });
+            if (response.ok) {
+                setJobs((prevJobs) =>
+                    prevJobs.map((job) =>
+                        job._id === id ? { ...job, ...updateData } : job
+                    )
+                );
+                Swal.fire("Success!", successMessage, "success");
+            }
+        } catch (error) {
+            console.error("Error updating job:", error);
+        }
+    };
+
     const handleAssignEmployee = async (id) => {
         const { value } = await Swal.fire({
             title: "Assign Employee",
@@ -29,46 +49,12 @@ export default function JobManagementVendor() {
         });
 
         if (value) {
-            try {
-                const response = await fetch(`/api/jobManagementVendor`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ id, employee: value }),
-                });
-
-                if (response.ok) {
-                    setJobs((prevJobs) =>
-                        prevJobs.map((job) =>
-                            job._id === id ? { ...job, employee: value } : job
-                        )
-                    );
-                    Swal.fire("Success!", `Employee ${value} assigned successfully.`, "success");
-                }
-            } catch (error) {
-                console.error("Error updating job:", error);
-            }
+            updateJob(id, { employee: value }, `Employee ${value} assigned successfully.`);
         }
     };
 
     const handleCompleteJob = async (id) => {
-        try {
-            const response = await fetch(`/api/jobManagementVendor`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id, status: "Completed" }),
-            });
-
-            if (response.ok) {
-                setJobs((prevJobs) =>
-                    prevJobs.map((job) =>
-                        job._id === id ? { ...job, status: "Completed" } : job
-                    )
-                );
-                Swal.fire("Completed!", "Job has been marked as completed.", "success");
-            }
-        } catch (error) {
-            console.error("Error completing job:", error);
-        }
+        updateJob(id, { status: "Completed" }, "Job has been marked as completed.");
     };
 
     const handleRemoveJob = (id) => {
@@ -106,10 +92,12 @@ export default function JobManagementVendor() {
                     <thead>
                         <tr className="bg-gray-200 text-left">
                             <th className="border border-gray-300 p-3">Title</th>
-                            <th className="border border-gray-300 p-3">Description</th>
                             <th className="border border-gray-300 p-3">Vendor</th>
+                            <th className="border border-gray-300 p-3">Category</th>
+                            <th className="border border-gray-300 p-3">Priority</th>
+                            <th className="border border-gray-300 p-3">Location</th>
+                            <th className="border border-gray-300 p-3">Salary</th>
                             <th className="border border-gray-300 p-3">Assigned Employee</th>
-                            <th className="border border-gray-300 p-3">Created On</th>
                             <th className="border border-gray-300 p-3">Status</th>
                             <th className="border border-gray-300 p-3 text-center">Actions</th>
                         </tr>
@@ -118,12 +106,12 @@ export default function JobManagementVendor() {
                         {jobs.map((job) => (
                             <tr key={job._id} className="bg-white border-b border-gray-200 text-center hover:bg-gray-100">
                                 <td className="border border-gray-300 p-3">{job.title}</td>
-                                <td className="border border-gray-300 p-3 truncate max-w-xs">{job.description}</td>
                                 <td className="border border-gray-300 p-3 font-semibold">{job.vendor}</td>
+                                <td className="border border-gray-300 p-3">{job.category}</td>
+                                <td className="border border-gray-300 p-3">{job.priority}</td>
+                                <td className="border border-gray-300 p-3">{job.location}</td>
+                                <td className="border border-gray-300 p-3">${job.salary}</td>
                                 <td className="border border-gray-300 p-3">{job.employee || "Not Assigned"}</td>
-                                <td className="border border-gray-300 p-3">
-                                    {new Date(job.createdAt).toLocaleDateString()}
-                                </td>
                                 <td
                                     className={`border border-gray-300 p-3 font-semibold ${
                                         job.status === "Completed" ? "text-green-600" : "text-yellow-600"
@@ -137,7 +125,7 @@ export default function JobManagementVendor() {
                                             onClick={() => handleAssignEmployee(job._id)}
                                             className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
                                         >
-                                            <FaUserPlus className="" />
+                                            <FaUserPlus />
                                         </button>
                                     )}
                                     {job.status !== "Completed" && (
@@ -145,14 +133,14 @@ export default function JobManagementVendor() {
                                             onClick={() => handleCompleteJob(job._id)}
                                             className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center"
                                         >
-                                            <FaCheck className="" />
+                                            <FaCheck />
                                         </button>
                                     )}
                                     <button
                                         onClick={() => handleRemoveJob(job._id)}
                                         className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md flex items-center"
                                     >
-                                        <FaTrash className="" />
+                                        <FaTrash />
                                     </button>
                                 </td>
                             </tr>

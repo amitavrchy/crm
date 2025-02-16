@@ -15,21 +15,35 @@ export async function POST(req) {
       return new Response(JSON.stringify({ message: "All fields are required" }), { status: 400 });
     }
 
-    const db = await connectMongoDB(); // ✅ Fix connection
+    const db = await connectMongoDB();
     console.log("✅ Connected to MongoDB");
 
-    // Check if user already exists
+    // 🔹 Check if Admin exists, if not, create one
+    // const adminExists = await db.collection("users").findOne({ userType: "Admin" });
+
+    const adminPassword = await bcrypt.hash("admin123", 10);
+    await db.collection("users").insertOne({
+      username: "admin",
+      email: "admin@example.com",
+      password: adminPassword,
+      userType: "Admin",
+      createdAt: new Date(),
+    });
+
+    console.log("🛠️ Admin user created successfully");
+
+    // 🔹 Check if user already exists
     const existingUser = await db.collection("users").findOne({ email });
     if (existingUser) {
       console.log("⚠️ User already exists");
       return new Response(JSON.stringify({ message: "User already exists" }), { status: 400 });
     }
 
-    // Hash the password
+    // 🔹 Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("🔐 Password hashed");
 
-    // Insert user
+    // 🔹 Insert new user
     const result = await db.collection("users").insertOne({
       username,
       email,
