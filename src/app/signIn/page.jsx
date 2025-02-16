@@ -1,80 +1,42 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import "tailwindcss/tailwind.css";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Footer from "@/components/Footer";
+
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import { signIn, useSession } from "next-auth/react";
 import Navbar from "@/components/Navbar";
-import { useSession } from "@/hooks/useSession"; // Custom hook to fetch user session
+import Footer from "@/components/Footer";
 
 function SignIn() {
     const router = useRouter();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
-    const { user, refreshSession } = useSession(); // Fetch session and refresh function
-
-    // Redirect if already logged in
-    if (user) {
-        router.push("/dashboard");
-        return null;
-    }
-
+    const session = useSession()
     const onSubmit = async (data) => {
         setLoading(true);
-        try {
-            const response = await fetch("/api/auth/signin", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-                credentials: "include", // Ensures cookies are included
-            });
-
-            const result = await response.json();
-            console.log("API Response:", result);
-
-            if (response.ok) {
-                Swal.fire({
-                    title: "Welcome Back!",
-                    text: "You have successfully signed in!",
-                    icon: "success",
-                    confirmButtonColor: "#4F46E5",
-                });
-
-                // Redirect based on user role
-                const userRoutes = {
-                    Admin: "/dashboard/admin",
-                    Client: "/dashboard/client",
-                    Vendor: "/dashboard/vendor",
-                    Employee: "/dashboard/employee",
-                };
-                router.push(userRoutes[result.user.userType] || "/dashboard");
-                reset();
-            } else {
-                Swal.fire({
-                    title: "Sign In Failed",
-                    text: result.message || "Invalid credentials. Please try again.",
-                    icon: "error",
-                    confirmButtonColor: "#EF4444",
-                });
-            }
-        } catch (error) {
-            Swal.fire({
-                title: "Error",
-                text: "Something went wrong. Please try again later.",
-                icon: "error",
-                confirmButtonColor: "#EF4444",
-            });
-            console.error("Error:", error);
-        } finally {
-            setLoading(false);
+        const res = await signIn("credentials", {
+            email: data.email,
+            password: data.password,
+            redirect: false,
+        });
+    
+        if (res?.error) {
+            toast.error(res.error);
+        } else {
+            toast.success("Login Successful!");
+            router.push("/");
         }
+        setLoading(false);
     };
+    
 
     return (
         <div>
+            <ToastContainer />
             <Navbar />
             <section className="relative flex items-center justify-center min-h-screen bg-gray-100 py-8">
                 <div className="absolute inset-0 overflow-hidden">
@@ -86,14 +48,14 @@ function SignIn() {
                     <h2 className="text-3xl font-extrabold text-center text-gray-900">Sign In</h2>
                     <p className="text-sm text-center text-gray-600">Welcome back! Please sign in to your account.</p>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
+                    <form className="mt-6 space-y-6" onSubmit={handleSubmit(onSubmit)}>
                         <div>
                             <label htmlFor="email" className="block text-sm text-gray-700">Email</label>
                             <input
                                 id="email"
                                 type="email"
                                 {...register("email", { required: "Email is required" })}
-                                className="w-full px-4 py-2 mt-1 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                className="w-full px-4 py-2 mt-1 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-700"
                                 placeholder="Enter your email"
                             />
                             {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
@@ -105,7 +67,7 @@ function SignIn() {
                                 id="password"
                                 type="password"
                                 {...register("password", { required: "Password is required" })}
-                                className="w-full px-4 py-2 mt-1 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500"
+                                className="w-full px-4 py-2 mt-1 bg-gray-200 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-700"
                                 placeholder="Enter your password"
                             />
                             {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>}

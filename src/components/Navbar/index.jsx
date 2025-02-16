@@ -1,36 +1,42 @@
 "use client";
 
-import { useState } from "react";
-import { useSession } from "@/hooks/useSession"; // Import the useSession hook
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaEnvelope, FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
-import axios from "axios";
-import logo from "../../../public/dr white logo.png";
+import { useSession, signOut } from "next-auth/react";
+import logo from "../../../public/drWhiteLogo.png"
 
 const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const { user, loading } = useSession();
     const router = useRouter();
+    const { data: session, status } = useSession();
 
-    const getDashboardLink = () => {
-        if (!user) return "/dashboard";
-        const dashboardRoutes = {
-            admin: "/dashboard/admin",
-            vendor: "/dashboard/vendor",
-            client: "/dashboard/client",
-            employee: "/dashboard/employee",
-        };
-        return dashboardRoutes[user.userType] || "/dashboard";
+    const userType = session?.user?.userType?.toLowerCase();
+
+    const dashboardRoutes = {
+        admin: "/dashboard/admin",
+        vendor: "/dashboard/vendor",
+        client: "/dashboard/client",
+        employee: "/dashboard/employee",
     };
 
-    // Handle logout
-    const handleLogout = async () => {
-        try {
-            await axios.post("/api/auth/logout", {}, { withCredentials: true });
-            router.push("/signIn");
-        } catch (error) {
-            console.error("Logout error:", error);
+    const dashboardLink = userType ? dashboardRoutes[userType] || "/dashboard" : "/dashboard";
+
+    useEffect(() => {
+        console.log("User Type:", userType);
+        console.log("Redirecting to:", dashboardLink);
+    }, [userType]);
+
+    const handleSignOut = async () => {
+        await signOut({ callbackUrl: "/" });
+    };
+
+    const goToDashboard = () => {
+        if (userType) {
+            router.push(dashboardLink);
+        } else {
+            router.push("/dashboard");
         }
     };
 
@@ -49,17 +55,12 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="flex space-x-6">
-                    {loading ? (
-                        <span>Loading...</span>
-                    ) : user ? (
+                    {status === "authenticated" ? (
                         <>
-                            <a href={getDashboardLink()} className="hover:text-yellow-400 transition">
+                            <button onClick={goToDashboard} className="hover:text-yellow-400 transition">
                                 Dashboard
-                            </a>
-                            <button
-                                onClick={handleLogout}
-                                className="hover:text-yellow-400 transition"
-                            >
+                            </button>
+                            <button onClick={handleSignOut} className="hover:text-yellow-400 transition">
                                 Logout
                             </button>
                         </>
@@ -125,11 +126,11 @@ const Navbar = () => {
                                 <a href="/projects" className="text-lg hover:text-gray-400 transition">Projects</a>
                                 <a href="/FAQ" className="text-lg hover:text-gray-400 transition">FAQ</a>
                                 <a href="/scheduleMeet" className="text-lg hover:text-gray-400 transition">Schedule A Meeting</a>
-                                <a href="/aboutUs" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition">About us</a>
-                                {user && (
-                                    <a href={getDashboardLink()} className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition text-center">
+                                <a href="/aboutUs" className="bg-orange-500 hover:bg-orange-600 text-white text-center px-6 py-2 rounded-lg transition">About us</a>
+                                {status === "authenticated" && (
+                                    <button onClick={goToDashboard} className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition text-center">
                                         Dashboard
-                                    </a>
+                                    </button>
                                 )}
                             </div>
                         </div>
