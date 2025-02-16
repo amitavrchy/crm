@@ -18,12 +18,15 @@ function SignIn() {
     const session = useSession()
     const onSubmit = async (data) => {
         setLoading(true);
+
         const res = await signIn("credentials", {
             email: data.email,
             password: data.password,
             redirect: false,
         });
-    
+
+        console.log("🔍 SignIn Response:", res);
+
         if (res?.error) {
             toast.error(res.error);
         } else {
@@ -32,7 +35,8 @@ function SignIn() {
         }
         setLoading(false);
     };
-    
+
+
 
     return (
         <div>

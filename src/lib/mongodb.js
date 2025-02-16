@@ -3,6 +3,7 @@ import { MongoClient } from "mongodb";
 const uri = process.env.MONGODB_URI;
 if (!uri) throw new Error("MONGODB_URI is not defined in .env");
 
+let client;
 let clientPromise;
 
 const options = {
@@ -10,21 +11,17 @@ const options = {
   useUnifiedTopology: true,
 };
 
-if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
-    const client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
-  const client = new MongoClient(uri, options);
-  clientPromise = client.connect();
+if (!global._mongoClientPromise) {
+  client = new MongoClient(uri, options);
+  global._mongoClientPromise = client.connect();
 }
+
+clientPromise = global._mongoClientPromise;
 
 export async function connectMongoDB() {
   try {
     const client = await clientPromise;
-    const db = client.db();
+    const db = client.db("test");  // ⚠️ Add the correct database name
     return db;
   } catch (error) {
     console.error("MongoDB Connection Error:", error);
